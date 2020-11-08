@@ -17,4 +17,12 @@ public class RealEstateDescription {
                    "spa.";
 
     }
+
+    public static String returnSecondDescription() {
+        return "This 2,462sf residence has been meticulously renovated and features a jaw-dropping " +
+                "3,800sf+ wrap-around terrace with endless NYC Skyline, East River and Williamsburg " +
+                "Bridge views from every room. With 12' ceilings, this striking loft offers 3 " +
+                "bedrooms, 3.5 baths, a home office, laundry room and incredible storage throughout."
+                ;
+    }
 }

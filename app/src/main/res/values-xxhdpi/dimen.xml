@@ -5,4 +5,8 @@
     <dimen name="fragment_real_estate_textviews_margin_top">8dp</dimen>
     <dimen name="fragment_real_estate_textviews_size">20sp</dimen>
     <dimen name="fragment_real_estate_price_textview_size">25sp</dimen>
+
+    <dimen name="activity_on_click_real_estate_title_description_margin">15dp</dimen>
+    <dimen name="activity_on_click_real_estate_title_description_size">20sp</dimen>
+    <dimen name="activity_on_click_real_estate_description_margin">16dp</dimen>
 </resources>

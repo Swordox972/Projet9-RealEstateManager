@@ -2,7 +2,9 @@ package com.openclassrooms.realestatemanager.model;
 
 import androidx.annotation.NonNull;
 
-public class RealEstate {
+import java.io.Serializable;
+
+public class RealEstate implements Serializable {
 
     @NonNull
     private Type type;

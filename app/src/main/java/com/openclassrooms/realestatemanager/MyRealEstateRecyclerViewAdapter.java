@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateBinding;
+import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
-import java.text.NumberFormat;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
-import java.util.Locale;
 
 public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         <MyRealEstateRecyclerViewAdapter.ViewHolder> {
@@ -50,6 +51,9 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
                 mRealEstate.getFirstLocation());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText(mRealEstate.getPrice());
 
+        holder.itemView.setOnClickListener(view -> {
+            EventBus.getDefault().post(new OpenRealEstateEvent(mRealEstate));
+        });
 
     }
 

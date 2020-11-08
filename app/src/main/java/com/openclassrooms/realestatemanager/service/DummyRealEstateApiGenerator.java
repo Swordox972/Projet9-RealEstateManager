@@ -17,7 +17,18 @@ public abstract class DummyRealEstateApiGenerator {
                     "Lafayette\n" +
                     "NoHo\n" +
                     "New York", RealEstate.Status.forSell, "07/11/2020",null,
-                    "Jessica")
+                    "Jessica"),
+
+            new RealEstate(RealEstate.Type.Penthouse, "$5,400,000", 582,
+                    7, 4, 3,
+                    RealEstateDescription.returnSecondDescription(),
+                    "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg", "Brooklyn"
+            , "The Gretsch Building PH1A\n" +
+                    "60 Broadway\n" +
+                    "Wythe & Berry\n" +
+                    "Williamsburg\n" +
+                    "Brooklyn", RealEstate.Status.forSell, "08/11/2020", null,
+                    "Bianca")
     );
 
     public static List<RealEstate> getRealEstates() {
