@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_real_estate_imageview_size">120dp</dimen>
+    <dimen name="fragment_real_estate_texviews_margin_start">15dp</dimen>
+    <dimen name="fragment_real_estate_textviews_margin_top">8dp</dimen>
+    <dimen name="fragment_real_estate_textviews_size">20sp</dimen>
+    <dimen name="fragment_real_estate_price_textview_size">25sp</dimen>
+</resources>
