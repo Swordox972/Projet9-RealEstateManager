@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6A6A6C</color>
-    <color name="colorPrimaryDark">#4F4F50</color>
+    <color name="colorPrimary">#26C6DA</color>
+    <color name="colorPrimaryDark">#37474F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="activity_on_click_real_estate_description_card_color">#ECEFF1</color>
 </resources>

@@ -9,4 +9,7 @@
     <dimen name="activity_on_click_real_estate_title_description_margin">15dp</dimen>
     <dimen name="activity_on_click_real_estate_title_description_size">20sp</dimen>
     <dimen name="activity_on_click_real_estate_description_margin">16dp</dimen>
+    <dimen name="activity_on_click_real_estate_icon_margin_start">15dp</dimen>
+    <dimen name="activity_on_click_real_estate_distance_between_icon_and_text">10dp</dimen>
+    <dimen name="activity_on_click_real_estate_icons_margin_top">15dp</dimen>
 </resources>

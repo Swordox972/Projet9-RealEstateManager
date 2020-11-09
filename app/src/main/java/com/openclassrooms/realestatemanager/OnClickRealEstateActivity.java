@@ -22,7 +22,7 @@ public class OnClickRealEstateActivity extends AppCompatActivity {
         setContentView(view);
 
         initializeRealEstateValueAndDescription();
-
+        initializeRealEstateIconsValue();
 
     }
 
@@ -31,5 +31,18 @@ public class OnClickRealEstateActivity extends AppCompatActivity {
         mRealEstate = (RealEstate) intent.getSerializableExtra(RealEstateFragment.KEY);
 
         binding.activityOnClickRealEstateDescription.setText(mRealEstate.getDescription());
+    }
+
+    private void initializeRealEstateIconsValue() {
+        String surface = mRealEstate.getSurface() + " sq" + " m";
+        String numberOfRooms =Integer.toString(mRealEstate.getNumberOfRooms());
+        String numberOfBathrooms = Integer.toString(mRealEstate.getNumberOfBathrooms());
+        String numberOfBedrooms = Integer.toString(mRealEstate.getNumberOfBedrooms());
+
+        binding.activityOnClickRealEstateSurfaceValue.setText(surface);
+        binding.activityOnClickRealEstateRoomsValue.setText(numberOfRooms);
+        binding.activityOnClickRealEstateBathroomsValue.setText(numberOfBathrooms);
+        binding.activityOnClickRealEstateBedroomsValue.setText(numberOfBedrooms);
+        binding.activityOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
     }
 }

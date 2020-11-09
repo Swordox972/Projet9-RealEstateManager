@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".OnClickRealEstateActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/activity_on_click_real_estate_title_description_cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/activity_on_click_real_estate_description_card_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
     <TextView
         android:id="@+id/activity_on_click_real_estate_title_description"
@@ -16,6 +32,16 @@
         android:textStyle="bold"
         android:textSize="@dimen/activity_on_click_real_estate_title_description_size" />
 
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/activity_on_click_real_estate_description_cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/activity_on_click_real_estate_description_card_color"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_title_description_cardview"
+        app:layout_constraintStart_toStartOf="parent">
+
     <TextView
         android:id="@+id/activity_on_click_real_estate_description"
         android:layout_width="wrap_content"
@@ -23,4 +49,199 @@
         android:layout_margin="@dimen/activity_on_click_real_estate_description_margin"
         />
 
-</LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <!-- Surface -->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_description_cardview"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_settings_overscan_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/surface"
+            android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+            />
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_surface_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Surface -->
+
+    <!-- Number of rooms-->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_rooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_linear_layout_surface"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_home_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/number_of_rooms"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_rooms_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Number of rooms-->
+
+    <!-- Number of bathrooms-->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_bathrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_rooms"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_bathtub_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/number_of_bathrooms"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_bathrooms_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Number of bathrooms-->
+
+    <!-- Number of bedrooms-->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_bedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bathrooms"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_local_hotel_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/number_of_bedrooms"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_bedrooms_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Number of bedrooms-->
+
+   <!-- Location-->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bedrooms">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_location_on_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/location"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_location_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Location-->
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
