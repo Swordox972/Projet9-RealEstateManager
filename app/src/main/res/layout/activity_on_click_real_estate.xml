@@ -7,19 +7,28 @@
     android:layout_height="match_parent">
 
 
-
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".OnClickRealEstateActivity">
 
+    <ImageView
+        android:id="@+id/activity_on_click_real_estate_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+  <!-- Description Title-->
     <androidx.cardview.widget.CardView
         android:id="@+id/activity_on_click_real_estate_title_description_cardview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/activity_on_click_real_estate_description_card_color"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_image_view"
         app:layout_constraintStart_toStartOf="parent"
         >
 
@@ -33,7 +42,30 @@
         android:textSize="@dimen/activity_on_click_real_estate_title_description_size" />
 
     </androidx.cardview.widget.CardView>
+    <!-- Description Title-->
 
+    <!-- Status-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/activity_on_click_real_estate_status_cardview_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/activity_on_click_real_estate_title_description_cardview"
+        app:layout_constraintTop_toTopOf="@id/activity_on_click_real_estate_title_description_cardview"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_on_click_real_estate_title_description_cardview">
+
+    <TextView
+        android:id="@+id/activity_on_click_real_estate_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+    <!-- Status-->
+
+    <!-- Description Text-->
     <androidx.cardview.widget.CardView
         android:id="@+id/activity_on_click_real_estate_description_cardview"
         android:layout_width="wrap_content"
@@ -50,7 +82,7 @@
         />
 
     </androidx.cardview.widget.CardView>
-
+    <!-- Description Text-->
 
 
     <!-- Surface -->
@@ -77,8 +109,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/surface"
             android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+            android:text="@string/surface"
+            android:textStyle="bold"
             />
 
             <TextView
@@ -116,7 +149,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
-                android:text="@string/number_of_rooms"/>
+                android:text="@string/number_of_rooms"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/activity_on_click_real_estate_rooms_value"
@@ -154,7 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
-                android:text="@string/number_of_bathrooms"/>
+                android:text="@string/number_of_bathrooms"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/activity_on_click_real_estate_bathrooms_value"
@@ -192,7 +227,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
-                android:text="@string/number_of_bedrooms"/>
+                android:text="@string/number_of_bedrooms"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/activity_on_click_real_estate_bedrooms_value"
@@ -230,7 +266,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
-                android:text="@string/location"/>
+                android:text="@string/location"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/activity_on_click_real_estate_location_value"
@@ -241,7 +278,125 @@
         </LinearLayout>
 
     </LinearLayout>
-    <!-- Location-->
+    <!-- Location -->
+
+    <!-- Price -->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_location">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_attach_money_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/price"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Price -->
+
+    <!-- Entry Date-->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_entry_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_price">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_event_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/entry_date"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_entry_date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Entry Date -->
+
+   <!-- Sale Date -->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_sale_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
+        android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_entry_date">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_shop_24"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                android:text="@string/sale_date"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/activity_on_click_real_estate_sale_date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Sale Date -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

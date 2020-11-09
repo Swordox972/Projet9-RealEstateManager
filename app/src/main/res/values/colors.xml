@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="activity_on_click_real_estate_description_card_color">#ECEFF1</color>
+    <color name="activity_on_click_real_estate_for_sell_status_color">#76FF03</color>
+    <color name="activity_on_click_real_estate_sold_status_color">#FF3D00</color>
+    <color name="activity_on_click_real_estate_status_cardview_color">#90A4AE</color>
 </resources>
