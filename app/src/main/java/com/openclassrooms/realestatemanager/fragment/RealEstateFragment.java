@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
+import com.openclassrooms.realestatemanager.OnClickRealEstateActivity;
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;

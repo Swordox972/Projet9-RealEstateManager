@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.service;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

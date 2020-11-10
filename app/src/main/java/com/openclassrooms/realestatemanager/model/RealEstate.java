@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.model;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class RealEstate implements Serializable {
 
@@ -15,6 +16,7 @@ public class RealEstate implements Serializable {
     private int numberOfBedrooms;
     private String description;
     private String photoUrl;
+    private ArrayList photos;
     private String firstLocation;
     private String secondLocation;
     @NonNull
@@ -26,8 +28,9 @@ public class RealEstate implements Serializable {
 
     public RealEstate(@NonNull Type type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
-                      String firstLocation, String secondLocation, @NonNull Status status,
-                      String entryDate, String dateOfSale, Agent agent, String agentPhotoUrl) {
+                      ArrayList photos, String firstLocation, String secondLocation,
+                      @NonNull Status status, String entryDate, String dateOfSale, Agent agent,
+                      String agentPhotoUrl) {
         this.type = type;
         this.price = price;
         this.surface = surface;
@@ -36,6 +39,7 @@ public class RealEstate implements Serializable {
         this.numberOfBedrooms = numberOfBedrooms;
         this.description = description;
         this.photoUrl = photoUrl;
+        this.photos = photos;
         this.firstLocation = firstLocation;
         this.secondLocation = secondLocation;
         this.status = status;
@@ -108,6 +112,14 @@ public class RealEstate implements Serializable {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public ArrayList getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(ArrayList photos) {
+        this.photos = photos;
     }
 
     public String getFirstLocation() {

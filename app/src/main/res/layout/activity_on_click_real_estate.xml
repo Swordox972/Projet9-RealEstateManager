@@ -21,6 +21,16 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- Real estate Photos -->
+     <fragment
+         android:id="@+id/activity_on_click_real_estate_fragment"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:name="com.openclassrooms.realestatemanager.fragment.RealEstatePhotosFragment"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_image_view"/>
+    <!-- Real estate Photos -->
+
   <!-- Description Title-->
     <androidx.cardview.widget.CardView
         android:id="@+id/activity_on_click_real_estate_title_description_cardview"
@@ -28,7 +38,7 @@
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/activity_on_click_real_estate_description_card_color"
-        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_image_view"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_fragment"
         app:layout_constraintStart_toStartOf="parent"
         >
 

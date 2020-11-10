@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -26,8 +26,6 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
     public MyRealEstateRecyclerViewAdapter(List<RealEstate> items) {
         this.mRealEstateList = items;
     }
-
-
 
     @NonNull
     @Override

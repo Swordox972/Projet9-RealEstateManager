@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.databinding.ActivityOnClickRealEstateBinding;
+import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
 public class OnClickRealEstateActivity extends AppCompatActivity {
