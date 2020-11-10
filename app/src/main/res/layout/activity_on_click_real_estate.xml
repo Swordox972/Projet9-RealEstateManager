@@ -85,6 +85,38 @@
     <!-- Description Text-->
 
 
+    <!-- Agent -->
+    <LinearLayout
+        android:id="@+id/activity_on_click_real_estate_linear_layout_salesperson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_description_cardview">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agent_in_charge"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/activity_on_click_real_estate_agent_photo"
+            android:layout_width="100dp"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:id="@+id/activity_on_click_real_estate_agent_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <!-- Agent -->
+
     <!-- Surface -->
     <LinearLayout
         android:id="@+id/activity_on_click_real_estate_linear_layout_surface"
@@ -93,7 +125,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
         android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
-        app:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_description_cardview"
+        app:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_linear_layout_salesperson"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView

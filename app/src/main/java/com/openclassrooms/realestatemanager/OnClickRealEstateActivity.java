@@ -22,20 +22,38 @@ public class OnClickRealEstateActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        initializeRealEstateValueAndDescriptionAndImageView();
+        Intent intent = getIntent();
+        mRealEstate = (RealEstate) intent.getSerializableExtra(RealEstateFragment.KEY);
+
+        initializeDescriptionAndImageView();
+        initializeAgent();
         initializeRealEstateIconsValue();
 
     }
 
-    private void initializeRealEstateValueAndDescriptionAndImageView() {
-        Intent intent = getIntent();
-        mRealEstate = (RealEstate) intent.getSerializableExtra(RealEstateFragment.KEY);
-
+    private void initializeDescriptionAndImageView() {
+        //Real Estate ImageView
         Glide.with(binding.activityOnClickRealEstateImageView.getContext())
                 .load(mRealEstate.getPhotoUrl())
                 .into(binding.activityOnClickRealEstateImageView);
 
         binding.activityOnClickRealEstateDescription.setText(mRealEstate.getDescription());
+    }
+
+    private void initializeAgent() {
+        //Agent photo
+        Glide.with(binding.activityOnClickRealEstateAgentPhoto.getContext())
+                .load(mRealEstate.getAgentPhotoUrl())
+                .into(binding.activityOnClickRealEstateAgentPhoto);
+        //Agent name
+        String agentName;
+        if (mRealEstate.getAgent().equals(RealEstate.Agent.jessicaCCampbell)) {
+            agentName = "Jessica C. Campbell";
+        } else {
+            agentName = "Christian Haag";
+        }
+
+        binding.activityOnClickRealEstateAgentName.setText(agentName);
     }
 
     private void initializeRealEstateIconsValue() {
@@ -56,6 +74,8 @@ public class OnClickRealEstateActivity extends AppCompatActivity {
         } else {
             dateOfSale = mRealEstate.getDateOfSale();
         }
+
+
 
         String surface = mRealEstate.getSurface() + " sq" + " m";
         String numberOfRooms = Integer.toString(mRealEstate.getNumberOfRooms());

@@ -21,12 +21,13 @@ public class RealEstate implements Serializable {
     private Status status;
     private String entryDate;
     private String dateOfSale;
-    private String agent;
+    private Agent agent;
+    private String agentPhotoUrl;
 
     public RealEstate(@NonNull Type type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
                       String firstLocation, String secondLocation, @NonNull Status status,
-                      String entryDate, String dateOfSale, String agent) {
+                      String entryDate, String dateOfSale, Agent agent, String agentPhotoUrl) {
         this.type = type;
         this.price = price;
         this.surface = surface;
@@ -41,6 +42,7 @@ public class RealEstate implements Serializable {
         this.entryDate = entryDate;
         this.dateOfSale = dateOfSale;
         this.agent = agent;
+        this.agentPhotoUrl = agentPhotoUrl;
     }
 
     @NonNull
@@ -149,12 +151,20 @@ public class RealEstate implements Serializable {
         this.dateOfSale = dateOfSale;
     }
 
-    public String getAgent() {
+    public Agent getAgent() {
         return agent;
     }
 
-    public void setAgent(String agent) {
+    public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public String getAgentPhotoUrl() {
+        return agentPhotoUrl;
+    }
+
+    public void setAgentPhotoUrl(String agentPhotoUrl) {
+        this.agentPhotoUrl = agentPhotoUrl;
     }
 
     public enum Type {
@@ -168,6 +178,11 @@ public class RealEstate implements Serializable {
     public enum Status {
         forSell,
         sold
+    }
+
+    public enum Agent {
+        jessicaCCampbell,
+        christianHaag
     }
 }
 

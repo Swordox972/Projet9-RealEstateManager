@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class DummyRealEstateApiGenerator {
 
-    public static List<RealEstate> DUMMY_REALESTATE = Arrays.asList(
+    public static List<RealEstate> DUMMY_REAL_ESTATE = Arrays.asList(
             new RealEstate(RealEstate.Type.Loft, "$13,950,000", 423, 8,
                     4,4,
                     RealEstateDescription.returnFirstDescription(),
@@ -17,7 +17,8 @@ public abstract class DummyRealEstateApiGenerator {
                     "Lafayette\n" +
                     "NoHo\n" +
                     "New York", RealEstate.Status.forSell, "07/11/2020",null,
-                    "Jessica"),
+                    RealEstate.Agent.jessicaCCampbell,
+                    "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg"),
 
             new RealEstate(RealEstate.Type.Penthouse, "$5,400,000", 582,
                     7, 4, 3,
@@ -28,10 +29,11 @@ public abstract class DummyRealEstateApiGenerator {
                     "Wythe & Berry\n" +
                     "Williamsburg\n" +
                     "Brooklyn", RealEstate.Status.forSell, "08/11/2020", null,
-                    "Bianca")
+                    RealEstate.Agent.christianHaag,
+                    "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg")
     );
 
     public static List<RealEstate> getRealEstates() {
-        return new ArrayList<>(DUMMY_REALESTATE);
+        return new ArrayList<>(DUMMY_REAL_ESTATE);
     }
 }
