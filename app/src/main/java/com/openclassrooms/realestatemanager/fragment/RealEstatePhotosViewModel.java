@@ -8,17 +8,21 @@ import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 import com.openclassrooms.realestatemanager.service.RealEstateApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RealEstatePhotosViewModel extends ViewModel {
 
     private final RealEstateApiService apiService;
 
-    private final MutableLiveData<List<RealEstatePhotos>> _photos = new MutableLiveData<List<RealEstatePhotos>>();
-    public LiveData<List<RealEstatePhotos>> photos = _photos;
+    private final MutableLiveData<ArrayList<RealEstatePhotos>> _photos =
+            new MutableLiveData<ArrayList<RealEstatePhotos>>();
+    public LiveData<ArrayList<RealEstatePhotos>> getPhotos() {
+        return _photos;
+    }
 
     public RealEstatePhotosViewModel() {
         apiService = DI.getRealEstateApiService();
-        _photos.postValue(apiService.getRealEstatePhotos1());
+        
     }
 }

@@ -13,7 +13,8 @@ public abstract class DummyRealEstateApiGenerator {
             new RealEstate(RealEstate.Type.Loft, "$13,950,000", 423, 8,
                     4,4,
                     RealEstateDescription.returnFirstDescription(),
-                    "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg", null,
+                    "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
+                    RealEstatePhotoService.getRealEstatePhotos1(),
                     "Manhattan",
                     "41 Great Jones Street Penthouse\n" +
                     "Lafayette\n" +
@@ -25,7 +26,8 @@ public abstract class DummyRealEstateApiGenerator {
             new RealEstate(RealEstate.Type.Penthouse, "$5,400,000", 582,
                     7, 4, 3,
                     RealEstateDescription.returnSecondDescription(),
-                    "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg", null,
+                    "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
+                    RealEstatePhotoService.getRealEstatePhotos2(),
                     "Brooklyn"
             , "The Gretsch Building PH1A\n" +
                     "60 Broadway\n" +
@@ -40,43 +42,6 @@ public abstract class DummyRealEstateApiGenerator {
         return new ArrayList<>(DUMMY_REAL_ESTATE);
     }
 
-    public static List<RealEstatePhotos> DUMMY_REAL_ESTATE_PHOTOS1= Arrays.asList(
-            new RealEstatePhotos("https://i.ibb.co/d21p5mr/Lounge1.jpg",
-                    "Lounge 1"),
-            new RealEstatePhotos("https://i.ibb.co/dDJgnLj/Lounge2.jpg",
-                    "Lounge 2"),
-            new RealEstatePhotos("https://i.ibb.co/ssvkpLq/Kitchen.jpg",
-                    "Kitchen"),
-            new RealEstatePhotos("https://i.ibb.co/Fw7S4vc/bathroom1.jpg",
-                    "Bathroom 1"),
-            new RealEstatePhotos("https://i.ibb.co/yRxrBXc/bathroom2.jpg",
-                    "Bathroom 2"),
-            new RealEstatePhotos("https://i.ibb.co/3Ty6dVf/Bedroom1.jpg",
-                    "Bedroom 1"),
-            new RealEstatePhotos("https://i.ibb.co/M53J6FX/bedroom2.jpg",
-                    "Bedroom 2")
-    );
 
-    public static List<RealEstatePhotos> getRealEstatePhotos1() {
-        return new ArrayList<>(DUMMY_REAL_ESTATE_PHOTOS1);
-    }
 
-    public static List<RealEstatePhotos> DUMMY_REAL_ESTATE_PHOTOS2 = Arrays.asList(
-            new RealEstatePhotos("https://i.ibb.co/CPKwSKh/Lounge1.jpg",
-                    "Lounge 1"),
-            new RealEstatePhotos("https://i.ibb.co/02SfH9X/Kitchen.jpg",
-                    "Kitchen"),
-            new RealEstatePhotos("https://i.ibb.co/hgzWDGP/bathroom1.jpg",
-                    "Bathroom 1"),
-            new RealEstatePhotos("https://i.ibb.co/SQ7kPx3/bathroom2.jpg",
-                    "Bathroom 2"),
-            new RealEstatePhotos("https://i.ibb.co/YRvChkY/bedroom1.jpg",
-                    "Bedroom 1"),
-            new RealEstatePhotos("https://i.ibb.co/89krJvd/bedroom2.jpg",
-                    "Bedroom 2")
-    );
-
-    public static List<RealEstatePhotos> getRealEstatePhotos2() {
-        return new ArrayList<>(DUMMY_REAL_ESTATE_PHOTOS2);
-    }
 }

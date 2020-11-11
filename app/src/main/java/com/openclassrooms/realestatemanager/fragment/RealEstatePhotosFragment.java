@@ -16,8 +16,10 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.adapter.MyRealEstatePhotosRecyclerViewAdapter;
+import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RealEstatePhotosFragment extends Fragment {
@@ -44,15 +46,14 @@ public class RealEstatePhotosFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
+        RealEstate mRealEstate =(RealEstate) getActivity().getIntent()
+                .getSerializableExtra(RealEstateFragment.KEY);
+
+        ArrayList<RealEstatePhotos> realEstatePhotos = mRealEstate.getPhotos();
         adapter = new MyRealEstatePhotosRecyclerViewAdapter(); //empty constructor adapter
         mRecyclerView.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(RealEstatePhotosViewModel.class);
-        viewModel.photos.observe(getViewLifecycleOwner(), new Observer<List<RealEstatePhotos>>() {
-            @Override
-            public void onChanged(List<RealEstatePhotos> realEstatePhotos) {
-                adapter.setRealEstatePhotosList(realEstatePhotos);
-            }
-        });
+        adapter.setRealEstatePhotosList(realEstatePhotos);
     }
 }

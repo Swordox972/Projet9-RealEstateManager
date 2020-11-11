@@ -9,7 +9,5 @@ public interface RealEstateApiService {
 
     List<RealEstate> getRealEstates();
 
-    List<RealEstatePhotos> getRealEstatePhotos1();
 
-    List<RealEstatePhotos> getRealEstatePhotos2();
 }
