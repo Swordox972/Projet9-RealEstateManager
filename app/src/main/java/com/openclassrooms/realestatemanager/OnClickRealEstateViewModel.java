@@ -9,12 +9,11 @@ public class OnClickRealEstateViewModel extends ViewModel {
 
     public static class ViewState {
         final String imageUrl;
-        final String description;
-        final String agentName;
-        final String agentImage;
         final String status;
         final int statusColor;
-        final String dateOfSale;
+        final String description;
+        final String agentImage;
+        final String agentName;
         final String surface;
         final String numberOfRooms;
         final String numberOfBathrooms;
@@ -22,19 +21,18 @@ public class OnClickRealEstateViewModel extends ViewModel {
         final String secondLocation;
         final String price;
         final String entryDate;
+        final String dateOfSale;
 
-        public ViewState(String imageUrl, String description, String agentName, String agentImage,
-                         String status, int statusColor,
-                         String dateOfSale, String surface,
-                         String numberOfRooms, String numberOfBathrooms, String numberOfBedrooms,
-                         String secondLocation, String price, String entryDate) {
+        public ViewState(String imageUrl, String status, int statusColor, String description,
+                         String agentImage, String agentName, String surface, String numberOfRooms,
+                         String numberOfBathrooms, String numberOfBedrooms, String secondLocation,
+                         String price, String entryDate, String dateOfSale) {
             this.imageUrl = imageUrl;
-            this.description = description;
-            this.agentName = agentName;
-            this.agentImage = agentImage;
             this.status = status;
             this.statusColor = statusColor;
-            this.dateOfSale = dateOfSale;
+            this.description = description;
+            this.agentImage = agentImage;
+            this.agentName = agentName;
             this.surface = surface;
             this.numberOfRooms = numberOfRooms;
             this.numberOfBathrooms = numberOfBathrooms;
@@ -42,6 +40,7 @@ public class OnClickRealEstateViewModel extends ViewModel {
             this.secondLocation = secondLocation;
             this.price = price;
             this.entryDate = entryDate;
+            this.dateOfSale = dateOfSale;
         }
     }
 
@@ -85,19 +84,19 @@ public class OnClickRealEstateViewModel extends ViewModel {
 
         final ViewState newViewState = new ViewState(
                 mRealEstate.getPhotoUrl(),
+                status,
+                statusColor,
                 mRealEstate.getDescription(),
                 mRealEstate.getAgentPhotoUrl(),
                 agentName,
-                status,
-                statusColor,
-                dateOfSale,
                 surface,
                 numberOfRooms,
                 numberOfBathrooms,
                 numberOfBedrooms,
                 mRealEstate.getSecondLocation(),
                 mRealEstate.getPrice(),
-                mRealEstate.getEntryDate()
+                mRealEstate.getEntryDate(),
+                dateOfSale
         );
         _viewState.postValue(newViewState);
     }
