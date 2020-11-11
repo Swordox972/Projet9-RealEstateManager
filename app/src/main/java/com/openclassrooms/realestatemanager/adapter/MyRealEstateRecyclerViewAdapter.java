@@ -14,17 +14,21 @@ import com.openclassrooms.realestatemanager.model.RealEstate;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         <MyRealEstateRecyclerViewAdapter.ViewHolder> {
 
-    private List<RealEstate> mRealEstateList;
+    private final List<RealEstate> mRealEstateList = new ArrayList<>();
 
+    public MyRealEstateRecyclerViewAdapter() {
+    }
 
-
-    public MyRealEstateRecyclerViewAdapter(List<RealEstate> items) {
-        this.mRealEstateList = items;
+    public void setRealEstateList(List<RealEstate> realEstateList) {
+        mRealEstateList.clear();
+        mRealEstateList.addAll(realEstateList);
+        notifyDataSetChanged();
     }
 
     @NonNull
