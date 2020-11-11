@@ -11,16 +11,23 @@ import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstatePhotosBinding;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyRealEstatePhotosRecyclerViewAdapter extends
         RecyclerView.Adapter<MyRealEstatePhotosRecyclerViewAdapter.ViewHolder> {
 
+    private final List<RealEstatePhotos> realEstatePhotosList = new ArrayList<>();
 
-    private List<RealEstatePhotos> realEstatePhotosList;
+    public MyRealEstatePhotosRecyclerViewAdapter() {
 
-    public MyRealEstatePhotosRecyclerViewAdapter(List<RealEstatePhotos> items) {
-        this.realEstatePhotosList = items;
+    }
+
+    //method to update the items of adapter
+    public void setRealEstatePhotosList(List<RealEstatePhotos> realEstatePhotosList) {
+        this.realEstatePhotosList.clear();
+        this.realEstatePhotosList.addAll(realEstatePhotosList);
+        notifyDataSetChanged();
     }
 
     @NonNull
