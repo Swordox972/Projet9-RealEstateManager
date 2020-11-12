@@ -2,6 +2,8 @@ package com.openclassrooms.realestatemanager.model;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -19,6 +21,8 @@ public class RealEstate implements Serializable {
     private ArrayList photos;
     private String firstLocation;
     private String secondLocation;
+    private double latitude;
+    private double longitude;
     @NonNull
     private Status status;
     private String entryDate;
@@ -28,9 +32,9 @@ public class RealEstate implements Serializable {
 
     public RealEstate(@NonNull Type type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
-                      ArrayList photos, String firstLocation, String secondLocation,
-                      @NonNull Status status, String entryDate, String dateOfSale, Agent agent,
-                      String agentPhotoUrl) {
+                      ArrayList photos, String firstLocation, String secondLocation, double latitude,
+                      double longitude, @NonNull Status status, String entryDate, String dateOfSale,
+                      Agent agent, String agentPhotoUrl) {
         this.type = type;
         this.price = price;
         this.surface = surface;
@@ -42,6 +46,8 @@ public class RealEstate implements Serializable {
         this.photos = photos;
         this.firstLocation = firstLocation;
         this.secondLocation = secondLocation;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.status = status;
         this.entryDate = entryDate;
         this.dateOfSale = dateOfSale;
@@ -136,6 +142,22 @@ public class RealEstate implements Serializable {
 
     public void setSecondLocation(String secondLocation) {
         this.secondLocation = secondLocation;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     @NonNull

@@ -27,7 +27,6 @@ public class RealEstatePhotosFragment extends Fragment {
     //no more service here
 
     private RecyclerView mRecyclerView;
-    private RealEstatePhotosViewModel viewModel;
     private MyRealEstatePhotosRecyclerViewAdapter adapter;
 
     public RealEstatePhotosFragment() {
@@ -52,8 +51,7 @@ public class RealEstatePhotosFragment extends Fragment {
         ArrayList<RealEstatePhotos> realEstatePhotos = mRealEstate.getPhotos();
         adapter = new MyRealEstatePhotosRecyclerViewAdapter(); //empty constructor adapter
         mRecyclerView.setAdapter(adapter);
-
-        viewModel = new ViewModelProvider(this).get(RealEstatePhotosViewModel.class);
+        
         adapter.setRealEstatePhotosList(realEstatePhotos);
     }
 }

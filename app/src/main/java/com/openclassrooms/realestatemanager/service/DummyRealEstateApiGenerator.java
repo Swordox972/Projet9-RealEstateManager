@@ -19,7 +19,9 @@ public abstract class DummyRealEstateApiGenerator {
                     "41 Great Jones Street Penthouse\n" +
                     "Lafayette\n" +
                     "NoHo\n" +
-                    "New York", RealEstate.Status.forSell, "07/11/2020",null,
+                    "New York",
+                    40.726649, -73.992833,
+                    RealEstate.Status.forSell, "07/11/2020",null,
                     RealEstate.Agent.jessicaCCampbell,
                     "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg"),
 
@@ -33,7 +35,8 @@ public abstract class DummyRealEstateApiGenerator {
                     "60 Broadway\n" +
                     "Wythe & Berry\n" +
                     "Williamsburg\n" +
-                    "Brooklyn", RealEstate.Status.forSell, "08/11/2020", null,
+                    "Brooklyn",40.710313 , -73.966295,
+                    RealEstate.Status.forSell, "08/11/2020", null,
                     RealEstate.Agent.christianHaag,
                     "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg")
     );

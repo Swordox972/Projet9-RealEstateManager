@@ -13,5 +13,6 @@
     <string name="price">Price</string>
     <string name="entry_date">Entry date</string>
     <string name="sale_date">Sale date</string>
+    <string name="map">Map</string>
 
 </resources>

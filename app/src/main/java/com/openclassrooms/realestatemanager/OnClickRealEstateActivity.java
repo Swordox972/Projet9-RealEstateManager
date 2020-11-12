@@ -7,14 +7,30 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.openclassrooms.realestatemanager.databinding.ActivityOnClickRealEstateBinding;
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
-public class OnClickRealEstateActivity extends AppCompatActivity {
+public class OnClickRealEstateActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private ActivityOnClickRealEstateBinding binding;
     private OnClickRealEstateViewModel viewModel;
+    private GoogleMap mMap;
+    private RealEstate mRealEstate;
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real Estate Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(realEstateLatLng));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +38,15 @@ public class OnClickRealEstateActivity extends AppCompatActivity {
         binding = ActivityOnClickRealEstateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        MapFragment mapFragment = (MapFragment) getFragmentManager().
+                findFragmentById(R.id.activity_on_click_real_estate_map_fragment);
+        mapFragment.getMapAsync(this);
+
         viewModel = new ViewModelProvider(this).get(OnClickRealEstateViewModel.class);
 
-        final RealEstate realEstate = (RealEstate) getIntent().getSerializableExtra(RealEstateFragment.KEY);
+         mRealEstate = (RealEstate) getIntent().getSerializableExtra(RealEstateFragment.KEY);
 
-        viewModel.displayRealEstate(realEstate);
+        viewModel.displayRealEstate(mRealEstate);
 
         viewModel.viewState.observe(this, new Observer<OnClickRealEstateViewModel.ViewState>() {
             @Override
