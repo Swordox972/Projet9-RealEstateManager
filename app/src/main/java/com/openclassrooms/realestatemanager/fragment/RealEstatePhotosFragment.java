@@ -45,8 +45,9 @@ public class RealEstatePhotosFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        RealEstate mRealEstate =(RealEstate) getActivity().getIntent()
-                .getSerializableExtra(RealEstateFragment.KEY);
+        RealEstate mRealEstate =(RealEstate) getParentFragment().getArguments().getSerializable(
+                RealEstateFragment.KEY);
+
 
         ArrayList<RealEstatePhotos> realEstatePhotos = mRealEstate.getPhotos();
         adapter = new MyRealEstatePhotosRecyclerViewAdapter(); //empty constructor adapter

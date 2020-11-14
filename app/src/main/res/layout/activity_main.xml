@@ -7,11 +7,11 @@
     tools:context="com.openclassrooms.realestatemanager.MainActivity"
     android:gravity="center">
 
-    <fragment
-        android:id="@+id/activity_main_fragment"
+    <FrameLayout
+        android:id="@+id/activity_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.openclassrooms.realestatemanager.fragment.RealEstateFragment"/>
+        />
 
 
 

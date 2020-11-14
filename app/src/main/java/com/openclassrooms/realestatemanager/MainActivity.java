@@ -8,9 +8,8 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.google.android.gms.maps.OnMapReadyCallback;
+import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -22,6 +21,9 @@ private static final int RC_LOCATION = 10;
         setContentView(R.layout.activity_main);
 
         requestPermissionFineLocation();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_frame_layout,
+                new RealEstateFragment()).commit();
     }
 
     private void requestPermissionFineLocation() {

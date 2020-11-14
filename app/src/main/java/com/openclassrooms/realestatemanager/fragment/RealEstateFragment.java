@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,12 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
-import com.openclassrooms.realestatemanager.OnClickRealEstateActivity;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.service.RealEstateApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -88,11 +83,16 @@ public class RealEstateFragment extends Fragment {
     @Subscribe
     public void onOpenRealEstate(OpenRealEstateEvent event) {
         RealEstate mRealEstate = event.mRealEstate;
-        Intent intent = new Intent(getContext(), OnClickRealEstateActivity.class);
-        intent.putExtra(KEY, mRealEstate);
+
+        OnClickRealEstateFragment onClickRealEstateFragment = new OnClickRealEstateFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(KEY, mRealEstate);
+        onClickRealEstateFragment.setArguments(args);
+
         //Ensure that real estate is not null
         if (mRealEstate != null) {
-            startActivity(intent);
+           getFragmentManager().beginTransaction().replace(R.id.activity_frame_layout,
+                   onClickRealEstateFragment).commit();
         }
     }
 }
