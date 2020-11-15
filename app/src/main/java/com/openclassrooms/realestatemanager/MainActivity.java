@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.openclassrooms.realestatemanager.fragment.OnClickRealEstateFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
+import com.openclassrooms.realestatemanager.fragment.TabletClickOnItemFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -22,8 +26,9 @@ private static final int RC_LOCATION = 10;
 
         requestPermissionFineLocation();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_frame_layout,
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container_view_list,
                 new RealEstateFragment()).commit();
+
     }
 
     private void requestPermissionFineLocation() {

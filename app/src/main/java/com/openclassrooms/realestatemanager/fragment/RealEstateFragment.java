@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -89,10 +90,25 @@ public class RealEstateFragment extends Fragment {
         args.putSerializable(KEY, mRealEstate);
         onClickRealEstateFragment.setArguments(args);
 
+        Fragment fragmentContainerViewDetail =  getParentFragmentManager().findFragmentById(
+                R.id.activity_main_fragment_container_view_detail);
+
+
         //Ensure that real estate is not null
-        if (mRealEstate != null) {
-           getFragmentManager().beginTransaction().replace(R.id.activity_frame_layout,
-                   onClickRealEstateFragment).commit();
+        if (mRealEstate != null && fragmentContainerViewDetail.isVisible() == false ) {
+           getParentFragmentManager()
+                   .beginTransaction()
+                   .replace(R.id.activity_main_fragment_container_view_list,
+                           onClickRealEstateFragment)
+                   .addToBackStack(OnClickRealEstateFragment.class.getSimpleName())
+                   .commit();
+        }
+        else if (mRealEstate != null && fragmentContainerViewDetail.isVisible()) {
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_main_fragment_container_view_detail,
+                            onClickRealEstateFragment)
+                    .commit();
         }
     }
 }

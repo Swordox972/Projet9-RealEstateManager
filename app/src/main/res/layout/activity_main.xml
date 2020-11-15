@@ -7,8 +7,8 @@
     tools:context="com.openclassrooms.realestatemanager.MainActivity"
     android:gravity="center">
 
-    <FrameLayout
-        android:id="@+id/activity_frame_layout"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/activity_main_fragment_container_view_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

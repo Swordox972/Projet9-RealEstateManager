@@ -291,8 +291,8 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bedrooms">
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toTopOf="@id/activity_on_click_real_estate_linear_layout_bedrooms">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -330,8 +330,8 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_location">
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
+            map:layout_constraintTop_toTopOf="@id/activity_on_click_real_estate_linear_layout_surface">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -369,7 +369,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_price">
 
             <ImageView
@@ -408,7 +408,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_entry_date">
 
             <ImageView
@@ -447,7 +447,7 @@
             android:text="@string/map"
             android:textSize="@dimen/activity_on_click_real_estate_titles_size"
             android:textStyle="bold"
-            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_sale_date"
+            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_location"
             map:layout_constraintStart_toStartOf="parent"/>
 
         <!-- Maps Lite Mode -->

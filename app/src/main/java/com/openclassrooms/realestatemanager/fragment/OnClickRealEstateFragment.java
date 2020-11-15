@@ -53,7 +53,6 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
 
         binding.activityOnClickRealEstateDescription.setText(mRealEstate.getDescription());
 
-
         Glide.with(binding.activityOnClickRealEstateAgentPhoto.getContext())
                 .load(mRealEstate.getAgentPhotoUrl())
                 .into(binding.activityOnClickRealEstateAgentPhoto);
@@ -108,10 +107,10 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         mMap = googleMap;
         LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
         mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(realEstateLatLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));
     }
 
-    
+
 
     @Override
     public void onDestroyView() {

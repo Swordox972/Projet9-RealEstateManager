@@ -40,6 +40,9 @@ dependencies {
     //GOOGLE MAPS
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    //Fragment
+    implementation "androidx.fragment:fragment:1.2.5"
+
     //ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
 
