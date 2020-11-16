@@ -1,6 +1,9 @@
 package com.openclassrooms.realestatemanager.adapter;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -21,6 +24,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         <MyRealEstateRecyclerViewAdapter.ViewHolder> {
 
     private final List<RealEstate> mRealEstateList = new ArrayList<>();
+    int row_index = -1;
 
     public MyRealEstateRecyclerViewAdapter() {
     }
@@ -36,6 +40,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(FragmentRealEstateBinding.inflate(LayoutInflater.from(
                 parent.getContext()),parent, false));
+
     }
 
     @Override
@@ -54,9 +59,18 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText(mRealEstate.getPrice());
 
         holder.itemView.setOnClickListener(view -> {
+            row_index = position;
+            notifyDataSetChanged();
             EventBus.getDefault().post(new OpenRealEstateEvent(mRealEstate));
         });
 
+        if (row_index == position) {
+            holder.fragmentRealEstateBinding.fragmentRealEstateMainLinearLayout.setBackgroundColor(
+                    Color.parseColor("#84FFFF"));
+        } else {
+            holder.fragmentRealEstateBinding.fragmentRealEstateMainLinearLayout.setBackgroundColor(
+                    Color.parseColor("#FAFAFA"));
+        }
     }
 
     @Override

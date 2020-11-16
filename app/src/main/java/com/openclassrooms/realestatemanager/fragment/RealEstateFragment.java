@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateBinding;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
@@ -35,20 +37,18 @@ public class RealEstateFragment extends Fragment {
 
     private MyRealEstateRecyclerViewAdapter adapter;
 
-    public static String KEY = "RealEstateClicked";
+    public static final String KEY = "RealEstateClicked";
 
     public RealEstateFragment() {
         // Required empty public constructor
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_real_estate_list, container, false);
     }
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class RealEstateFragment extends Fragment {
 
 
         //Ensure that real estate is not null
-        if (mRealEstate != null && fragmentContainerViewDetail.isVisible() == false ) {
+        if (mRealEstate != null && fragmentContainerViewDetail ==null ) {
            getParentFragmentManager()
                    .beginTransaction()
                    .replace(R.id.activity_main_fragment_container_view_list,

@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -64,9 +63,9 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         }
 
         if (mRealEstate.getStatus() == RealEstate.Status.forSell) {
-            binding.activityOnClickRealEstateStatus.setText("For sell");
+            binding.activityOnClickRealEstateStatus.setText("For sale");
             binding.activityOnClickRealEstateStatus.setTextColor(getResources()
-                    .getColor(R.color.activity_on_click_real_estate_for_sell_status_color));
+                    .getColor(R.color.activity_on_click_real_estate_for_sale_status_color));
         } else {
             binding.activityOnClickRealEstateStatus.setText("Sold");
             binding.activityOnClickRealEstateStatus.setTextColor(getResources().getColor(

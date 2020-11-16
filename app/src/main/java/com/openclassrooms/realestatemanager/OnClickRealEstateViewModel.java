@@ -64,7 +64,7 @@ public class OnClickRealEstateViewModel extends ViewModel {
         final int statusColor;
         if (mRealEstate.getStatus() == RealEstate.Status.forSell) {
             status = "For sell";
-            statusColor = R.color.activity_on_click_real_estate_for_sell_status_color;
+            statusColor = R.color.activity_on_click_real_estate_for_sale_status_color;
         } else {
             status = "Sold";
             statusColor = R.color.activity_on_click_real_estate_sold_status_color;

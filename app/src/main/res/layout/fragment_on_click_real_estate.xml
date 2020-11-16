@@ -46,10 +46,10 @@
                 android:id="@+id/activity_on_click_real_estate_title_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_on_click_real_estate_titles_margin"
+                android:layout_margin="@dimen/fragment_on_click_real_estate_titles_margin"
                 android:text="@string/description"
                 android:textStyle="bold"
-                android:textSize="@dimen/activity_on_click_real_estate_titles_size" />
+                android:textSize="@dimen/fragment_on_click_real_estate_titles_size" />
 
         </androidx.cardview.widget.CardView>
         <!-- Description Title-->
@@ -69,7 +69,7 @@
                 android:id="@+id/activity_on_click_real_estate_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="@dimen/fragment_on_click_real_estate_text_views_size"
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>
@@ -88,7 +88,8 @@
                 android:id="@+id/activity_on_click_real_estate_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_on_click_real_estate_description_margin"
+                android:layout_margin="@dimen/fragment_on_click_real_estate_description_margin"
+                android:textSize="@dimen/fragment_on_click_real_estate_text_views_size"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -110,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/agent_in_charge"
                 android:textStyle="bold"
+                android:textSize="@dimen/fragment_on_click_real_estate_text_views_size"
                 />
 
             <ImageView
@@ -133,8 +135,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_linear_layout_agent"
             map:layout_constraintStart_toStartOf="parent">
 
@@ -151,16 +153,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/surface"
                     android:textStyle="bold"
+
                     />
 
                 <TextView
                     android:id="@+id/activity_on_click_real_estate_surface_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"/>
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -172,8 +175,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintTop_toBottomOf="@+id/activity_on_click_real_estate_linear_layout_surface"
             map:layout_constraintStart_toStartOf="parent">
 
@@ -190,7 +193,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/number_of_rooms"
                     android:textStyle="bold"/>
 
@@ -198,7 +201,7 @@
                     android:id="@+id/activity_on_click_real_estate_rooms_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -211,8 +214,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_rooms"
             map:layout_constraintStart_toStartOf="parent">
 
@@ -229,7 +232,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/number_of_bathrooms"
                     android:textStyle="bold"/>
 
@@ -237,7 +240,7 @@
                     android:id="@+id/activity_on_click_real_estate_bathrooms_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -250,8 +253,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bathrooms"
             map:layout_constraintStart_toStartOf="parent">
 
@@ -268,7 +271,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/number_of_bedrooms"
                     android:textStyle="bold"/>
 
@@ -276,7 +279,7 @@
                     android:id="@+id/activity_on_click_real_estate_bedrooms_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -289,8 +292,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bedrooms">
 
@@ -307,7 +310,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/location"
                     android:textStyle="bold"/>
 
@@ -315,7 +318,7 @@
                     android:id="@+id/activity_on_click_real_estate_location_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -328,8 +331,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_location">
 
@@ -346,7 +349,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/price"
                     android:textStyle="bold"/>
 
@@ -354,7 +357,7 @@
                     android:id="@+id/activity_on_click_real_estate_price_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -367,8 +370,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_price">
 
@@ -385,7 +388,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/entry_date"
                     android:textStyle="bold"/>
 
@@ -393,7 +396,7 @@
                     android:id="@+id/activity_on_click_real_estate_entry_date_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -406,8 +409,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/activity_on_click_real_estate_icons_margin_top"
-            android:layout_marginStart="@dimen/activity_on_click_real_estate_icon_margin_start"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_entry_date">
 
@@ -424,7 +427,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     android:text="@string/sale_date"
                     android:textStyle="bold"/>
 
@@ -432,7 +435,7 @@
                     android:id="@+id/activity_on_click_real_estate_sale_date_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_on_click_real_estate_distance_between_icon_and_text"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
                     />
             </LinearLayout>
 
@@ -443,9 +446,9 @@
             android:id="@+id/activity_on_click_real_estate_map_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_on_click_real_estate_titles_margin"
+            android:layout_margin="@dimen/fragment_on_click_real_estate_titles_margin"
             android:text="@string/map"
-            android:textSize="@dimen/activity_on_click_real_estate_titles_size"
+            android:textSize="@dimen/fragment_on_click_real_estate_titles_size"
             android:textStyle="bold"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_sale_date"
             map:layout_constraintStart_toStartOf="parent"/>
@@ -462,8 +465,8 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/activity_on_click_real_estate_map_fragment"
-                android:layout_width="@dimen/activity_on_click_real_estate_map_fragment_size"
-                android:layout_height="@dimen/activity_on_click_real_estate_map_fragment_size"
+                android:layout_width="@dimen/fragment_on_click_real_estate_map_fragment_size"
+                android:layout_height="@dimen/fragment_on_click_real_estate_map_fragment_size"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 map:mapType="normal"
                 map:liteMode="true"/>
