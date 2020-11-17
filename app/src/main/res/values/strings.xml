@@ -14,8 +14,12 @@
     <string name="entry_date">Entry date</string>
     <string name="sale_date">Sale date</string>
     <string name="map">Map</string>
+    <string name="media">Media</string>
 
     <string name="click_on_an_element_in_the_list">Click on an element in the list to display details
      </string>
 
+    <string name="menu_add">Add</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_search">Search</string>
 </resources>

@@ -303,8 +303,8 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_bedrooms">
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
+            map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_agent">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -344,7 +344,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_price">
 
             <ImageView
@@ -385,7 +385,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintStart_toStartOf="@id/activity_on_click_real_estate_linear_layout_location"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_entry_date">
 
             <ImageView
@@ -426,7 +426,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toBottomOf="@id/activity_on_click_real_estate_linear_layout_sale_date">
 
             <ImageView

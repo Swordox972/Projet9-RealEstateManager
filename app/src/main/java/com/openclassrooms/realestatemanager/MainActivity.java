@@ -1,23 +1,21 @@
 package com.openclassrooms.realestatemanager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-
-import com.openclassrooms.realestatemanager.fragment.OnClickRealEstateFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
-import com.openclassrooms.realestatemanager.fragment.TabletClickOnItemFragment;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
-private static final int RC_LOCATION = 10;
+    private static final int RC_LOCATION = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +29,23 @@ private static final int RC_LOCATION = 10;
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
     private void requestPermissionFineLocation() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -41,7 +56,7 @@ private static final int RC_LOCATION = 10;
     }
 
     private void getLocatePermission() {
-        ActivityCompat.requestPermissions(this, new String[] {
+        ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION}, RC_LOCATION);
     }
 
@@ -55,4 +70,5 @@ private static final int RC_LOCATION = 10;
             }
         }
     }
+
 }
