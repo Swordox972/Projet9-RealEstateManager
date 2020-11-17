@@ -1,9 +1,7 @@
 package com.openclassrooms.realestatemanager.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -39,7 +37,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(FragmentRealEstateBinding.inflate(LayoutInflater.from(
-                parent.getContext()),parent, false));
+                parent.getContext()), parent, false));
 
     }
 

@@ -11,7 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -28,9 +28,9 @@ public class UtilsClassTest {
     }
 
     @Test
-    public void assertConvertDollarToEuroWorks () {
+    public void assertConvertDollarToEuroWorks() {
         int dollars = 8;
-        assertEquals(Utils.convertDollarToEuro(dollars), Math.round(dollars * 0.812 ));
+        assertEquals(Utils.convertDollarToEuro(dollars), Math.round(dollars * 0.812));
     }
 
     @Test
@@ -41,8 +41,8 @@ public class UtilsClassTest {
 
     @Test
     public void assertGetTodayDateWorks() {
-     Date today = new Date();
-     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-     assertEquals(Utils.getTodayDate(), dateFormat.format(today));
+        Date today = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        assertEquals(Utils.getTodayDate(), dateFormat.format(today));
     }
 }

@@ -65,11 +65,11 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         if (mRealEstate.getStatus() == RealEstate.Status.forSell) {
             binding.activityOnClickRealEstateStatus.setText("For sale");
             binding.activityOnClickRealEstateStatus.setTextColor(getResources()
-                    .getColor(R.color.activity_on_click_real_estate_for_sale_status_color));
+                    .getColor(R.color.fragment_on_click_real_estate_for_sale_status_color));
         } else {
             binding.activityOnClickRealEstateStatus.setText("Sold");
             binding.activityOnClickRealEstateStatus.setTextColor(getResources().getColor(
-                    R.color.activity_on_click_real_estate_sold_status_color));
+                    R.color.fragment_on_click_real_estate_sold_status_color));
         }
 
         String dateOfSale;
@@ -96,7 +96,7 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
 
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.activity_on_click_real_estate_map_fragment);
+                .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment);
         supportMapFragment.getMapAsync(this);
 
     }
@@ -108,7 +108,6 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));
     }
-
 
 
     @Override

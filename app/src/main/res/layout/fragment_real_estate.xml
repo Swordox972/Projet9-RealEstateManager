@@ -12,22 +12,22 @@
         android:id="@+id/fragment_real_estate_imageView"
         android:layout_width="@dimen/fragment_real_estate_imageview_size"
         android:layout_height="@dimen/fragment_real_estate_imageview_size"
-        android:background="@null"/>
+        android:background="@null" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/fragment_real_estate_item_type"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
-        android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
-        android:textStyle="bold"
-        android:textSize="@dimen/fragment_real_estate_textviews_size"
-        android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/fragment_real_estate_item_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
+            android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
+            android:textStyle="bold"
+            android:textSize="@dimen/fragment_real_estate_textviews_size"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/fragment_real_estate_item_first_location"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
             android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
-            android:textSize="@dimen/fragment_real_estate_textviews_size"/>
+            android:textSize="@dimen/fragment_real_estate_textviews_size" />
 
         <TextView
             android:id="@+id/fragment_real_estate_item_price"
@@ -44,7 +44,7 @@
             android:layout_marginStart="@dimen/fragment_real_estate_texviews_margin_start"
             android:layout_marginTop="@dimen/fragment_real_estate_textviews_margin_top"
             android:textSize="@dimen/fragment_real_estate_price_textview_size"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent" />
 
     </LinearLayout>
 

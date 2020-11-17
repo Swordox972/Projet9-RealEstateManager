@@ -2,8 +2,6 @@ package com.openclassrooms.realestatemanager.model;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

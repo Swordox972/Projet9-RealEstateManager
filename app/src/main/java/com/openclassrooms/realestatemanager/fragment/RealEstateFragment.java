@@ -1,25 +1,21 @@
 package com.openclassrooms.realestatemanager.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateBinding;
+import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
@@ -90,20 +86,19 @@ public class RealEstateFragment extends Fragment {
         args.putSerializable(KEY, mRealEstate);
         onClickRealEstateFragment.setArguments(args);
 
-        Fragment fragmentContainerViewDetail =  getParentFragmentManager().findFragmentById(
+        Fragment fragmentContainerViewDetail = getParentFragmentManager().findFragmentById(
                 R.id.activity_main_fragment_container_view_detail);
 
 
         //Ensure that real estate is not null
-        if (mRealEstate != null && fragmentContainerViewDetail ==null ) {
-           getParentFragmentManager()
-                   .beginTransaction()
-                   .replace(R.id.activity_main_fragment_container_view_list,
-                           onClickRealEstateFragment)
-                   .addToBackStack(OnClickRealEstateFragment.class.getSimpleName())
-                   .commit();
-        }
-        else if (mRealEstate != null && fragmentContainerViewDetail.isVisible()) {
+        if (mRealEstate != null && fragmentContainerViewDetail == null) {
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_main_fragment_container_view_list,
+                            onClickRealEstateFragment)
+                    .addToBackStack(OnClickRealEstateFragment.class.getSimpleName())
+                    .commit();
+        } else if (mRealEstate != null && fragmentContainerViewDetail.isVisible()) {
             getParentFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_main_fragment_container_view_detail,

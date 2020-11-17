@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
 
@@ -21,8 +21,8 @@
         android:background="@android:color/black"
         android:alpha="0.6"
         android:layout_alignStart="@id/fragment_real_estate_photos_image_view"
-        android:layout_alignBottom="@id/fragment_real_estate_photos_image_view"
-        />
+        android:layout_alignBottom="@id/fragment_real_estate_photos_image_view" />
+
     <TextView
         android:id="@+id/fragment_real_estate_photos_description"
         android:layout_width="wrap_content"
@@ -32,7 +32,6 @@
         android:layout_alignStart="@id/fragment_real_estate_photos_view_filter"
         android:layout_alignBottom="@id/fragment_real_estate_photos_view_filter"
         android:textSize="@dimen/fragment_real_estate_photos_text_view_size"
-        android:textColor="@android:color/white"
-        />
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

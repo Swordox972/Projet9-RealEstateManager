@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
 public class OnClickRealEstateViewModel extends ViewModel {
@@ -49,7 +50,7 @@ public class OnClickRealEstateViewModel extends ViewModel {
 
     private RealEstate mRealEstate;
 
-    public void displayRealEstate(RealEstate realEstate){
+    public void displayRealEstate(RealEstate realEstate) {
         this.mRealEstate = realEstate;
 
         //Agent name
@@ -64,10 +65,10 @@ public class OnClickRealEstateViewModel extends ViewModel {
         final int statusColor;
         if (mRealEstate.getStatus() == RealEstate.Status.forSell) {
             status = "For sell";
-            statusColor = R.color.activity_on_click_real_estate_for_sale_status_color;
+            statusColor = R.color.fragment_on_click_real_estate_for_sale_status_color;
         } else {
             status = "Sold";
-            statusColor = R.color.activity_on_click_real_estate_sold_status_color;
+            statusColor = R.color.fragment_on_click_real_estate_sold_status_color;
         }
 
         final String dateOfSale;

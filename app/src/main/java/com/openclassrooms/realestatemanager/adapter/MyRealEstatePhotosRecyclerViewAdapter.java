@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,7 @@ public class MyRealEstatePhotosRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       final RealEstatePhotos mRealEstatePhotos = realEstatePhotosList.get(position);
+        final RealEstatePhotos mRealEstatePhotos = realEstatePhotosList.get(position);
 
         Glide.with(holder.fragmentRealEstatePhotosBinding.fragmentRealEstatePhotosImageView.getContext())
                 .load(mRealEstatePhotos.getPhotoUrl())
