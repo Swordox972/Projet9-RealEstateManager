@@ -39,6 +39,11 @@ public class RealEstateFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,12 +62,10 @@ public class RealEstateFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
-        viewModel.list.observe(getViewLifecycleOwner(), new Observer<List<RealEstate>>() {
-            @Override
-            public void onChanged(List<RealEstate> realEstates) {
-                adapter.setRealEstateList(realEstates);
-            }
-        });
+
+        viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
+            adapter.setRealEstateList(realEstates);
+                });
     }
 
     @Override
@@ -106,4 +109,5 @@ public class RealEstateFragment extends Fragment {
                     .commit();
         }
     }
+
 }

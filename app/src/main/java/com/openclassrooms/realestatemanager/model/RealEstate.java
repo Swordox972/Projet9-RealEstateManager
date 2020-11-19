@@ -1,14 +1,22 @@
 package com.openclassrooms.realestatemanager.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.openclassrooms.realestatemanager.service.RealEstateTypeConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+@Entity
 public class RealEstate implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     @NonNull
-    private Type type;
+    private String type;
     private String price;
     private int surface;
     private int numberOfRooms;
@@ -22,17 +30,18 @@ public class RealEstate implements Serializable {
     private double latitude;
     private double longitude;
     @NonNull
-    private Status status;
+    private String status;
     private String entryDate;
     private String dateOfSale;
-    private Agent agent;
+    private String agent;
     private String agentPhotoUrl;
 
-    public RealEstate(@NonNull Type type, String price, int surface, int numberOfRooms,
+    public RealEstate(long id, @NonNull String type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
                       ArrayList photos, String firstLocation, String secondLocation, double latitude,
-                      double longitude, @NonNull Status status, String entryDate, String dateOfSale,
-                      Agent agent, String agentPhotoUrl) {
+                      double longitude, @NonNull String status, String entryDate, String dateOfSale,
+                      String agent, String agentPhotoUrl) {
+        this.id = id;
         this.type = type;
         this.price = price;
         this.surface = surface;
@@ -53,12 +62,20 @@ public class RealEstate implements Serializable {
         this.agentPhotoUrl = agentPhotoUrl;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @NonNull
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(@NonNull Type type) {
+    public void setType(@NonNull String type) {
         this.type = type;
     }
 
@@ -159,11 +176,11 @@ public class RealEstate implements Serializable {
     }
 
     @NonNull
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(@NonNull Status status) {
+    public void setStatus(@NonNull String status) {
         this.status = status;
     }
 
@@ -183,11 +200,11 @@ public class RealEstate implements Serializable {
         this.dateOfSale = dateOfSale;
     }
 
-    public Agent getAgent() {
+    public String getAgent() {
         return agent;
     }
 
-    public void setAgent(Agent agent) {
+    public void setAgent(String agent) {
         this.agent = agent;
     }
 
@@ -199,22 +216,6 @@ public class RealEstate implements Serializable {
         this.agentPhotoUrl = agentPhotoUrl;
     }
 
-    public enum Type {
-        Flat,
-        House,
-        Penthouse,
-        Duplex,
-        Loft
-    }
 
-    public enum Status {
-        forSell,
-        sold
-    }
-
-    public enum Agent {
-        jessicaCCampbell,
-        christianHaag
-    }
 }
 

@@ -50,8 +50,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.fragmentRealEstateBinding.fragmentRealEstateImageView);
 
-        holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType()
-                .toString());
+        holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemFirstLocation.setText(
                 mRealEstate.getFirstLocation());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText(mRealEstate.getPrice());

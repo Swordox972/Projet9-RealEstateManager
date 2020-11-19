@@ -43,10 +43,6 @@ dependencies {
     //Fragment
     implementation "androidx.fragment:fragment:1.2.5"
 
-    //ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
-
-
     //CardView
     implementation "androidx.cardview:cardview:1.0.0"
 
@@ -59,4 +55,17 @@ dependencies {
 
     //EventBus
     implementation 'org.greenrobot:eventbus:3.2.0'
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor('android.arch.persistence.room:compiler:1.1.1')
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Testing
+    androidTestImplementation("android.arch.core:core-testing:1.1.1")
 }

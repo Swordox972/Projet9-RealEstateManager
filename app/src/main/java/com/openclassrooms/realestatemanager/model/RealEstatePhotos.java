@@ -2,14 +2,25 @@ package com.openclassrooms.realestatemanager.model;
 
 import java.io.Serializable;
 
+
 public class RealEstatePhotos implements Serializable {
 
+    private long id;
     private String photoUrl;
     private String description;
 
-    public RealEstatePhotos(String photoUrl, String description) {
+    public RealEstatePhotos(long id, String photoUrl, String description) {
+        this.id = id;
         this.photoUrl = photoUrl;
         this.description = description;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getPhotoUrl() {
@@ -27,4 +38,5 @@ public class RealEstatePhotos implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

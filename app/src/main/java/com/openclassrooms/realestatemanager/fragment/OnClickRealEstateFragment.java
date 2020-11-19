@@ -46,31 +46,30 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Glide.with(binding.activityOnClickRealEstateImageView.getContext())
+        Glide.with(binding.fragmentOnClickRealEstateImageView.getContext())
                 .load(mRealEstate.getPhotoUrl())
-                .into(binding.activityOnClickRealEstateImageView);
+                .into(binding.fragmentOnClickRealEstateImageView);
 
-        binding.activityOnClickRealEstateDescription.setText(mRealEstate.getDescription());
+        binding.fragmentOnClickRealEstateDescription.setText(mRealEstate.getDescription());
 
-        Glide.with(binding.activityOnClickRealEstateAgentPhoto.getContext())
+        Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.getContext())
                 .load(mRealEstate.getAgentPhotoUrl())
-                .into(binding.activityOnClickRealEstateAgentPhoto);
+                .into(binding.fragmentOnClickRealEstateAgentPhoto);
 
-        if (mRealEstate.getAgent().equals(RealEstate.Agent.jessicaCCampbell)) {
-            binding.activityOnClickRealEstateAgentName.setText("Jessica C. Campbell");
-        } else {
-            binding.activityOnClickRealEstateAgentName.setText("Christian Haag");
-        }
+            binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
 
-        if (mRealEstate.getStatus() == RealEstate.Status.forSell) {
-            binding.activityOnClickRealEstateStatus.setText("For sale");
-            binding.activityOnClickRealEstateStatus.setTextColor(getResources()
+            binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
+
+
+
+            binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
+            binding.fragmentOnClickRealEstateStatus.setTextColor(getResources()
                     .getColor(R.color.fragment_on_click_real_estate_for_sale_status_color));
-        } else {
-            binding.activityOnClickRealEstateStatus.setText("Sold");
-            binding.activityOnClickRealEstateStatus.setTextColor(getResources().getColor(
+
+            binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
+            binding.fragmentOnClickRealEstateStatus.setTextColor(getResources().getColor(
                     R.color.fragment_on_click_real_estate_sold_status_color));
-        }
+
 
         String dateOfSale;
         if (mRealEstate.getDateOfSale() == null) {
@@ -85,14 +84,14 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         String numberOfBedrooms = Integer.toString(mRealEstate.getNumberOfBedrooms());
 
 
-        binding.activityOnClickRealEstateSurfaceValue.setText(surface);
-        binding.activityOnClickRealEstateRoomsValue.setText(numberOfRooms);
-        binding.activityOnClickRealEstateBathroomsValue.setText(numberOfBathrooms);
-        binding.activityOnClickRealEstateBedroomsValue.setText(numberOfBedrooms);
-        binding.activityOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
-        binding.activityOnClickRealEstatePriceValue.setText(mRealEstate.getPrice());
-        binding.activityOnClickRealEstateEntryDateValue.setText(mRealEstate.getEntryDate());
-        binding.activityOnClickRealEstateSaleDateValue.setText(dateOfSale);
+        binding.fragmentOnClickRealEstateSurfaceValue.setText(surface);
+        binding.fragmentOnClickRealEstateRoomsValue.setText(numberOfRooms);
+        binding.fragmentOnClickRealEstateBathroomsValue.setText(numberOfBathrooms);
+        binding.fragmentOnClickRealEstateBedroomsValue.setText(numberOfBedrooms);
+        binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
+        binding.fragmentOnClickRealEstatePriceValue.setText(mRealEstate.getPrice());
+        binding.fragmentOnClickRealEstateEntryDateValue.setText(mRealEstate.getEntryDate());
+        binding.fragmentOnClickRealEstateSaleDateValue.setText(dateOfSale);
 
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()

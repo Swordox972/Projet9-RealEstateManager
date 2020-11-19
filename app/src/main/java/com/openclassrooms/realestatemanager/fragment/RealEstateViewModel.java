@@ -1,25 +1,42 @@
 package com.openclassrooms.realestatemanager.fragment;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
 
-import com.openclassrooms.realestatemanager.di.DI;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.service.RealEstateApiService;
+import com.openclassrooms.realestatemanager.repository.RealEstateDataRepository;
 
 import java.util.List;
 
 
-public class RealEstateViewModel extends ViewModel {
+public class RealEstateViewModel extends AndroidViewModel {
 
-    private final RealEstateApiService apiService;
+    //Repository
+    private final RealEstateDataRepository mRepository;
+    private final LiveData<List<RealEstate>> mRealEstates;
 
-    private final MutableLiveData<List<RealEstate>> _list = new MutableLiveData<>();
-    final LiveData<List<RealEstate>> list = _list;
-
-    public RealEstateViewModel() {
-        apiService = DI.getRealEstateApiService();
-        _list.postValue(apiService.getRealEstates());
+    public RealEstateViewModel( Application application) {
+        super(application);
+        mRepository = new RealEstateDataRepository(application);
+        mRealEstates = mRepository.getRealEstates();
     }
+
+    //Data
+    @Nullable
+    LiveData<List<RealEstate>> getRealEstates() {
+        return mRealEstates;
+    }
+
+
+    public void createRealEstate(RealEstate realEstate) {
+        mRepository.createRealEstate(realEstate);
+    }
+
+    public void updateRealEstate(RealEstate realEstate) {
+       mRepository.updateRealEstate(realEstate);
+    }
+
 }

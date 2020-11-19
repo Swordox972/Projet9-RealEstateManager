@@ -9,20 +9,20 @@ public class RealEstatePhotoService {
     public static ArrayList<RealEstatePhotos> getRealEstatePhotos1() {
         ArrayList<RealEstatePhotos> realEstatePhotos1 = new ArrayList<>();
 
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/d21p5mr/Lounge1.jpg",
-                "Lounge 1"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/dDJgnLj/Lounge2.jpg",
-                "Lounge 2"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/ssvkpLq/Kitchen.jpg",
-                "Kitchen"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/Fw7S4vc/bathroom1.jpg",
-                "Bathroom 1"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/yRxrBXc/bathroom2.jpg",
-                "Bathroom 2"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/3Ty6dVf/Bedroom1.jpg",
-                "Bedroom 1"));
-        realEstatePhotos1.add(new RealEstatePhotos("https://i.ibb.co/M53J6FX/bedroom2.jpg",
-                "Bedroom 2"));
+        realEstatePhotos1.add(new RealEstatePhotos(1,"" +
+                "https://i.ibb.co/d21p5mr/Lounge1.jpg", "Lounge 1"));
+        realEstatePhotos1.add(new RealEstatePhotos(2,
+                "https://i.ibb.co/dDJgnLj/Lounge2.jpg", "Lounge 2"));
+        realEstatePhotos1.add(new RealEstatePhotos(3,
+                "https://i.ibb.co/ssvkpLq/Kitchen.jpg", "Kitchen"));
+        realEstatePhotos1.add(new RealEstatePhotos(4,
+                "https://i.ibb.co/Fw7S4vc/bathroom1.jpg", "Bathroom 1"));
+        realEstatePhotos1.add(new RealEstatePhotos(5,
+                "https://i.ibb.co/yRxrBXc/bathroom2.jpg", "Bathroom 2"));
+        realEstatePhotos1.add(new RealEstatePhotos(6,
+                "https://i.ibb.co/3Ty6dVf/Bedroom1.jpg", "Bedroom 1"));
+        realEstatePhotos1.add(new RealEstatePhotos(7,
+                "https://i.ibb.co/M53J6FX/bedroom2.jpg", "Bedroom 2"));
 
         return realEstatePhotos1;
     }
@@ -31,18 +31,18 @@ public class RealEstatePhotoService {
     public static ArrayList<RealEstatePhotos> getRealEstatePhotos2() {
         ArrayList<RealEstatePhotos> realEstatePhotos2 = new ArrayList<>();
 
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/CPKwSKh/Lounge1.jpg",
-                "Lounge 1"));
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/02SfH9X/Kitchen.jpg",
-                "Kitchen"));
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/hgzWDGP/bathroom1.jpg",
-                "Bathroom 1"));
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/SQ7kPx3/bathroom2.jpg",
-                "Bathroom 2"));
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/YRvChkY/bedroom1.jpg",
-                "Bedroom 1"));
-        realEstatePhotos2.add(new RealEstatePhotos("https://i.ibb.co/89krJvd/bedroom2.jpg",
-                "Bedroom 2"));
+        realEstatePhotos2.add(new RealEstatePhotos(8,
+                "https://i.ibb.co/CPKwSKh/Lounge1.jpg", "Lounge 1"));
+        realEstatePhotos2.add(new RealEstatePhotos(9,
+                "https://i.ibb.co/02SfH9X/Kitchen.jpg", "Kitchen"));
+        realEstatePhotos2.add(new RealEstatePhotos(10,
+                "https://i.ibb.co/hgzWDGP/bathroom1.jpg", "Bathroom 1"));
+        realEstatePhotos2.add(new RealEstatePhotos(11,
+                "https://i.ibb.co/SQ7kPx3/bathroom2.jpg", "Bathroom 2"));
+        realEstatePhotos2.add(new RealEstatePhotos(12,
+                "https://i.ibb.co/YRvChkY/bedroom1.jpg", "Bedroom 1"));
+        realEstatePhotos2.add(new RealEstatePhotos(13,
+                "https://i.ibb.co/89krJvd/bedroom2.jpg", "Bedroom 2"));
 
         return realEstatePhotos2;
 
