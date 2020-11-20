@@ -1,11 +1,9 @@
 package com.openclassrooms.realestatemanager.model;
 
-import androidx.annotation.NonNull;
+import android.content.ContentValues;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.openclassrooms.realestatemanager.service.RealEstateTypeConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ public class RealEstate implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @NonNull
     private String type;
     private String price;
     private int surface;
@@ -29,17 +26,20 @@ public class RealEstate implements Serializable {
     private String secondLocation;
     private double latitude;
     private double longitude;
-    @NonNull
     private String status;
     private String entryDate;
     private String dateOfSale;
     private String agent;
     private String agentPhotoUrl;
 
-    public RealEstate(long id, @NonNull String type, String price, int surface, int numberOfRooms,
+
+    public RealEstate() {
+    }
+
+    public RealEstate(long id, String type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
                       ArrayList photos, String firstLocation, String secondLocation, double latitude,
-                      double longitude, @NonNull String status, String entryDate, String dateOfSale,
+                      double longitude, String status, String entryDate, String dateOfSale,
                       String agent, String agentPhotoUrl) {
         this.id = id;
         this.type = type;
@@ -70,12 +70,11 @@ public class RealEstate implements Serializable {
         this.id = id;
     }
 
-    @NonNull
     public String getType() {
         return type;
     }
 
-    public void setType(@NonNull String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -175,12 +174,11 @@ public class RealEstate implements Serializable {
         this.longitude = longitude;
     }
 
-    @NonNull
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(@NonNull String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -217,5 +215,34 @@ public class RealEstate implements Serializable {
     }
 
 
+    //Content Provider
+    public static RealEstate fromContentValues(ContentValues values) {
+        final RealEstate realEstate = new RealEstate();
+        if (values.containsKey("type")) realEstate.setType(values.getAsString("type"));
+        if (values.containsKey("price")) realEstate.setPrice(values.getAsString("price"));
+        if (values.containsKey("surface")) realEstate.setSurface(values.getAsInteger("surface"));
+        if (values.containsKey("numberOfRooms")) realEstate.setNumberOfRooms(
+                values.getAsInteger("numberOfRooms"));
+        if (values.containsKey("numberOfBathrooms")) realEstate.setNumberOfBathrooms(
+                values.getAsInteger("numberOfBathrooms"));
+        if (values.containsKey("numberOfBedrooms")) realEstate.setNumberOfBedrooms(
+                values.getAsInteger("numberOfBedrooms"));
+        if (values.containsKey("description")) realEstate.setDescription(
+                values.getAsString("description"));
+        if (values.containsKey("photoUrl")) realEstate.setPhotoUrl(values.getAsString("photoUrl"));
+        if (values.containsKey("firstLocation")) realEstate.setFirstLocation(
+                values.getAsString("firstLocation"));
+        if (values.containsKey("secondLocation")) realEstate.setSecondLocation(
+                values.getAsString("secondLocation"));
+        if (values.containsKey("latitude")) realEstate.setLatitude(values.getAsDouble("latitude"));
+        if (values.containsKey("longitude")) realEstate.setLongitude(values.getAsDouble("longitude"));
+        if (values.containsKey("status")) realEstate.setStatus(values.getAsString("status"));
+        if (values.containsKey("entryDate")) realEstate.setEntryDate(values.getAsString("entryDate"));
+        if (values.containsKey("dateOfSale")) realEstate.setDateOfSale(values.getAsString("dateOfSale"));
+        if (values.containsKey("agent")) realEstate.setAgent(values.getAsString("agent"));
+        if (values.containsKey("agentPhotoUrl")) realEstate.setAgentPhotoUrl(values.getAsString("agentPhotoUrl"));
+
+        return realEstate;
+    }
 }
 

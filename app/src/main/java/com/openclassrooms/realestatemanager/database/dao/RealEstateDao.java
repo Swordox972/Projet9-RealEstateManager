@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.database.dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -15,7 +17,7 @@ import java.util.List;
 public interface RealEstateDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertRealEstate(RealEstate realEstate);
+    long insertRealEstate(RealEstate realEstate);
 
     @Query("SELECT * FROM RealEstate WHERE id = :realEstateId")
     LiveData<RealEstate> getRealEstate(long realEstateId);
@@ -27,5 +29,9 @@ public interface RealEstateDao {
     int updateRealEstate(RealEstate realEstate);
 
     @Query("DELETE FROM RealEstate")
-    void deleteAll();
+    int deleteAll();
+
+    //Content Provider
+    @Query("SELECT * FROM RealEstate")
+    Cursor getRealEstatesWithCursor();
 }

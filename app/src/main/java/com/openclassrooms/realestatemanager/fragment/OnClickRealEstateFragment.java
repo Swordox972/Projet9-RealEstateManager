@@ -60,15 +60,15 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
 
             binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
 
-
-
+            if (mRealEstate.getStatus().equals("For sale")) {
             binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
             binding.fragmentOnClickRealEstateStatus.setTextColor(getResources()
                     .getColor(R.color.fragment_on_click_real_estate_for_sale_status_color));
-
+            } else {
             binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
             binding.fragmentOnClickRealEstateStatus.setTextColor(getResources().getColor(
                     R.color.fragment_on_click_real_estate_sold_status_color));
+            }
 
 
         String dateOfSale;
