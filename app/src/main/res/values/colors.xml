@@ -8,4 +8,6 @@
     <color name="fragment_on_click_real_estate_for_sale_status_color">#76FF03</color>
     <color name="fragment_on_click_real_estate_sold_status_color">#D50000</color>
     <color name="fragment_on_click_real_estate_status_cardview_color">#757575</color>
+
+    <color name="activity_add_real_estate_chose_date_button_color">#E91E63</color>
 </resources>

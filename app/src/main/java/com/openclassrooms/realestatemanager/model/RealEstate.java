@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.model;
 import android.content.ContentValues;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -32,7 +33,7 @@ public class RealEstate implements Serializable {
     private String agent;
     private String agentPhotoUrl;
 
-
+    @Ignore
     public RealEstate() {
     }
 
@@ -235,12 +236,16 @@ public class RealEstate implements Serializable {
         if (values.containsKey("secondLocation")) realEstate.setSecondLocation(
                 values.getAsString("secondLocation"));
         if (values.containsKey("latitude")) realEstate.setLatitude(values.getAsDouble("latitude"));
-        if (values.containsKey("longitude")) realEstate.setLongitude(values.getAsDouble("longitude"));
+        if (values.containsKey("longitude"))
+            realEstate.setLongitude(values.getAsDouble("longitude"));
         if (values.containsKey("status")) realEstate.setStatus(values.getAsString("status"));
-        if (values.containsKey("entryDate")) realEstate.setEntryDate(values.getAsString("entryDate"));
-        if (values.containsKey("dateOfSale")) realEstate.setDateOfSale(values.getAsString("dateOfSale"));
+        if (values.containsKey("entryDate"))
+            realEstate.setEntryDate(values.getAsString("entryDate"));
+        if (values.containsKey("dateOfSale"))
+            realEstate.setDateOfSale(values.getAsString("dateOfSale"));
         if (values.containsKey("agent")) realEstate.setAgent(values.getAsString("agent"));
-        if (values.containsKey("agentPhotoUrl")) realEstate.setAgentPhotoUrl(values.getAsString("agentPhotoUrl"));
+        if (values.containsKey("agentPhotoUrl"))
+            realEstate.setAgentPhotoUrl(values.getAsString("agentPhotoUrl"));
 
         return realEstate;
     }

@@ -21,5 +21,6 @@
     <dimen name="fragment_on_click_real_estate_icons_margin_top">15dp</dimen>
     <dimen name="fragment_on_click_real_estate_map_fragment_size">300dp</dimen>
 
+    <dimen name="activity_add_real_estate_margin">15dp</dimen>
 
 </resources>

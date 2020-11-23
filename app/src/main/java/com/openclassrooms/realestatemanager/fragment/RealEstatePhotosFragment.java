@@ -17,6 +17,7 @@ import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RealEstatePhotosFragment extends Fragment {
 
@@ -39,16 +40,15 @@ public class RealEstatePhotosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView) view;
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.HORIZONTAL, false));
 
         RealEstate mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
                 RealEstateFragment.KEY);
 
-
-        ArrayList<RealEstatePhotos> realEstatePhotos = mRealEstate.getPhotos();
         adapter = new MyRealEstatePhotosRecyclerViewAdapter(); //empty constructor adapter
         mRecyclerView.setAdapter(adapter);
 
-        adapter.setRealEstatePhotosList(realEstatePhotos);
+        adapter.setRealEstatePhotosList(mRealEstate.getPhotos());
     }
 }

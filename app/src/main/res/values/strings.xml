@@ -22,4 +22,33 @@
     <string name="menu_add">Add</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_search">Search</string>
+
+    <string name="borough_or_neighborhood">Borough or Neighborhood</string>
+    <string name="price_in_dollar">Price in dollar</string>
+    <string name="add_main_photo">Add Main Photo</string>
+    <string name="type">Type</string>
+    <string name="add_other_photos">Add other photos</string>
+    <string name="tape_description_here">Tape description here</string>
+    <string name="status">Status</string>
+    <string name="address">Address</string>
+    <string name="ok">OK</string>
+    <string name="choose_date">Choose Date</string>
+
+    <string-array name="real_estate_types">
+        <item>Loft</item>
+        <item>Penthouse</item>
+        <item>Flat</item>
+        <item>House</item>
+        <item>Duplex</item>
+    </string-array>
+
+    <string-array name="real_estate_status">
+        <item>For sale</item>
+        <item>Sold</item>
+    </string-array>
+
+    <string-array name="real_estate_agent">
+        <item>Jessica C. Campbell</item>
+        <item>Christian Haag</item>
+    </string-array>
 </resources>

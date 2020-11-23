@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,10 +13,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
+import com.openclassrooms.realestatemanager.model.RealEstate;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_LOCATION = 10;
+
+    public static final String ADD_REAL_ESTATE = "ADD_REAL_ESTATE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case (R.id.menu_add):
+                Intent intent = new Intent(this, AddRealEstateActivity.class);
+                RealEstate realEstate = new RealEstate();
+                intent.putExtra(ADD_REAL_ESTATE, realEstate);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);

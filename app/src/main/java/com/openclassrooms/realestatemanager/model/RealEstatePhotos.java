@@ -1,26 +1,35 @@
 package com.openclassrooms.realestatemanager.model;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 
 public class RealEstatePhotos implements Serializable {
 
-    private long id;
+    private String photoUri;
     private String photoUrl;
     private String description;
 
-    public RealEstatePhotos(long id, String photoUrl, String description) {
-        this.id = id;
+    public RealEstatePhotos() {
+    }
+
+    public RealEstatePhotos(String photoUri, String photoUrl, String description) {
         this.photoUrl = photoUrl;
         this.description = description;
     }
 
-    public long getId() {
-        return id;
+
+    public String getPhotoUri() {
+        return photoUri;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPhotoUri(String photoUri) {
+        this.photoUri = photoUri;
     }
 
     public String getPhotoUrl() {
@@ -39,4 +48,23 @@ public class RealEstatePhotos implements Serializable {
         this.description = description;
     }
 
+
+    public static String uriToString(Uri uri) {
+        String stringUri = uri.toString();
+        return stringUri;
+    }
+
+    public static Uri stringToUri(String stringUri) {
+        Uri uri = Uri.parse(stringUri);
+        return uri;
+
+    }
+
+    public static Uri bitmapToImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage,
+                "Title", null);
+        return Uri.parse(path);
+    }
 }
