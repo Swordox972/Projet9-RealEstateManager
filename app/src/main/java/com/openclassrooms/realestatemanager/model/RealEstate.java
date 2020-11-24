@@ -21,7 +21,8 @@ public class RealEstate implements Serializable {
     private int numberOfBathrooms;
     private int numberOfBedrooms;
     private String description;
-    private String photoUrl;
+    private String mainPhotoUrl;
+    private String mainPhotoString;
     private ArrayList photos;
     private String firstLocation;
     private String secondLocation;
@@ -38,10 +39,10 @@ public class RealEstate implements Serializable {
     }
 
     public RealEstate(long id, String type, String price, int surface, int numberOfRooms,
-                      int numberOfBathrooms, int numberOfBedrooms, String description, String photoUrl,
-                      ArrayList photos, String firstLocation, String secondLocation, double latitude,
-                      double longitude, String status, String entryDate, String dateOfSale,
-                      String agent, String agentPhotoUrl) {
+                      int numberOfBathrooms, int numberOfBedrooms, String description, String mainPhotoUrl,
+                      String mainPhotoString,ArrayList photos, String firstLocation,
+                      String secondLocation, double latitude, double longitude, String status,
+                      String entryDate, String dateOfSale, String agent, String agentPhotoUrl) {
         this.id = id;
         this.type = type;
         this.price = price;
@@ -50,7 +51,7 @@ public class RealEstate implements Serializable {
         this.numberOfBathrooms = numberOfBathrooms;
         this.numberOfBedrooms = numberOfBedrooms;
         this.description = description;
-        this.photoUrl = photoUrl;
+        this.mainPhotoUrl = mainPhotoUrl;
         this.photos = photos;
         this.firstLocation = firstLocation;
         this.secondLocation = secondLocation;
@@ -127,12 +128,20 @@ public class RealEstate implements Serializable {
         this.description = description;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public String getMainPhotoUrl() {
+        return mainPhotoUrl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setMainPhotoUrl(String mainPhotoUrl) {
+        this.mainPhotoUrl = mainPhotoUrl;
+    }
+
+    public String getMainPhotoString() {
+        return mainPhotoString;
+    }
+
+    public void setMainPhotoString(String mainPhotoString) {
+        this.mainPhotoString = mainPhotoString;
     }
 
     public ArrayList getPhotos() {
@@ -230,7 +239,7 @@ public class RealEstate implements Serializable {
                 values.getAsInteger("numberOfBedrooms"));
         if (values.containsKey("description")) realEstate.setDescription(
                 values.getAsString("description"));
-        if (values.containsKey("photoUrl")) realEstate.setPhotoUrl(values.getAsString("photoUrl"));
+        if (values.containsKey("photoUrl")) realEstate.setMainPhotoUrl(values.getAsString("photoUrl"));
         if (values.containsKey("firstLocation")) realEstate.setFirstLocation(
                 values.getAsString("firstLocation"));
         if (values.containsKey("secondLocation")) realEstate.setSecondLocation(

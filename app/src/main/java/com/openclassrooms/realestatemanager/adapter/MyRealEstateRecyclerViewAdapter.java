@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.adapter;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateBinding;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,10 +47,17 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final RealEstate mRealEstate = mRealEstateList.get(position);
 
+        if (mRealEstate.getMainPhotoUrl() != null) {
         Glide.with(holder.fragmentRealEstateBinding.fragmentRealEstateImageView.getContext())
-                .load(mRealEstate.getPhotoUrl())
+                .load(mRealEstate.getMainPhotoUrl())
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.fragmentRealEstateBinding.fragmentRealEstateImageView);
+        }
+
+        if (mRealEstate.getMainPhotoString() != null) {
+            Bitmap bitmap = RealEstatePhotos.stringToBitMap(mRealEstate.getMainPhotoString());
+            holder.fragmentRealEstateBinding.fragmentRealEstateImageView.setImageBitmap(bitmap);
+        }
 
         holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemFirstLocation.setText(

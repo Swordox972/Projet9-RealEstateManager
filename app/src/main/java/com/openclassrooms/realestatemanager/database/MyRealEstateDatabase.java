@@ -64,7 +64,7 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                              423, 8, 4, 4,
                              RealEstateDescription.returnFirstDescription(),
                              "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
-                             RealEstatePhotoService.getRealEstatePhotos1(),
+                             null, RealEstatePhotoService.getRealEstatePhotos1(),
                              "Manhattan",
                              "41 Great Jones Street Penthouse\n" +
                                      "Lafayette\n" +
@@ -79,7 +79,7 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                              7, 4, 3,
                              RealEstateDescription.returnSecondDescription(),
                              "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
-                             RealEstatePhotoService.getRealEstatePhotos2(),
+                             null, RealEstatePhotoService.getRealEstatePhotos2(),
                              "Brooklyn"
                              , "The Gretsch Building PH1A\n" +
                              "60 Broadway\n" +

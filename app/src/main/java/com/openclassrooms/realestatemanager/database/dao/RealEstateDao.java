@@ -31,6 +31,9 @@ public interface RealEstateDao {
     @Query("DELETE FROM RealEstate")
     int deleteAll();
 
+    @Query("DELETE FROM RealEstate WHERE id = :realEstateId")
+    int deleteRealEstate(long realEstateId);
+
     //Content Provider
     @Query("SELECT * FROM RealEstate")
     Cursor getRealEstatesWithCursor();

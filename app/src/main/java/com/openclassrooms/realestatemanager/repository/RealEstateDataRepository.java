@@ -39,5 +39,8 @@ public class RealEstateDataRepository {
         mRealEstateDao.updateRealEstate(realEstate);
     }
 
+    //Delete
+    public void deleteRealEstate(long realEstateId) {mRealEstateDao.deleteRealEstate(realEstateId);}
+
 
 }

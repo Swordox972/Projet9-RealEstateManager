@@ -4,12 +4,16 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +26,8 @@ import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AddRealEstateActivity extends AppCompatActivity {
+public class AddRealEstateActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     ActivityAddRealEstateBinding binding;
 
@@ -38,6 +43,10 @@ public class AddRealEstateActivity extends AppCompatActivity {
     private RealEstate mNewRealEstate;
     public static ArrayList<RealEstatePhotos> othersPhotosList;
 
+    private String type;
+    private String status;
+    private String agent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +56,59 @@ public class AddRealEstateActivity extends AppCompatActivity {
 
         mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
         othersPhotosList = new ArrayList<>();
+        initializeSpinners();
 
         selectMainPhotoIntent();
         selectOtherPhotosIntent();
 
         initializeButtonSelectEntryDate();
         initializeButtonSelectSaleDate();
+
+        initializeFinishButton();
+    }
+
+    private void initializeSpinners() {
+        Spinner spinnerType = binding.activityAddRealEstateTypeSpinner;
+        Spinner spinnerStatus = binding.activityAddRealEstateStatusSpinner;
+        Spinner spinnerAgent = binding.activityAddRealEstateAgentSpinner;
+
+        initializeSpinnerAdapter(spinnerType, R.array.real_estate_types);
+        initializeSpinnerAdapter(spinnerStatus, R.array.real_estate_status);
+        initializeSpinnerAdapter(spinnerAgent, R.array.real_estate_agent);
+
+        spinnerType.setOnItemSelectedListener(this);
+        spinnerStatus.setOnItemSelectedListener(this);
+        spinnerAgent.setOnItemSelectedListener(this);
+
+    }
+
+
+    private void initializeSpinnerAdapter(Spinner spinner, int resourceArray) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                resourceArray, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+    }
+
+    //Spinner onItemSelected
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (adapterView.getId() == R.id.activity_add_real_estate_type_spinner)
+            type = adapterView.getItemAtPosition(i).toString();
+
+        if (adapterView.getId() == R.id.activity_add_real_estate_status_spinner)
+            status = adapterView.getItemAtPosition(i).toString();
+
+        if (adapterView.getId() == R.id.activity_add_real_estate_agent_spinner)
+            agent = adapterView.getItemAtPosition(i).toString();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     private void selectMainPhotoIntent() {
@@ -138,6 +194,54 @@ public class AddRealEstateActivity extends AppCompatActivity {
                 dateSetListener, lastSelectedYear, lastSelectedMonth, lastSelectedDayOfMonth);
 
         datePickerDialog.show();
+    }
+
+    private void setNewRealEstateValue() {
+        mNewRealEstate.setType(type);
+        mNewRealEstate.setStatus(status);
+        mNewRealEstate.setAgent(agent);
+
+        String firstLocation = binding.activityAddRealEstateFirstLocationEditText.getText().toString();
+        String price = binding.activityAddRealEstatePriceEditText.getText().toString();
+        int surface = Integer.parseInt(binding.activityAddRealEstateSurfaceEditText.getText().toString());
+        int numberOfRooms = Integer.parseInt(
+                binding.activityAddRealEstateNumberOfRoomsEditText.getText().toString());
+        int numberOfBathrooms = Integer.parseInt(
+                binding.activityAddRealEstateNumberOfBathroomsEditText.getText().toString());
+        int numberOfBedrooms = Integer.parseInt(binding
+                .activityAddRealEstateNumberOfBedroomsEditText.getText().toString());
+        String secondLocation = binding.activityAddRealEstateAddressEditText.getText().toString();
+        String entryDate = binding.activityAddRealEstateEntryDateEditText.getText().toString();
+        String saleDate = binding.activityAddRealEstateSaleDateEditText.getText().toString();
+
+        BitmapDrawable mainPhoto = (BitmapDrawable) binding.activityAddRealEstateMainPhoto.getDrawable();
+        Bitmap mainPhotoBitmap = mainPhoto.getBitmap();
+        String mainPhotoBitmapToString = RealEstatePhotos.bitMapToString(mainPhotoBitmap);
+
+        mNewRealEstate.setFirstLocation(firstLocation);
+        mNewRealEstate.setPrice(price);
+        mNewRealEstate.setMainPhotoString(mainPhotoBitmapToString);
+        //mNewRealEstate.setOthersPhotos is in onActivityResult
+        mNewRealEstate.setSurface(surface);
+        mNewRealEstate.setNumberOfRooms(numberOfRooms);
+        mNewRealEstate.setNumberOfBathrooms(numberOfBathrooms);
+        mNewRealEstate.setNumberOfBedrooms(numberOfBedrooms);
+        mNewRealEstate.setSecondLocation(secondLocation);
+        mNewRealEstate.setEntryDate(entryDate);
+        mNewRealEstate.setDateOfSale(saleDate);
+
+    }
+
+    private void initializeFinishButton() {
+        //Set mNewRealEstate all value selected previously
+        binding.activityAddRealEstateOkButton.setOnClickListener(view -> {
+            setNewRealEstateValue();
+
+            Intent intent = new Intent();
+            intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
+            setResult(RESULT_OK, intent);
+            finish();
+        });
     }
 
     @Override

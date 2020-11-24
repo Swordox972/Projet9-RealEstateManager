@@ -8,18 +8,28 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
+import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_LOCATION = 10;
 
     public static final String ADD_REAL_ESTATE = "ADD_REAL_ESTATE";
+
+    public static final int ADD_REAL_ESTATE_REQUEST_CODE = 100;
+
+    private RealEstateViewModel viewModel;
+
+    private MyRealEstateHandlerThread myRealEstateHandlerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container_view_list,
                 new RealEstateFragment()).commit();
+
+        viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
+
+        myRealEstateHandlerThread = new MyRealEstateHandlerThread(
+                "InsertRealEstateInDatabase");
 
     }
 
@@ -46,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AddRealEstateActivity.class);
                 RealEstate realEstate = new RealEstate();
                 intent.putExtra(ADD_REAL_ESTATE, realEstate);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE);
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -80,4 +95,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                RealEstate newRealEstate =(RealEstate)
+                        data.getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+
+                myRealEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel);
+
+            }
+        }
+
+    }
+
+    
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myRealEstateHandlerThread.quit();
+    }
 }

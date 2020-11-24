@@ -140,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="@string/price_in_dollar"
+        android:hint="@string/surface_in_square_meter"
         android:layout_margin="15dp" />
 
     <EditText

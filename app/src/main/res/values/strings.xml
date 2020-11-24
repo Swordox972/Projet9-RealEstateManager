@@ -33,6 +33,7 @@
     <string name="address">Address</string>
     <string name="ok">OK</string>
     <string name="choose_date">Choose Date</string>
+    <string name="surface_in_square_meter">Surface in square meter</string>
 
     <string-array name="real_estate_types">
         <item>Loft</item>

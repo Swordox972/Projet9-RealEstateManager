@@ -47,7 +47,7 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Glide.with(binding.fragmentOnClickRealEstateImageView.getContext())
-                .load(mRealEstate.getPhotoUrl())
+                .load(mRealEstate.getMainPhotoUrl())
                 .into(binding.fragmentOnClickRealEstateImageView);
 
         binding.fragmentOnClickRealEstateDescription.setText(mRealEstate.getDescription());
