@@ -1,23 +1,24 @@
 package com.openclassrooms.realestatemanager.adapter;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.databinding.FragmentPickPhotosBinding;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class MyPickPhotosRecyclerViewAdapter extends
         RecyclerView.Adapter<MyPickPhotosRecyclerViewAdapter.ViewHolder> {
 
     private final ArrayList<RealEstatePhotos> realEstatePhotosList = new ArrayList<>();
+    public static HashMap<Integer, String> map = new HashMap<>();
 
     public MyPickPhotosRecyclerViewAdapter() {
     }
@@ -42,7 +43,30 @@ public class MyPickPhotosRecyclerViewAdapter extends
         holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.setImageURI(
                 RealEstatePhotos.stringToUri(realEstatePhotos.getPhotoUri()));
 
-        
+        holder.fragmentPickPhotosBinding.fragmentRealEstatePhotosDescription.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        String value = map.get(position);
+                        if (value == null) {
+                            map.put(position, holder.fragmentPickPhotosBinding
+                                    .fragmentRealEstatePhotosDescription.getText().toString());
+                        }
+                    }
+                }
+        );
+
+
     }
 
     @Override
@@ -52,7 +76,7 @@ public class MyPickPhotosRecyclerViewAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private  FragmentPickPhotosBinding fragmentPickPhotosBinding;
+        private FragmentPickPhotosBinding fragmentPickPhotosBinding;
 
         public ViewHolder(@NonNull FragmentPickPhotosBinding fragmentPickPhotosBinding) {
             super(fragmentPickPhotosBinding.getRoot());

@@ -10,6 +10,7 @@
     <string name="number_of_bathrooms">Number of bathrooms</string>
     <string name="number_of_bedrooms">Number of bedrooms</string>
     <string name="location">Location</string>
+    <string name="points_of_interest">Points of interest</string>
     <string name="price">Price</string>
     <string name="entry_date">Entry date</string>
     <string name="sale_date">Sale date</string>

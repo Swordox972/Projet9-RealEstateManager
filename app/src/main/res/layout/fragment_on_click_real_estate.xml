@@ -316,6 +316,44 @@
         </LinearLayout>
         <!-- Location -->
 
+        <!-- Points of interest -->
+        <LinearLayout
+            android:id="@+id/fragment_on_click_real_estate_linear_layout_points_of_interest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
+            android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_linear_layout_location">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_my_location_24" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text"
+                    android:text="@string/points_of_interest"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fragment_on_click_real_estate_points_of_interest_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/fragment_on_click_real_estate_distance_between_icon_and_text" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Points of interest -->
+
         <!-- Price -->
         <LinearLayout
             android:id="@+id/fragment_on_click_real_estate_linear_layout_price"
@@ -325,7 +363,7 @@
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_linear_layout_location">
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_linear_layout_points_of_interest">
 
             <ImageView
                 android:layout_width="wrap_content"

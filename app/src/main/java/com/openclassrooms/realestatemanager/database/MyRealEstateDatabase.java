@@ -69,7 +69,7 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                              "41 Great Jones Street Penthouse\n" +
                                      "Lafayette\n" +
                                      "NoHo\n" +
-                                     "New York",
+                                     "New York", "Ecole",
                              40.726649, -73.992833,
                              "For sale", "07/11/2020", null,
                              "Jessica C. Campbell",
@@ -85,7 +85,7 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                              "60 Broadway\n" +
                              "Wythe & Berry\n" +
                              "Williamsburg\n" +
-                             "Brooklyn", 40.710313, -73.966295,
+                             "Brooklyn", "Parc",40.710313, -73.966295,
                              "For sale", "08/11/2020", null,
                              "Christian Haag",
                              "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");

@@ -26,6 +26,7 @@ public class RealEstate implements Serializable {
     private ArrayList photos;
     private String firstLocation;
     private String secondLocation;
+    private String pointsOfInterest;
     private double latitude;
     private double longitude;
     private String status;
@@ -41,8 +42,9 @@ public class RealEstate implements Serializable {
     public RealEstate(long id, String type, String price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String mainPhotoUrl,
                       String mainPhotoString,ArrayList photos, String firstLocation,
-                      String secondLocation, double latitude, double longitude, String status,
-                      String entryDate, String dateOfSale, String agent, String agentPhotoUrl) {
+                      String secondLocation, String pointsOfInterest,double latitude, double longitude,
+                      String status, String entryDate, String dateOfSale, String agent,
+                      String agentPhotoUrl) {
         this.id = id;
         this.type = type;
         this.price = price;
@@ -52,9 +54,11 @@ public class RealEstate implements Serializable {
         this.numberOfBedrooms = numberOfBedrooms;
         this.description = description;
         this.mainPhotoUrl = mainPhotoUrl;
+        this.mainPhotoString = mainPhotoString;
         this.photos = photos;
         this.firstLocation = firstLocation;
         this.secondLocation = secondLocation;
+        this.pointsOfInterest = pointsOfInterest;
         this.latitude = latitude;
         this.longitude = longitude;
         this.status = status;
@@ -166,6 +170,14 @@ public class RealEstate implements Serializable {
 
     public void setSecondLocation(String secondLocation) {
         this.secondLocation = secondLocation;
+    }
+
+    public String getPointsOfInterest() {
+        return pointsOfInterest;
+    }
+
+    public void setPointsOfInterest(String pointsOfInterest) {
+        this.pointsOfInterest = pointsOfInterest;
     }
 
     public double getLatitude() {

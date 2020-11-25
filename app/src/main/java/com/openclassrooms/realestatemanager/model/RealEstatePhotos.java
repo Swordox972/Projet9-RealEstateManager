@@ -21,6 +21,7 @@ public class RealEstatePhotos implements Serializable {
     }
 
     public RealEstatePhotos(String photoUri, String photoUrl, String description) {
+        this.photoUri = photoUri;
         this.photoUrl = photoUrl;
         this.description = description;
     }

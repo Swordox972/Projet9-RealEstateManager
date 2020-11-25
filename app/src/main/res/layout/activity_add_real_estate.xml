@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/borough_or_neighborhood"
-        android:inputType="text"
+        android:inputType="text|none"
         android:layout_margin="@dimen/activity_add_real_estate_margin"
         />
 
@@ -94,7 +94,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal|none"
+        android:digits="0123456789.,"
         android:hint="@string/price_in_dollar"
+        android:layout_margin="15dp"/>
+
+    <!-- Description -->
+    <EditText
+        android:id="@+id/activity_add_real_estate_description_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text|none"
+        android:hint="@string/description"
         android:layout_margin="15dp"/>
 
     <!-- Main Photo button-->
@@ -177,6 +187,15 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/address"
+        android:layout_margin="15dp"
+        />
+
+    <EditText
+        android:id="@+id/activity_add_real_estate_points_of_interest_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/points_of_interest"
         android:layout_margin="15dp"
         />
 

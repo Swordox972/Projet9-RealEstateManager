@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.adapter;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -55,8 +56,12 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         }
 
         if (mRealEstate.getMainPhotoString() != null) {
-            Bitmap bitmap = RealEstatePhotos.stringToBitMap(mRealEstate.getMainPhotoString());
-            holder.fragmentRealEstateBinding.fragmentRealEstateImageView.setImageBitmap(bitmap);
+            Uri imageUri = RealEstatePhotos.stringToUri(mRealEstate.getMainPhotoString());
+            try {
+            holder.fragmentRealEstateBinding.fragmentRealEstateImageView.setImageURI(imageUri);
+            } catch (SecurityException se) {
+
+            }
         }
 
         holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType());

@@ -1,6 +1,10 @@
 package com.openclassrooms.realestatemanager.fragment;
 
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentOnClickRealEstateBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCallback {
@@ -46,17 +54,20 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (mRealEstate.getMainPhotoUrl() != null) {
         Glide.with(binding.fragmentOnClickRealEstateImageView.getContext())
                 .load(mRealEstate.getMainPhotoUrl())
                 .into(binding.fragmentOnClickRealEstateImageView);
+        } else if (mRealEstate.getMainPhotoString() != null) {
+            Uri imageUri = RealEstatePhotos.stringToUri(mRealEstate.getMainPhotoString());
+                binding.fragmentOnClickRealEstateImageView.setImageURI(imageUri);
+        }
 
         binding.fragmentOnClickRealEstateDescription.setText(mRealEstate.getDescription());
 
         Glide.with(binding.fragmentOnClickRealEstateAgentPhoto.getContext())
                 .load(mRealEstate.getAgentPhotoUrl())
                 .into(binding.fragmentOnClickRealEstateAgentPhoto);
-
-            binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
 
             binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
 
@@ -89,6 +100,7 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding.fragmentOnClickRealEstateBathroomsValue.setText(numberOfBathrooms);
         binding.fragmentOnClickRealEstateBedroomsValue.setText(numberOfBedrooms);
         binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
+        binding.fragmentOnClickRealEstatePointsOfInterestValue.setText(mRealEstate.getPointsOfInterest());
         binding.fragmentOnClickRealEstatePriceValue.setText(mRealEstate.getPrice());
         binding.fragmentOnClickRealEstateEntryDateValue.setText(mRealEstate.getEntryDate());
         binding.fragmentOnClickRealEstateSaleDateValue.setText(dateOfSale);
@@ -100,9 +112,39 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
 
     }
 
+    private void getLocationFromAddress(String strAddress) {
+        Geocoder geocoder = new Geocoder(getContext());
+        List<Address> address;
+
+        try {
+            //Get latLng from String
+            address = geocoder.getFromLocationName(strAddress, 5);
+
+            if (address != null) {
+
+                // Take first possibility from the all possibilities.
+                try {
+                    Address location = address.get(0);
+                    mRealEstate.setLatitude(location.getLatitude());
+                    mRealEstate.setLongitude(location.getLongitude());
+                } catch (IndexOutOfBoundsException e) {
+
+                }
+
+            }
+
+        } catch (IOException ioException) {
+                 ioException.printStackTrace();
+        }
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if (mRealEstate.getLatitude() == 0 && mRealEstate.getLongitude() == 0) {
+            getLocationFromAddress(mRealEstate.getSecondLocation());
+        }
+
         LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
         mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));

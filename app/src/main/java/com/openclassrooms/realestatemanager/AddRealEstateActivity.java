@@ -19,10 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.openclassrooms.realestatemanager.adapter.MyPickPhotosRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.databinding.ActivityAddRealEstateBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -108,7 +110,14 @@ public class AddRealEstateActivity extends AppCompatActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+        if (adapterView.getId() == R.id.activity_add_real_estate_type_spinner)
+            type = adapterView.getItemAtPosition(0).toString();
 
+        if (adapterView.getId() == R.id.activity_add_real_estate_status_spinner)
+            status = adapterView.getItemAtPosition(0).toString();
+
+        if (adapterView.getId() == R.id.activity_add_real_estate_agent_spinner)
+            agent = adapterView.getItemAtPosition(0).toString();
     }
 
     private void selectMainPhotoIntent() {
@@ -201,8 +210,15 @@ public class AddRealEstateActivity extends AppCompatActivity
         mNewRealEstate.setStatus(status);
         mNewRealEstate.setAgent(agent);
 
+        if (agent.equals("Jessica C. Campbell")) {
+            mNewRealEstate.setAgentPhotoUrl("https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg");
+        } else {
+            mNewRealEstate.setAgentPhotoUrl("https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");
+        }
+
         String firstLocation = binding.activityAddRealEstateFirstLocationEditText.getText().toString();
         String price = binding.activityAddRealEstatePriceEditText.getText().toString();
+        String description = binding.activityAddRealEstateDescriptionEditText.getText().toString();
         int surface = Integer.parseInt(binding.activityAddRealEstateSurfaceEditText.getText().toString());
         int numberOfRooms = Integer.parseInt(
                 binding.activityAddRealEstateNumberOfRoomsEditText.getText().toString());
@@ -211,22 +227,22 @@ public class AddRealEstateActivity extends AppCompatActivity
         int numberOfBedrooms = Integer.parseInt(binding
                 .activityAddRealEstateNumberOfBedroomsEditText.getText().toString());
         String secondLocation = binding.activityAddRealEstateAddressEditText.getText().toString();
+        String pointsOfInsterest = binding.activityAddRealEstatePointsOfInterestEditText.getText()
+                .toString();
         String entryDate = binding.activityAddRealEstateEntryDateEditText.getText().toString();
         String saleDate = binding.activityAddRealEstateSaleDateEditText.getText().toString();
 
-        BitmapDrawable mainPhoto = (BitmapDrawable) binding.activityAddRealEstateMainPhoto.getDrawable();
-        Bitmap mainPhotoBitmap = mainPhoto.getBitmap();
-        String mainPhotoBitmapToString = RealEstatePhotos.bitMapToString(mainPhotoBitmap);
-
         mNewRealEstate.setFirstLocation(firstLocation);
-        mNewRealEstate.setPrice(price);
-        mNewRealEstate.setMainPhotoString(mainPhotoBitmapToString);
+        mNewRealEstate.setPrice("$" + price);
+        mNewRealEstate.setDescription(description);
+        //mNewRealEstate.setMainPhoto is in onActivityResult
         //mNewRealEstate.setOthersPhotos is in onActivityResult
         mNewRealEstate.setSurface(surface);
         mNewRealEstate.setNumberOfRooms(numberOfRooms);
         mNewRealEstate.setNumberOfBathrooms(numberOfBathrooms);
         mNewRealEstate.setNumberOfBedrooms(numberOfBedrooms);
         mNewRealEstate.setSecondLocation(secondLocation);
+        mNewRealEstate.setPointsOfInterest(pointsOfInsterest);
         mNewRealEstate.setEntryDate(entryDate);
         mNewRealEstate.setDateOfSale(saleDate);
 
@@ -259,12 +275,18 @@ public class AddRealEstateActivity extends AppCompatActivity
                 //set image in ImageView from camera
                 Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
                 binding.activityAddRealEstateMainPhoto.setImageBitmap(selectedImage);
+                Uri imageUri = RealEstatePhotos.bitmapToImageUri(this, selectedImage);
+                String imageUriToString = RealEstatePhotos.uriToString(imageUri);
+                mNewRealEstate.setMainPhotoString(imageUriToString);
             }
         } else if (requestCode == PICK_PHOTO) {
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from gallery
                 Uri selectedImage = data.getData();
                 binding.activityAddRealEstateMainPhoto.setImageURI(selectedImage);
+               String selectedImageToString = RealEstatePhotos.uriToString(selectedImage);
+
+                mNewRealEstate.setMainPhotoString(selectedImageToString);
             }
         } else if (requestCode == TAKE_PICTURE_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -272,13 +294,19 @@ public class AddRealEstateActivity extends AppCompatActivity
                 Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
 
                 RealEstatePhotos realEstatePhotos = new RealEstatePhotos();
-
+                //Set photo uri
                 Uri imageUri = RealEstatePhotos.bitmapToImageUri(this, selectedImage);
                 String imageUriToString = RealEstatePhotos.uriToString(imageUri);
                 realEstatePhotos.setPhotoUri(imageUriToString);
-                othersPhotosList.add(realEstatePhotos);
-                mNewRealEstate.setPhotos(othersPhotosList);
 
+                othersPhotosList.add(realEstatePhotos);
+                //Set photo description
+                if (othersPhotosList.size() != 0) {
+                String photoDescription = MyPickPhotosRecyclerViewAdapter.map
+                        .get(othersPhotosList.size() -1);
+                realEstatePhotos.setDescription(photoDescription);
+                    mNewRealEstate.setPhotos(othersPhotosList);
+                }
             }
         } else if (requestCode == PICK_PHOTO_FOR_OTHER_PHOTOS) {
             if (resultCode == RESULT_OK) {
@@ -289,7 +317,13 @@ public class AddRealEstateActivity extends AppCompatActivity
                 String imageUriToString = RealEstatePhotos.uriToString(selectedImage);
                 realEstatePhotos.setPhotoUri(imageUriToString);
                 othersPhotosList.add(realEstatePhotos);
+                //Set photo description
+                if (othersPhotosList.size() != 0) {
+                String photoDescription = MyPickPhotosRecyclerViewAdapter.map.get(
+                        othersPhotosList.size() -1);
+                realEstatePhotos.setDescription(photoDescription);
                 mNewRealEstate.setPhotos(othersPhotosList);
+                }
             }
         }
     }
