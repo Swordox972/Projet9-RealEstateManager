@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_real_estate_main_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     tools:context=".fragment.RealEstateFragment">
 
 
@@ -12,12 +12,20 @@
         android:id="@+id/fragment_real_estate_imageView"
         android:layout_width="@dimen/fragment_real_estate_imageview_size"
         android:layout_height="@dimen/fragment_real_estate_imageview_size"
-        android:background="@null" />
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/fragment_real_estate_imageView"
+        app:layout_constraintTop_toTopOf="@id/fragment_real_estate_main_linear_layout">
+
 
         <TextView
             android:id="@+id/fragment_real_estate_item_type"
@@ -48,4 +56,17 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/fragment_real_estate_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:background="@android:color/black"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/fragment_real_estate_main_linear_layout"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_real_estate_main_linear_layout"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,5 +48,18 @@ public class MyRealEstateHandlerThread extends HandlerThread {
         });
     }
 
+    public void startUpdateRealEstateHandler(RealEstate realEstate,
+                                             RealEstateViewModel realEstateViewModel){
+        if (!this.isAlive()) this.start();
+
+        Handler handler = new Handler(this.getLooper());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                realEstateViewModel.updateRealEstate(realEstate);
+            }
+        });
+    }
 
 }

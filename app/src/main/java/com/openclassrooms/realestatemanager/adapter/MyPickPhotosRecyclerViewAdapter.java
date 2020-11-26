@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.databinding.FragmentPickPhotosBinding;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
@@ -40,8 +41,16 @@ public class MyPickPhotosRecyclerViewAdapter extends
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final RealEstatePhotos realEstatePhotos = realEstatePhotosList.get(position);
 
+        if (realEstatePhotos.getPhotoUri() != null) {
         holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.setImageURI(
                 RealEstatePhotos.stringToUri(realEstatePhotos.getPhotoUri()));
+        } else if (realEstatePhotos.getPhotoUrl() != null) {
+            Glide.with(holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.getContext())
+                    .load(realEstatePhotos.getPhotoUrl())
+                    .into(holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView);
+            holder.fragmentPickPhotosBinding.fragmentRealEstatePhotosDescription.setText(
+                    realEstatePhotos.getDescription());
+        }
 
         holder.fragmentPickPhotosBinding.fragmentRealEstatePhotosDescription.addTextChangedListener(
                 new TextWatcher() {

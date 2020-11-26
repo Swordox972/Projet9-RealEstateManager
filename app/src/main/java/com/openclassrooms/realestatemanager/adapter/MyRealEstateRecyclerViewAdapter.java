@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.adapter;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.databinding.FragmentRealEstateBinding;
+import com.openclassrooms.realestatemanager.event.EditRealEstateEvent;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
@@ -26,6 +26,7 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
 
     private final List<RealEstate> mRealEstateList = new ArrayList<>();
     int row_index = -1;
+
 
     public MyRealEstateRecyclerViewAdapter() {
     }
@@ -57,17 +58,16 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
 
         if (mRealEstate.getMainPhotoString() != null) {
             Uri imageUri = RealEstatePhotos.stringToUri(mRealEstate.getMainPhotoString());
-            try {
             holder.fragmentRealEstateBinding.fragmentRealEstateImageView.setImageURI(imageUri);
-            } catch (SecurityException se) {
-
-            }
         }
 
         holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemFirstLocation.setText(
                 mRealEstate.getFirstLocation());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText(mRealEstate.getPrice());
+
+        holder.fragmentRealEstateBinding.fragmentRealEstateEditButton.setOnClickListener(view ->
+            EventBus.getDefault().post(new EditRealEstateEvent(mRealEstate)));
 
         holder.itemView.setOnClickListener(view -> {
             row_index = position;

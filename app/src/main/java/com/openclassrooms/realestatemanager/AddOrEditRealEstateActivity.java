@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,19 +18,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.realestatemanager.adapter.MyPickPhotosRecyclerViewAdapter;
-import com.openclassrooms.realestatemanager.databinding.ActivityAddRealEstateBinding;
+import com.openclassrooms.realestatemanager.databinding.ActivityAddOrEditRealEstateBinding;
+import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AddRealEstateActivity extends AppCompatActivity
+public class AddOrEditRealEstateActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
-    ActivityAddRealEstateBinding binding;
+    ActivityAddOrEditRealEstateBinding binding;
 
     public static final int TAKE_PICTURE = 0;
     public static final int PICK_PHOTO = 1;
@@ -52,11 +52,19 @@ public class AddRealEstateActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddRealEstateBinding.inflate(getLayoutInflater());
+        binding = ActivityAddOrEditRealEstateBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+        //If intent coming from AddRealEstate
+        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+        } //Else if intent coming from EditRealEstate
+        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(
+                    RealEstateFragment.EDIT_REAL_ESTATE);
+        }
+
         othersPhotosList = new ArrayList<>();
         initializeSpinners();
 
@@ -66,13 +74,18 @@ public class AddRealEstateActivity extends AppCompatActivity
         initializeButtonSelectEntryDate();
         initializeButtonSelectSaleDate();
 
+        //if editing, set all value in spinners, editTexts and ImageViews
+        if (mNewRealEstate.equals(getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE))) {
+            initializeRealEstateToEdit();
+        }
         initializeFinishButton();
     }
 
+
     private void initializeSpinners() {
-        Spinner spinnerType = binding.activityAddRealEstateTypeSpinner;
-        Spinner spinnerStatus = binding.activityAddRealEstateStatusSpinner;
-        Spinner spinnerAgent = binding.activityAddRealEstateAgentSpinner;
+        Spinner spinnerType = binding.activityAddOrEditRealEstateTypeSpinner;
+        Spinner spinnerStatus = binding.activityAddOrEditRealEstateStatusSpinner;
+        Spinner spinnerAgent = binding.activityAddOrEditRealEstateAgentSpinner;
 
         initializeSpinnerAdapter(spinnerType, R.array.real_estate_types);
         initializeSpinnerAdapter(spinnerStatus, R.array.real_estate_status);
@@ -81,6 +94,8 @@ public class AddRealEstateActivity extends AppCompatActivity
         spinnerType.setOnItemSelectedListener(this);
         spinnerStatus.setOnItemSelectedListener(this);
         spinnerAgent.setOnItemSelectedListener(this);
+
+
 
     }
 
@@ -97,31 +112,24 @@ public class AddRealEstateActivity extends AppCompatActivity
     //Spinner onItemSelected
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (adapterView.getId() == R.id.activity_add_real_estate_type_spinner)
+        if (adapterView.getId() == R.id.activity_add_or_edit_real_estate_type_spinner)
             type = adapterView.getItemAtPosition(i).toString();
 
-        if (adapterView.getId() == R.id.activity_add_real_estate_status_spinner)
+        if (adapterView.getId() == R.id.activity_add_or_edit_real_estate_status_spinner)
             status = adapterView.getItemAtPosition(i).toString();
 
-        if (adapterView.getId() == R.id.activity_add_real_estate_agent_spinner)
+        if (adapterView.getId() == R.id.activity_add_or_edit_real_estate_agent_spinner)
             agent = adapterView.getItemAtPosition(i).toString();
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        if (adapterView.getId() == R.id.activity_add_real_estate_type_spinner)
-            type = adapterView.getItemAtPosition(0).toString();
 
-        if (adapterView.getId() == R.id.activity_add_real_estate_status_spinner)
-            status = adapterView.getItemAtPosition(0).toString();
-
-        if (adapterView.getId() == R.id.activity_add_real_estate_agent_spinner)
-            agent = adapterView.getItemAtPosition(0).toString();
     }
 
     private void selectMainPhotoIntent() {
-        binding.activityAddRealEstateButtonMainPhoto.setOnClickListener(view -> {
+        binding.activityAddOrEditRealEstateButtonMainPhoto.setOnClickListener(view -> {
             final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -146,7 +154,7 @@ public class AddRealEstateActivity extends AppCompatActivity
     }
 
     private void selectOtherPhotosIntent() {
-        binding.activityAddRealEstatePickPhotosButton.setOnClickListener(view -> {
+        binding.activityAddOrEditRealEstatePickPhotosButton.setOnClickListener(view -> {
             final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -171,14 +179,14 @@ public class AddRealEstateActivity extends AppCompatActivity
     }
 
     private void initializeButtonSelectEntryDate() {
-        binding.activityAddRealEstateEntryDateButton.setOnClickListener(view ->
-                selectDate(binding.activityAddRealEstateEntryDateEditText));
+        binding.activityAddOrEditRealEstateEntryDateButton.setOnClickListener(view ->
+                selectDate(binding.activityAddOrEditRealEstateEntryDateEditText));
 
     }
 
     private void initializeButtonSelectSaleDate() {
-        binding.activityAddRealEstateSaleDateButton.setOnClickListener(view ->
-                selectDate(binding.activityAddRealEstateSaleDateEditText));
+        binding.activityAddOrEditRealEstateSaleDateButton.setOnClickListener(view ->
+                selectDate(binding.activityAddOrEditRealEstateSaleDateEditText));
     }
 
     private void selectDate(EditText editText) {
@@ -205,6 +213,66 @@ public class AddRealEstateActivity extends AppCompatActivity
         datePickerDialog.show();
     }
 
+    // -- Real Estate To Edit --
+    private void initializeRealEstateToEdit() {
+        //Initialize Spinners with the value of editing real estate
+        String[] types = getResources().getStringArray(R.array.real_estate_types);
+        String[] statusArray = getResources().getStringArray(R.array.real_estate_status);
+        String[] agents = getResources().getStringArray(R.array.real_estate_agent);
+
+        type = mNewRealEstate.getType();
+        status = mNewRealEstate.getStatus();
+        agent = mNewRealEstate.getAgent();
+
+        for (int i = 0; i < types.length; i++) {
+            if (type.equals(types[i])) {
+                binding.activityAddOrEditRealEstateTypeSpinner.setSelection(i);
+            }
+        }
+        for (int i = 0; i < statusArray.length; i++) {
+            if (status.equals(statusArray[i])) {
+                binding.activityAddOrEditRealEstateStatusSpinner.setSelection(i);
+            }
+        }
+        for (int i = 0; i < agents.length; i++) {
+            if (agent.equals(agents[i])) {
+                binding.activityAddOrEditRealEstateAgentSpinner.setSelection(i);
+            }
+        }
+
+        String surface =Integer.toString(mNewRealEstate.getSurface());
+        String numberOfRooms = Integer.toString(mNewRealEstate.getNumberOfRooms());
+        String numberOfBathrooms = Integer.toString(mNewRealEstate.getNumberOfBathrooms());
+        String numberOfBedrooms = Integer.toString(mNewRealEstate.getNumberOfBedrooms());
+
+
+        if (mNewRealEstate.getMainPhotoUrl() != null) {
+            Glide.with(binding.activityAddOrEditRealEstateMainPhoto.getContext())
+                    .load(mNewRealEstate.getMainPhotoUrl())
+                    .into(binding.activityAddOrEditRealEstateMainPhoto);
+        } else {
+            Uri mainPhotoUri = RealEstatePhotos.stringToUri(mNewRealEstate.getMainPhotoString());
+            binding.activityAddOrEditRealEstateMainPhoto.setImageURI(mainPhotoUri);
+        }
+
+        binding.activityAddOrEditRealEstateFirstLocationEditText.setText(mNewRealEstate.getFirstLocation());
+        binding.activityAddOrEditRealEstatePriceEditText.setText(mNewRealEstate.getPrice());
+        binding.activityAddOrEditRealEstateDescriptionEditText.setText(mNewRealEstate.getDescription());
+        othersPhotosList.addAll(mNewRealEstate.getPhotos());
+        binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface);
+        binding.activityAddOrEditRealEstateNumberOfRoomsEditText.setText(numberOfRooms);
+        binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.setText(numberOfBathrooms);
+        binding.activityAddOrEditRealEstateNumberOfBedroomsEditText.setText(numberOfBedrooms);
+        binding.activityAddOrEditRealEstateAddressEditText.setText(mNewRealEstate.getSecondLocation());
+        binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(
+                mNewRealEstate.getPointsOfInterest());
+        binding.activityAddOrEditRealEstateEntryDateEditText.setText(mNewRealEstate.getEntryDate());
+        binding.activityAddOrEditRealEstateSaleDateEditText.setText(mNewRealEstate.getDateOfSale());
+
+
+    }
+
+    // -- Finish activity --
     private void setNewRealEstateValue() {
         mNewRealEstate.setType(type);
         mNewRealEstate.setStatus(status);
@@ -216,33 +284,33 @@ public class AddRealEstateActivity extends AppCompatActivity
             mNewRealEstate.setAgentPhotoUrl("https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");
         }
 
-        String firstLocation = binding.activityAddRealEstateFirstLocationEditText.getText().toString();
-        String price = binding.activityAddRealEstatePriceEditText.getText().toString();
-        String description = binding.activityAddRealEstateDescriptionEditText.getText().toString();
-        int surface = Integer.parseInt(binding.activityAddRealEstateSurfaceEditText.getText().toString());
+        String firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.getText().toString();
+        String price = binding.activityAddOrEditRealEstatePriceEditText.getText().toString();
+        String description = binding.activityAddOrEditRealEstateDescriptionEditText.getText().toString();
+        int surface = Integer.parseInt(binding.activityAddOrEditRealEstateSurfaceEditText.getText().toString());
         int numberOfRooms = Integer.parseInt(
-                binding.activityAddRealEstateNumberOfRoomsEditText.getText().toString());
+                binding.activityAddOrEditRealEstateNumberOfRoomsEditText.getText().toString());
         int numberOfBathrooms = Integer.parseInt(
-                binding.activityAddRealEstateNumberOfBathroomsEditText.getText().toString());
+                binding.activityAddOrEditRealEstateNumberOfBathroomsEditText.getText().toString());
         int numberOfBedrooms = Integer.parseInt(binding
-                .activityAddRealEstateNumberOfBedroomsEditText.getText().toString());
-        String secondLocation = binding.activityAddRealEstateAddressEditText.getText().toString();
-        String pointsOfInsterest = binding.activityAddRealEstatePointsOfInterestEditText.getText()
+                .activityAddOrEditRealEstateNumberOfBedroomsEditText.getText().toString());
+        String secondLocation = binding.activityAddOrEditRealEstateAddressEditText.getText().toString();
+        String pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.getText()
                 .toString();
-        String entryDate = binding.activityAddRealEstateEntryDateEditText.getText().toString();
-        String saleDate = binding.activityAddRealEstateSaleDateEditText.getText().toString();
+        String entryDate = binding.activityAddOrEditRealEstateEntryDateEditText.getText().toString();
+        String saleDate = binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString();
 
         mNewRealEstate.setFirstLocation(firstLocation);
         mNewRealEstate.setPrice("$" + price);
         mNewRealEstate.setDescription(description);
-        //mNewRealEstate.setMainPhoto is in onActivityResult
-        //mNewRealEstate.setOthersPhotos is in onActivityResult
+        //mNewRealEstate.setMainPhoto is in onActivityResult or already assigned if editing without changes
+        //mNewRealEstate.setOthersPhotos is in onActivityResult or already assigned if editing without changes
         mNewRealEstate.setSurface(surface);
         mNewRealEstate.setNumberOfRooms(numberOfRooms);
         mNewRealEstate.setNumberOfBathrooms(numberOfBathrooms);
         mNewRealEstate.setNumberOfBedrooms(numberOfBedrooms);
         mNewRealEstate.setSecondLocation(secondLocation);
-        mNewRealEstate.setPointsOfInterest(pointsOfInsterest);
+        mNewRealEstate.setPointsOfInterest(pointsOfInterest);
         mNewRealEstate.setEntryDate(entryDate);
         mNewRealEstate.setDateOfSale(saleDate);
 
@@ -250,7 +318,9 @@ public class AddRealEstateActivity extends AppCompatActivity
 
     private void initializeFinishButton() {
         //Set mNewRealEstate all value selected previously
-        binding.activityAddRealEstateOkButton.setOnClickListener(view -> {
+        // If intent comes from Main Activity pass data back
+        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+        binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
             setNewRealEstateValue();
 
             Intent intent = new Intent();
@@ -258,8 +328,21 @@ public class AddRealEstateActivity extends AppCompatActivity
             setResult(RESULT_OK, intent);
             finish();
         });
+        }// Else if intent comes from Real Estate Fragment pass data back
+        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
+                 setNewRealEstateValue();
+
+                 Intent intent = new Intent();
+                 intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, mNewRealEstate);
+                 setResult(RESULT_OK, intent);
+                 finish();
+             });
+        }
     }
 
+
+    // -- OnActivityRESULT --
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -274,7 +357,7 @@ public class AddRealEstateActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from camera
                 Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
-                binding.activityAddRealEstateMainPhoto.setImageBitmap(selectedImage);
+                binding.activityAddOrEditRealEstateMainPhoto.setImageBitmap(selectedImage);
                 Uri imageUri = RealEstatePhotos.bitmapToImageUri(this, selectedImage);
                 String imageUriToString = RealEstatePhotos.uriToString(imageUri);
                 mNewRealEstate.setMainPhotoString(imageUriToString);
@@ -283,8 +366,8 @@ public class AddRealEstateActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 //set image in ImageView from gallery
                 Uri selectedImage = data.getData();
-                binding.activityAddRealEstateMainPhoto.setImageURI(selectedImage);
-               String selectedImageToString = RealEstatePhotos.uriToString(selectedImage);
+                binding.activityAddOrEditRealEstateMainPhoto.setImageURI(selectedImage);
+                String selectedImageToString = RealEstatePhotos.uriToString(selectedImage);
 
                 mNewRealEstate.setMainPhotoString(selectedImageToString);
             }
@@ -302,9 +385,9 @@ public class AddRealEstateActivity extends AppCompatActivity
                 othersPhotosList.add(realEstatePhotos);
                 //Set photo description
                 if (othersPhotosList.size() != 0) {
-                String photoDescription = MyPickPhotosRecyclerViewAdapter.map
-                        .get(othersPhotosList.size() -1);
-                realEstatePhotos.setDescription(photoDescription);
+                    String photoDescription = MyPickPhotosRecyclerViewAdapter.map
+                            .get(othersPhotosList.size() - 1);
+                    realEstatePhotos.setDescription(photoDescription);
                     mNewRealEstate.setPhotos(othersPhotosList);
                 }
             }
@@ -319,10 +402,10 @@ public class AddRealEstateActivity extends AppCompatActivity
                 othersPhotosList.add(realEstatePhotos);
                 //Set photo description
                 if (othersPhotosList.size() != 0) {
-                String photoDescription = MyPickPhotosRecyclerViewAdapter.map.get(
-                        othersPhotosList.size() -1);
-                realEstatePhotos.setDescription(photoDescription);
-                mNewRealEstate.setPhotos(othersPhotosList);
+                    String photoDescription = MyPickPhotosRecyclerViewAdapter.map.get(
+                            othersPhotosList.size() - 1);
+                    realEstatePhotos.setDescription(photoDescription);
+                    mNewRealEstate.setPhotos(othersPhotosList);
                 }
             }
         }

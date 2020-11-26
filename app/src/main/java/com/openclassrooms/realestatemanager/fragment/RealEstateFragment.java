@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,21 +9,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.openclassrooms.realestatemanager.AddOrEditRealEstateActivity;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
+import com.openclassrooms.realestatemanager.event.EditRealEstateEvent;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
+import static android.app.Activity.RESULT_OK;
 
 
 public class RealEstateFragment extends Fragment {
@@ -35,14 +38,12 @@ public class RealEstateFragment extends Fragment {
 
     public static final String KEY = "RealEstateClicked";
 
+    public static final String EDIT_REAL_ESTATE = "RealEstateToEdit";
+    public static final int EDIT_REQUEST_CODE = 25;
+
+
     public RealEstateFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -93,7 +94,8 @@ public class RealEstateFragment extends Fragment {
                 R.id.activity_main_fragment_container_view_detail);
 
 
-        //Ensure that real estate is not null
+        //Ensure that real estate is not null and containerView to display properly
+        //on phone
         if (mRealEstate != null && fragmentContainerViewDetail == null) {
             getParentFragmentManager()
                     .beginTransaction()
@@ -101,7 +103,7 @@ public class RealEstateFragment extends Fragment {
                             onClickRealEstateFragment)
                     .addToBackStack(OnClickRealEstateFragment.class.getSimpleName())
                     .commit();
-        } else if (mRealEstate != null && fragmentContainerViewDetail.isVisible()) {
+        } else if (mRealEstate != null && fragmentContainerViewDetail.isVisible()) { //on tablet
             getParentFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_main_fragment_container_view_detail,
@@ -110,4 +112,28 @@ public class RealEstateFragment extends Fragment {
         }
     }
 
+    @Subscribe
+    public void onEditRealEstate(EditRealEstateEvent event) {
+        RealEstate mRealEstate = event.mRealEstate;
+
+        Intent intent = new Intent(getContext(), AddOrEditRealEstateActivity.class);
+        intent.putExtra(EDIT_REAL_ESTATE, mRealEstate);
+        startActivityForResult(intent, EDIT_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EDIT_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                RealEstate realEstate =(RealEstate) data.getSerializableExtra(EDIT_REAL_ESTATE);
+                MyRealEstateHandlerThread myRealEstateHandlerThread =
+                        new MyRealEstateHandlerThread("UpdateRealEstateInDatabase");
+
+                myRealEstateHandlerThread.startUpdateRealEstateHandler(realEstate, viewModel);
+            }
+        }
+
+    }
 }

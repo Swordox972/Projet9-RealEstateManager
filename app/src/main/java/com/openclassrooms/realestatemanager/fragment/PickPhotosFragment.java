@@ -42,8 +42,16 @@ public class PickPhotosFragment extends Fragment {
         mRecyclerviewView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
 
+        //If realEstate come from MainActivity to add a real estate
+        if (getActivity().getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
           mNewRealEstate = (RealEstate) getActivity().getIntent()
                 .getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+        } //Else if realEstate come from an existing real estate to edit
+        else if (getActivity().getIntent().getSerializableExtra(
+                RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getActivity().getIntent().getSerializableExtra(
+                    RealEstateFragment.EDIT_REAL_ESTATE);
+        }
 
         adapter = new MyPickPhotosRecyclerViewAdapter();
         mRecyclerviewView.setAdapter(adapter);

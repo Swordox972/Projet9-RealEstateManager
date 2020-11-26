@@ -10,12 +10,6 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_edit"
-        android:title="@string/menu_edit"
-        android:icon="@drawable/ic_baseline_edit_24"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/menu_search"
         android:title="@string/menu_search"
         android:icon="@drawable/ic_baseline_search_24"

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NOTIFICATION_REQUEST_CODE = 20;
 
+
     private RealEstateViewModel viewModel;
 
     private MyRealEstateHandlerThread myRealEstateHandlerThread;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         myRealEstateHandlerThread = new MyRealEstateHandlerThread(
                 "InsertRealEstateInDatabase");
 
-
     }
 
     @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.menu_add):
-                Intent intent = new Intent(this, AddRealEstateActivity.class);
+                Intent intent = new Intent(this, AddOrEditRealEstateActivity.class);
                 RealEstate realEstate = new RealEstate();
                 intent.putExtra(ADD_REAL_ESTATE, realEstate);
                 startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE);
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
