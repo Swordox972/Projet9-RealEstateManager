@@ -34,6 +34,7 @@ public class RealEstateDataRepository {
     public LiveData<List<RealEstate>> getRealEstates() {
         return mRealEstates;
     }
+
     //Update
     public void updateRealEstate(RealEstate realEstate) {
         mRealEstateDao.updateRealEstate(realEstate);

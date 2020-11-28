@@ -10,4 +10,8 @@
     <color name="fragment_on_click_real_estate_status_cardview_color">#757575</color>
 
     <color name="activity_add_real_estate_chose_date_button_color">#E91E63</color>
+
+    <color name="bottom_navigation_color_background">#FF8A80</color>
+    <color name="bottom_navigation_color_icon_selected">#A7FFEB</color>
+    <color name="bottom_navigation_color_icon_not_selected">#212121</color>
 </resources>

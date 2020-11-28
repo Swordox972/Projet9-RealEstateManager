@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -25,8 +28,10 @@ import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddOrEditRealEstateActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
@@ -94,7 +99,6 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         spinnerType.setOnItemSelectedListener(this);
         spinnerStatus.setOnItemSelectedListener(this);
         spinnerAgent.setOnItemSelectedListener(this);
-
 
 
     }
@@ -240,7 +244,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
             }
         }
 
-        String surface =Integer.toString(mNewRealEstate.getSurface());
+        String surface = Integer.toString(mNewRealEstate.getSurface());
         String numberOfRooms = Integer.toString(mNewRealEstate.getNumberOfRooms());
         String numberOfBathrooms = Integer.toString(mNewRealEstate.getNumberOfBathrooms());
         String numberOfBedrooms = Integer.toString(mNewRealEstate.getNumberOfBedrooms());
@@ -301,7 +305,11 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         String saleDate = binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString();
 
         mNewRealEstate.setFirstLocation(firstLocation);
+        if (price.charAt(0) != '$') {
         mNewRealEstate.setPrice("$" + price);
+        } else {
+            mNewRealEstate.setPrice(price);
+        }
         mNewRealEstate.setDescription(description);
         //mNewRealEstate.setMainPhoto is in onActivityResult or already assigned if editing without changes
         //mNewRealEstate.setOthersPhotos is in onActivityResult or already assigned if editing without changes
@@ -310,9 +318,12 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         mNewRealEstate.setNumberOfBathrooms(numberOfBathrooms);
         mNewRealEstate.setNumberOfBedrooms(numberOfBedrooms);
         mNewRealEstate.setSecondLocation(secondLocation);
+        //Set latitude and longitude
+        getLocationFromAddress(secondLocation);
         mNewRealEstate.setPointsOfInterest(pointsOfInterest);
         mNewRealEstate.setEntryDate(entryDate);
         mNewRealEstate.setDateOfSale(saleDate);
+
 
     }
 
@@ -320,27 +331,67 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity pass data back
         if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-        binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
-            setNewRealEstateValue();
+            binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
+                setNewRealEstateValue();
 
-            Intent intent = new Intent();
-            intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
-            setResult(RESULT_OK, intent);
-            finish();
-        });
+                Intent intent = new Intent();
+                intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
+                setResult(RESULT_OK, intent);
+                finish();
+            });
         }// Else if intent comes from Real Estate Fragment pass data back
-        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
-                 setNewRealEstateValue();
 
-                 Intent intent = new Intent();
-                 intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, mNewRealEstate);
-                 setResult(RESULT_OK, intent);
-                 finish();
-             });
+        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
+
+                //Verify if when "Sold" status is selected that Sale date has a value
+                if (binding.activityAddOrEditRealEstateStatusSpinner.getSelectedItem().toString()
+                        .equals("For sale") || (binding.activityAddOrEditRealEstateStatusSpinner
+                        .getSelectedItem().toString().equals("Sold") &&
+                        !binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString()
+                                .isEmpty())) {
+                    setNewRealEstateValue();
+
+                    Intent intent = new Intent();
+                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, mNewRealEstate);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }// Toast to inform user that he put "Sold" status without sale date value
+                else {
+                    Toast.makeText(this,
+                            "Oops ...You specified Sold status without value to sale date",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
     }
 
+    private void getLocationFromAddress(String strAddress) {
+        Geocoder geocoder = new Geocoder(this);
+        List<Address> address;
+
+        try {
+            //Get latLng from String
+            address = geocoder.getFromLocationName(strAddress, 5);
+
+            if (address != null) {
+
+                // Take first possibility from the all possibilities.
+                try {
+                    Address location = address.get(0);
+                    mNewRealEstate.setLatitude(location.getLatitude());
+                    mNewRealEstate.setLongitude(location.getLongitude());
+                } catch (IndexOutOfBoundsException e) {
+
+                }
+
+            }
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
 
     // -- OnActivityRESULT --
     @Override

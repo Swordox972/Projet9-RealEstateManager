@@ -36,6 +36,8 @@ public class RealEstateFragment extends Fragment {
 
     private MyRealEstateRecyclerViewAdapter adapter;
 
+    MyRealEstateHandlerThread myRealEstateHandlerThread;
+
     public static final String KEY = "RealEstateClicked";
 
     public static final String EDIT_REAL_ESTATE = "RealEstateToEdit";
@@ -128,12 +130,11 @@ public class RealEstateFragment extends Fragment {
             if (resultCode == RESULT_OK) {
 
                 RealEstate realEstate =(RealEstate) data.getSerializableExtra(EDIT_REAL_ESTATE);
-                MyRealEstateHandlerThread myRealEstateHandlerThread =
+                 myRealEstateHandlerThread =
                         new MyRealEstateHandlerThread("UpdateRealEstateInDatabase");
 
                 myRealEstateHandlerThread.startUpdateRealEstateHandler(realEstate, viewModel);
             }
         }
-
     }
 }

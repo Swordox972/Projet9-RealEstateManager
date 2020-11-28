@@ -19,6 +19,7 @@ public interface RealEstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertRealEstate(RealEstate realEstate);
 
+
     @Query("SELECT * FROM RealEstate WHERE id = :realEstateId")
     LiveData<RealEstate> getRealEstate(long realEstateId);
 

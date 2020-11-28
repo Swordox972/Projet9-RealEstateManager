@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
+import com.openclassrooms.realestatemanager.fragment.MapsFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NOTIFICATION_REQUEST_CODE = 20;
 
+    private ActivityMainBinding binding;
+
 
     private RealEstateViewModel viewModel;
 
@@ -43,12 +48,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         checkPermissionsGranted();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_main_fragment_container_view_list,
-                new RealEstateFragment()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.activity_main_fragment_container_view_list,
+                        new RealEstateFragment()).commit();
+
+        initializeBottomNavigationView();
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
 
@@ -77,14 +87,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void initializeBottomNavigationView() {
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.page1:
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.activity_main_fragment_container_view_list,
+                                    new RealEstateFragment()).commit();
+                    break;
+                case R.id.page2:
+                    getSupportFragmentManager().beginTransaction().replace(
+                            R.id.activity_main_fragment_container_view_list, new MapsFragment())
+                            .commit();
+                    break;
+
+            }
+            return true;
+        });
+    }
+
     private void checkPermissionsGranted() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-        ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-        }
-        else {
+        } else {
             getPermissions();
         }
     }
@@ -100,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                            @NonNull int[] grantResults) {
         if (requestCode == ALL_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
-            grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] ==
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED && grantResults[2] ==
                     PackageManager.PERMISSION_GRANTED) {
 
             } else {
@@ -115,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                RealEstate newRealEstate =(RealEstate)
+                RealEstate newRealEstate = (RealEstate)
                         data.getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
 
                 myRealEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel);

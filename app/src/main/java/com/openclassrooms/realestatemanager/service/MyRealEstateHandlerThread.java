@@ -4,10 +4,14 @@ import android.os.Handler;
 import android.os.HandlerThread;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyRealEstateHandlerThread extends HandlerThread {
 
@@ -16,7 +20,7 @@ public class MyRealEstateHandlerThread extends HandlerThread {
         super(name);
     }
 
-    //2-Public method that will start the handler
+    //2-Public methods that will start the handler
     public void startCreateRealEstateHandler(RealEstate realEstate,
                                              RealEstateViewModel realEstateViewModel) {
         if (!this.isAlive()) this.start();

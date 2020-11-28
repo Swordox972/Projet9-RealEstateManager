@@ -46,8 +46,13 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding = FragmentOnClickRealEstateBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        mRealEstate = (RealEstate) getArguments().getSerializable(RealEstateFragment.KEY);
-
+        if (getArguments().getSerializable(RealEstateFragment.KEY) != null) {
+            mRealEstate = (RealEstate) getArguments().getSerializable(RealEstateFragment.KEY);
+        } else if (getArguments().getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) !=
+        null) {
+            mRealEstate = (RealEstate) getArguments()
+                    .getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
+        }
         return view;
     }
 
@@ -112,42 +117,15 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
 
     }
 
-    private void getLocationFromAddress(String strAddress) {
-        Geocoder geocoder = new Geocoder(getContext());
-        List<Address> address;
-
-        try {
-            //Get latLng from String
-            address = geocoder.getFromLocationName(strAddress, 5);
-
-            if (address != null) {
-
-                // Take first possibility from the all possibilities.
-                try {
-                    Address location = address.get(0);
-                    mRealEstate.setLatitude(location.getLatitude());
-                    mRealEstate.setLongitude(location.getLongitude());
-                } catch (IndexOutOfBoundsException e) {
-
-                }
-
-            }
-
-        } catch (IOException ioException) {
-                 ioException.printStackTrace();
-        }
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (mRealEstate.getLatitude() == 0 && mRealEstate.getLongitude() == 0) {
-            getLocationFromAddress(mRealEstate.getSecondLocation());
-        }
 
+        if ( mRealEstate.getLatitude() != 0 && mRealEstate.getLongitude() != 0) {
         LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
         mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));
+        }
     }
 
 

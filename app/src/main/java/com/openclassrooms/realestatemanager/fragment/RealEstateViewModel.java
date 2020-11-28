@@ -26,10 +26,9 @@ public class RealEstateViewModel extends AndroidViewModel {
 
     //Data
     @Nullable
-    LiveData<List<RealEstate>> getRealEstates() {
+    public LiveData<List<RealEstate>> getRealEstates() {
         return mRealEstates;
     }
-
 
     public void createRealEstate(RealEstate realEstate) {
         mRepository.createRealEstate(realEstate);

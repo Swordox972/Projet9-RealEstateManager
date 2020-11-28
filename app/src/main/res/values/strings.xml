@@ -36,6 +36,9 @@
     <string name="choose_date">Choose Date</string>
     <string name="surface_in_square_meter">Surface in square meter</string>
 
+    <string name="list_view">List View</string>
+    <string name="map_view">Map View</string>
+
     <string-array name="real_estate_types">
         <item>Loft</item>
         <item>Penthouse</item>

@@ -25,7 +25,7 @@ public class RealEstatePhotosFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private MyRealEstatePhotosRecyclerViewAdapter adapter;
-
+    RealEstate mRealEstate;
     public RealEstatePhotosFragment() {
         // Required empty public constructor
     }
@@ -43,8 +43,14 @@ public class RealEstatePhotosFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
 
-        RealEstate mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
+        if (getParentFragment().getArguments().getSerializable(RealEstateFragment.KEY) != null) {
+        mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
                 RealEstateFragment.KEY);
+        } else if (getParentFragment().getArguments().getSerializable(
+                MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) != null) {
+            mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
+                    MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
+        }
 
         adapter = new MyRealEstatePhotosRecyclerViewAdapter(); //empty constructor adapter
         mRecyclerView.setAdapter(adapter);
