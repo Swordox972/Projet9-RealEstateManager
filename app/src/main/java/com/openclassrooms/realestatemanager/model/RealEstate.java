@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.model;
 
 import android.content.ContentValues;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -10,12 +12,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @Entity
-public class RealEstate implements Serializable {
+public class RealEstate implements Parcelable {
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public RealEstate createFromParcel(Parcel in) {
+            return new RealEstate(in);
+        }
+
+        public RealEstate[] newArray(int size) {
+            return new RealEstate[size];
+        }
+        };
+
 
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String type;
-    private String price;
+    private int price;
     private int surface;
     private int numberOfRooms;
     private int numberOfBathrooms;
@@ -39,10 +52,10 @@ public class RealEstate implements Serializable {
     public RealEstate() {
     }
 
-    public RealEstate(long id, String type, String price, int surface, int numberOfRooms,
+    public RealEstate(long id, String type, int price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String mainPhotoUrl,
-                      String mainPhotoString,ArrayList photos, String firstLocation,
-                      String secondLocation, String pointsOfInterest,double latitude, double longitude,
+                      String mainPhotoString, ArrayList photos, String firstLocation,
+                      String secondLocation, String pointsOfInterest, double latitude, double longitude,
                       String status, String entryDate, String dateOfSale, String agent,
                       String agentPhotoUrl) {
         this.id = id;
@@ -68,6 +81,7 @@ public class RealEstate implements Serializable {
         this.agentPhotoUrl = agentPhotoUrl;
     }
 
+
     public long getId() {
         return id;
     }
@@ -84,11 +98,11 @@ public class RealEstate implements Serializable {
         this.type = type;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -237,11 +251,68 @@ public class RealEstate implements Serializable {
     }
 
 
+    //Parceling part
+    public RealEstate(Parcel in) {
+        photos = new ArrayList<RealEstatePhotos>();
+
+        this.id = in.readLong();
+        this.type = in.readString();
+        this.price = in.readInt();
+        this.surface = in.readInt();
+        this.numberOfRooms = in.readInt();
+        this.numberOfBathrooms = in.readInt();
+        this.numberOfBedrooms = in.readInt();
+        this.description = in.readString();
+        this.mainPhotoUrl = in.readString();
+        this.mainPhotoString = in.readString();
+        this.photos = in.readArrayList(RealEstatePhotos.class.getClassLoader());
+        this.firstLocation = in.readString();
+        this.secondLocation = in.readString();
+        this.pointsOfInterest = in.readString();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+        this.status = in.readString();
+        this.entryDate = in.readString();
+        this.dateOfSale = in.readString();
+        this.agent = in.readString();
+        this.agentPhotoUrl = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(this.id);
+        parcel.writeString(this.type);
+        parcel.writeInt(this.price);
+        parcel.writeInt(this.surface);
+        parcel.writeInt(this.numberOfRooms);
+        parcel.writeInt(this.numberOfBathrooms);
+        parcel.writeInt(this.numberOfBedrooms);
+        parcel.writeString(this.description);
+        parcel.writeString(this.mainPhotoUrl);
+        parcel.writeString(this.mainPhotoString);
+        parcel.writeList(this.photos);
+        parcel.writeString(this.firstLocation);
+        parcel.writeString(this.secondLocation);
+        parcel.writeString(this.pointsOfInterest);
+        parcel.writeDouble(this.latitude);
+        parcel.writeDouble(this.longitude);
+        parcel.writeString(this.status);
+        parcel.writeString(this.entryDate);
+        parcel.writeString(this.dateOfSale);
+        parcel.writeString(this.agent);
+        parcel.writeString(this.agentPhotoUrl);
+    }
+
     //Content Provider
     public static RealEstate fromContentValues(ContentValues values) {
         final RealEstate realEstate = new RealEstate();
         if (values.containsKey("type")) realEstate.setType(values.getAsString("type"));
-        if (values.containsKey("price")) realEstate.setPrice(values.getAsString("price"));
+        if (values.containsKey("price")) realEstate.setPrice(values.getAsInteger("price"));
         if (values.containsKey("surface")) realEstate.setSurface(values.getAsInteger("surface"));
         if (values.containsKey("numberOfRooms")) realEstate.setNumberOfRooms(
                 values.getAsInteger("numberOfRooms"));

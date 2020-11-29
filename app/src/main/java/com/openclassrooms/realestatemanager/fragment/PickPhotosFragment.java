@@ -43,13 +43,13 @@ public class PickPhotosFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
 
         //If realEstate come from MainActivity to add a real estate
-        if (getActivity().getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+        if (getActivity().getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
           mNewRealEstate = (RealEstate) getActivity().getIntent()
-                .getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+                .getParcelableExtra(MainActivity.ADD_REAL_ESTATE);
         } //Else if realEstate come from an existing real estate to edit
-        else if (getActivity().getIntent().getSerializableExtra(
+        else if (getActivity().getIntent().getParcelableExtra(
                 RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-            mNewRealEstate = (RealEstate) getActivity().getIntent().getSerializableExtra(
+            mNewRealEstate = (RealEstate) getActivity().getIntent().getParcelableExtra(
                     RealEstateFragment.EDIT_REAL_ESTATE);
         }
 

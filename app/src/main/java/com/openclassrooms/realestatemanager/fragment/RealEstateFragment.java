@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.realestatemanager.AddOrEditRealEstateActivity;
+import com.openclassrooms.realestatemanager.MainActivity;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.event.EditRealEstateEvent;
@@ -25,6 +26,8 @@ import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.Serializable;
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -34,7 +37,7 @@ public class RealEstateFragment extends Fragment {
 
     private RealEstateViewModel viewModel;
 
-    private MyRealEstateRecyclerViewAdapter adapter;
+    public static MyRealEstateRecyclerViewAdapter adapter;
 
     MyRealEstateHandlerThread myRealEstateHandlerThread;
 
@@ -66,9 +69,15 @@ public class RealEstateFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
 
-        viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
-            adapter.setRealEstateList(realEstates);
-                });
+        if (getActivity().getIntent().getParcelableArrayListExtra(MainActivity.SEARCH_REAL_ESTATE)
+        == null) {
+            viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
+                adapter.setRealEstateList(realEstates);
+            });
+        } else {
+            adapter.setRealEstateList(getActivity().getIntent().getParcelableArrayListExtra(
+                    MainActivity.SEARCH_REAL_ESTATE));
+        }
     }
 
     @Override
@@ -89,7 +98,7 @@ public class RealEstateFragment extends Fragment {
 
         OnClickRealEstateFragment onClickRealEstateFragment = new OnClickRealEstateFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY, mRealEstate);
+        args.putParcelable(KEY, mRealEstate);
         onClickRealEstateFragment.setArguments(args);
 
         Fragment fragmentContainerViewDetail = getParentFragmentManager().findFragmentById(
@@ -129,7 +138,7 @@ public class RealEstateFragment extends Fragment {
         if (requestCode == EDIT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                RealEstate realEstate =(RealEstate) data.getSerializableExtra(EDIT_REAL_ESTATE);
+                RealEstate realEstate =(RealEstate) data.getParcelableExtra(EDIT_REAL_ESTATE);
                  myRealEstateHandlerThread =
                         new MyRealEstateHandlerThread("UpdateRealEstateInDatabase");
 

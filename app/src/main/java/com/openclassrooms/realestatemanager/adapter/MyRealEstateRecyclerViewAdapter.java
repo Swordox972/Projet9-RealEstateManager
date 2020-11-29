@@ -50,10 +50,10 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         final RealEstate mRealEstate = mRealEstateList.get(position);
 
         if (mRealEstate.getMainPhotoUrl() != null) {
-        Glide.with(holder.fragmentRealEstateBinding.fragmentRealEstateImageView.getContext())
-                .load(mRealEstate.getMainPhotoUrl())
-                .apply(RequestOptions.centerCropTransform())
-                .into(holder.fragmentRealEstateBinding.fragmentRealEstateImageView);
+            Glide.with(holder.fragmentRealEstateBinding.fragmentRealEstateImageView.getContext())
+                    .load(mRealEstate.getMainPhotoUrl())
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(holder.fragmentRealEstateBinding.fragmentRealEstateImageView);
         }
 
         if (mRealEstate.getMainPhotoString() != null) {
@@ -64,10 +64,10 @@ public class MyRealEstateRecyclerViewAdapter extends RecyclerView.Adapter
         holder.fragmentRealEstateBinding.fragmentRealEstateItemType.setText(mRealEstate.getType());
         holder.fragmentRealEstateBinding.fragmentRealEstateItemFirstLocation.setText(
                 mRealEstate.getFirstLocation());
-        holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText(mRealEstate.getPrice());
+        holder.fragmentRealEstateBinding.fragmentRealEstateItemPrice.setText("$" + mRealEstate.getPrice());
 
         holder.fragmentRealEstateBinding.fragmentRealEstateEditButton.setOnClickListener(view ->
-            EventBus.getDefault().post(new EditRealEstateEvent(mRealEstate)));
+                EventBus.getDefault().post(new EditRealEstateEvent(mRealEstate)));
 
         holder.itemView.setOnClickListener(view -> {
             row_index = position;

@@ -82,7 +82,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         OnClickRealEstateFragment onClickRealEstateFragment = new
                                 OnClickRealEstateFragment();
                         Bundle args = new Bundle();
-                        args.putSerializable(MAPS_MARKER_CLICK_REAL_ESTATE, realEstateList.get(i));
+                        args.putParcelable(MAPS_MARKER_CLICK_REAL_ESTATE, realEstateList.get(i));
                         onClickRealEstateFragment.setArguments(args);
 
                         getParentFragmentManager().beginTransaction()
@@ -95,7 +95,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 return true;
             });
                 });
-
 
 
     }

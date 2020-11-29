@@ -23,4 +23,6 @@
 
     <dimen name="activity_add_real_estate_margin">15dp</dimen>
 
+    <dimen name="activity_search_real_estate_provider_margin">15dp</dimen>
+
 </resources>

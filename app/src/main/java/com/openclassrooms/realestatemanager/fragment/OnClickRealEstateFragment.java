@@ -1,10 +1,7 @@
 package com.openclassrooms.realestatemanager.fragment;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +22,6 @@ import com.openclassrooms.realestatemanager.databinding.FragmentOnClickRealEstat
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
-import java.io.IOException;
-import java.util.List;
-
 
 public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCallback {
 
@@ -46,12 +40,12 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding = FragmentOnClickRealEstateBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        if (getArguments().getSerializable(RealEstateFragment.KEY) != null) {
-            mRealEstate = (RealEstate) getArguments().getSerializable(RealEstateFragment.KEY);
-        } else if (getArguments().getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) !=
-        null) {
+        if (getArguments().getParcelable(RealEstateFragment.KEY) != null) {
+            mRealEstate = (RealEstate) getArguments().getParcelable(RealEstateFragment.KEY);
+        } else if (getArguments().getParcelable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) !=
+                null) {
             mRealEstate = (RealEstate) getArguments()
-                    .getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
+                    .getParcelable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
         }
         return view;
     }
@@ -60,12 +54,12 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mRealEstate.getMainPhotoUrl() != null) {
-        Glide.with(binding.fragmentOnClickRealEstateImageView.getContext())
-                .load(mRealEstate.getMainPhotoUrl())
-                .into(binding.fragmentOnClickRealEstateImageView);
+            Glide.with(binding.fragmentOnClickRealEstateImageView.getContext())
+                    .load(mRealEstate.getMainPhotoUrl())
+                    .into(binding.fragmentOnClickRealEstateImageView);
         } else if (mRealEstate.getMainPhotoString() != null) {
             Uri imageUri = RealEstatePhotos.stringToUri(mRealEstate.getMainPhotoString());
-                binding.fragmentOnClickRealEstateImageView.setImageURI(imageUri);
+            binding.fragmentOnClickRealEstateImageView.setImageURI(imageUri);
         }
 
         binding.fragmentOnClickRealEstateDescription.setText(mRealEstate.getDescription());
@@ -74,17 +68,17 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
                 .load(mRealEstate.getAgentPhotoUrl())
                 .into(binding.fragmentOnClickRealEstateAgentPhoto);
 
-            binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
+        binding.fragmentOnClickRealEstateAgentName.setText(mRealEstate.getAgent());
 
-            if (mRealEstate.getStatus().equals("For sale")) {
+        if (mRealEstate.getStatus().equals("For sale")) {
             binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
             binding.fragmentOnClickRealEstateStatus.setTextColor(getResources()
                     .getColor(R.color.fragment_on_click_real_estate_for_sale_status_color));
-            } else {
+        } else {
             binding.fragmentOnClickRealEstateStatus.setText(mRealEstate.getStatus());
             binding.fragmentOnClickRealEstateStatus.setTextColor(getResources().getColor(
                     R.color.fragment_on_click_real_estate_sold_status_color));
-            }
+        }
 
 
         String dateOfSale;
@@ -106,7 +100,7 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding.fragmentOnClickRealEstateBedroomsValue.setText(numberOfBedrooms);
         binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
         binding.fragmentOnClickRealEstatePointsOfInterestValue.setText(mRealEstate.getPointsOfInterest());
-        binding.fragmentOnClickRealEstatePriceValue.setText(mRealEstate.getPrice());
+        binding.fragmentOnClickRealEstatePriceValue.setText("$" + mRealEstate.getPrice());
         binding.fragmentOnClickRealEstateEntryDateValue.setText(mRealEstate.getEntryDate());
         binding.fragmentOnClickRealEstateSaleDateValue.setText(dateOfSale);
 
@@ -121,10 +115,10 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if ( mRealEstate.getLatitude() != 0 && mRealEstate.getLongitude() != 0) {
-        LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));
+        if (mRealEstate.getLatitude() != 0 && mRealEstate.getLongitude() != 0) {
+            LatLng realEstateLatLng = new LatLng(mRealEstate.getLatitude(), mRealEstate.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(realEstateLatLng).title("Real estate marker"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(realEstateLatLng, 18));
         }
     }
 

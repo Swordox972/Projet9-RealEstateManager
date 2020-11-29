@@ -43,12 +43,12 @@ public class RealEstatePhotosFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(),
                 LinearLayoutManager.HORIZONTAL, false));
 
-        if (getParentFragment().getArguments().getSerializable(RealEstateFragment.KEY) != null) {
-        mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
+        if (getParentFragment().getArguments().getParcelable(RealEstateFragment.KEY) != null) {
+        mRealEstate = (RealEstate) getParentFragment().getArguments().getParcelable(
                 RealEstateFragment.KEY);
-        } else if (getParentFragment().getArguments().getSerializable(
+        } else if (getParentFragment().getArguments().getParcelable(
                 MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) != null) {
-            mRealEstate = (RealEstate) getParentFragment().getArguments().getSerializable(
+            mRealEstate = (RealEstate) getParentFragment().getArguments().getParcelable(
                     MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
         }
 

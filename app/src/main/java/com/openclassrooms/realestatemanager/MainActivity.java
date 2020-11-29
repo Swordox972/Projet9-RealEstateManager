@@ -28,11 +28,17 @@ import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int ALL_PERMISSIONS = 10;
 
     public static final String ADD_REAL_ESTATE = "ADD_REAL_ESTATE";
+
+    public static final String SEARCH_REAL_ESTATE = "SEARCH_REAL_ESTATE";
+
+    public static final int SEARCH_REAL_ESTATE_REQUEST_CODE = 200;
 
     public static final int ADD_REAL_ESTATE_REQUEST_CODE = 100;
 
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private RealEstateViewModel viewModel;
 
     private MyRealEstateHandlerThread myRealEstateHandlerThread;
+
+    ArrayList<RealEstate> realEstateFilteredList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         myRealEstateHandlerThread = new MyRealEstateHandlerThread(
                 "InsertRealEstateInDatabase");
 
+        realEstateFilteredList = new ArrayList<>();
+
     }
 
     @Override
@@ -79,12 +89,22 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.menu_add):
                 Intent intent = new Intent(this, AddOrEditRealEstateActivity.class);
                 RealEstate realEstate = new RealEstate();
-                intent.putExtra(ADD_REAL_ESTATE, realEstate);
+                intent.putExtra(ADD_REAL_ESTATE,  realEstate);
                 startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE);
+                break;
+            case (R.id.menu_search):
+                if (realEstateFilteredList.size() != 0)
+                    realEstateFilteredList.clear();
+
+                Intent intent1 = new Intent(this, SearchRealEstateProviderActivity.class);
+                intent1.putParcelableArrayListExtra(SEARCH_REAL_ESTATE, realEstateFilteredList);
+                startActivityForResult(intent1, SEARCH_REAL_ESTATE_REQUEST_CODE);
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     private void initializeBottomNavigationView() {
@@ -149,6 +169,11 @@ public class MainActivity extends AppCompatActivity {
                 myRealEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel);
 
                 showNotificationOnAddRealEstate();
+            }
+        } else if (requestCode == SEARCH_REAL_ESTATE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                  realEstateFilteredList = data.getParcelableArrayListExtra(SEARCH_REAL_ESTATE);
+                  RealEstateFragment.adapter.setRealEstateList(realEstateFilteredList);
             }
         }
 

@@ -29,6 +29,7 @@ import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -62,11 +63,11 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         setContentView(view);
 
         //If intent coming from AddRealEstate
-        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+        if (getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE);
         } //Else if intent coming from EditRealEstate
-        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(
+        else if (getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getParcelableExtra(
                     RealEstateFragment.EDIT_REAL_ESTATE);
         }
 
@@ -80,7 +81,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         initializeButtonSelectSaleDate();
 
         //if editing, set all value in spinners, editTexts and ImageViews
-        if (mNewRealEstate.equals(getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE))) {
+        if (mNewRealEstate.equals(getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE))) {
             initializeRealEstateToEdit();
         }
         initializeFinishButton();
@@ -244,6 +245,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
             }
         }
 
+        String price = Integer.toString(mNewRealEstate.getPrice());
         String surface = Integer.toString(mNewRealEstate.getSurface());
         String numberOfRooms = Integer.toString(mNewRealEstate.getNumberOfRooms());
         String numberOfBathrooms = Integer.toString(mNewRealEstate.getNumberOfBathrooms());
@@ -260,7 +262,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         }
 
         binding.activityAddOrEditRealEstateFirstLocationEditText.setText(mNewRealEstate.getFirstLocation());
-        binding.activityAddOrEditRealEstatePriceEditText.setText(mNewRealEstate.getPrice());
+        binding.activityAddOrEditRealEstatePriceEditText.setText(price);
         binding.activityAddOrEditRealEstateDescriptionEditText.setText(mNewRealEstate.getDescription());
         othersPhotosList.addAll(mNewRealEstate.getPhotos());
         binding.activityAddOrEditRealEstateSurfaceEditText.setText(surface);
@@ -289,7 +291,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         }
 
         String firstLocation = binding.activityAddOrEditRealEstateFirstLocationEditText.getText().toString();
-        String price = binding.activityAddOrEditRealEstatePriceEditText.getText().toString();
+        int price = Integer.parseInt(binding.activityAddOrEditRealEstatePriceEditText.getText().toString());
         String description = binding.activityAddOrEditRealEstateDescriptionEditText.getText().toString();
         int surface = Integer.parseInt(binding.activityAddOrEditRealEstateSurfaceEditText.getText().toString());
         int numberOfRooms = Integer.parseInt(
@@ -305,11 +307,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         String saleDate = binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString();
 
         mNewRealEstate.setFirstLocation(firstLocation);
-        if (price.charAt(0) != '$') {
-        mNewRealEstate.setPrice("$" + price);
-        } else {
-            mNewRealEstate.setPrice(price);
-        }
+        mNewRealEstate.setPrice(price);
         mNewRealEstate.setDescription(description);
         //mNewRealEstate.setMainPhoto is in onActivityResult or already assigned if editing without changes
         //mNewRealEstate.setOthersPhotos is in onActivityResult or already assigned if editing without changes
@@ -330,18 +328,18 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
     private void initializeFinishButton() {
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity pass data back
-        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+        if (getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
                 setNewRealEstateValue();
 
                 Intent intent = new Intent();
-                intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
+                intent.putExtra(MainActivity.ADD_REAL_ESTATE, (Serializable) mNewRealEstate);
                 setResult(RESULT_OK, intent);
                 finish();
             });
         }// Else if intent comes from Real Estate Fragment pass data back
 
-        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+        else if (getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
 
                 //Verify if when "Sold" status is selected that Sale date has a value

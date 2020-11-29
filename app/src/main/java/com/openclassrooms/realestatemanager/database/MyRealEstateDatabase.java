@@ -60,7 +60,7 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
 
                     realEstateDao.deleteAll();
 
-                     RealEstate realEstate1 = new RealEstate(1,"Loft", "$13,950,000",
+                     RealEstate realEstate1 = new RealEstate(1,"Loft", 13950000,
                              423, 8, 4, 4,
                              RealEstateDescription.returnFirstDescription(),
                              "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
@@ -75,8 +75,8 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                              "Jessica C. Campbell",
                              "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg");
 
-                     RealEstate realEstate2 = new RealEstate(2,"Penthouse", "$5,400,000", 582,
-                             7, 4, 3,
+                     RealEstate realEstate2 = new RealEstate(2,"Penthouse", 5400000,
+                             582, 7, 4, 3,
                              RealEstateDescription.returnSecondDescription(),
                              "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
                              null, RealEstatePhotoService.getRealEstatePhotos2(),
