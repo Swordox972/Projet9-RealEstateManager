@@ -333,7 +333,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                 setNewRealEstateValue();
 
                 Intent intent = new Intent();
-                intent.putExtra(MainActivity.ADD_REAL_ESTATE, (Serializable) mNewRealEstate);
+                intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
                 setResult(RESULT_OK, intent);
                 finish();
             });

@@ -13,7 +13,6 @@ import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.service.DateUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SearchRealEstateProviderActivity extends AppCompatActivity {
 
@@ -55,42 +54,59 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
             String entryDateInDays = binding.activitySearchRealEstateEntryDateSinceEditText.getText().toString();
             String saleDateInDays = binding.activitySearchRealEstateSaleDateSinceEditText.getText().toString();
 
+
             //Ensure min and max price has value and filter with price
             if (!minimumPrice.isEmpty() && !maximumPrice.isEmpty()) {
 
                 int minimumPriceInt = Integer.parseInt(minimumPrice);
                 int maximumPriceInt = Integer.parseInt(maximumPrice);
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
 
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
                     int price = realEstateFilterList.get(i).getPrice();
 
-                    if (price < minimumPriceInt || price > maximumPriceInt)
-                        realEstateFilterList.remove(i);
+                    if (price > minimumPriceInt && price < maximumPriceInt)
+                        //RealEstates filtered to save
+                        realEstates.add(realEstateFilterList.get(i));
                 }
+
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
             }
 
             //Ensure min and max surface has value and filter with surface
             if (!minimumSurface.isEmpty() && !maximumSurface.isEmpty()) {
-
                 int minimumSurfaceInt = Integer.parseInt(minimumSurface);
                 int maximumSurfaceInt = Integer.parseInt(maximumSurface);
+
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
 
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
                     int surface = realEstateFilterList.get(i).getSurface();
 
-                    if (surface < minimumSurfaceInt || surface > maximumSurfaceInt)
-                        realEstateFilterList.remove(i);
+                    if (surface > minimumSurfaceInt && surface < maximumSurfaceInt)
+                        realEstates.add(realEstateFilterList.get(i));
                 }
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
             }
 
             //Ensure point of interest has value and filter with it
             if (!pointOfInterest.isEmpty()) {
 
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
+
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
 
                     if (!realEstateFilterList.get(i).getPointsOfInterest().equals(pointOfInterest))
-                        realEstateFilterList.remove(i);
+                        realEstates.add(realEstateFilterList.get(i));
                 }
+
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
             }
 
             //Ensure entry date has value and filter with it
@@ -98,15 +114,20 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
                 String todayDate = DateUtils.returnTodayDate();
                 int entryDateInDaysInt = Integer.parseInt(entryDateInDays);
 
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
+
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
-                 long days=DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getEntryDate(),
+                    long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getEntryDate(),
                             todayDate);
 
-                 if (entryDateInDaysInt > days) {
-                     realEstateFilterList.remove(i);
-                 }
+                    if (entryDateInDaysInt > days) {
+                        realEstates.add(realEstateFilterList.get(i));
+                    }
 
                 }
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
             }
 
             //Ensure sale date has value and filter with it
@@ -114,14 +135,19 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
                 String todayDate = DateUtils.returnTodayDate();
                 int saleDateInDaysInt = Integer.parseInt(saleDateInDays);
 
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
+
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    long days=DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getDateOfSale(),
+                    long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getDateOfSale(),
                             todayDate);
 
                     if (saleDateInDaysInt > days) {
-                        realEstateFilterList.remove(i);
+                        realEstates.add(realEstateFilterList.get(i));
                     }
                 }
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
             }
 
             Intent intent = new Intent();

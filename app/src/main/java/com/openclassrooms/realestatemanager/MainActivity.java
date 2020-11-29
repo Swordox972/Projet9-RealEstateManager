@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 RealEstate newRealEstate = (RealEstate)
-                        data.getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
+                        data.getParcelableExtra(MainActivity.ADD_REAL_ESTATE);
 
                 myRealEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel);
 
