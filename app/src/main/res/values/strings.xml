@@ -16,6 +16,7 @@
     <string name="sale_date">Sale date</string>
     <string name="map">Map</string>
     <string name="media">Media</string>
+    <string name="video">Video</string>
 
     <string name="click_on_an_element_in_the_list">Click on an element in the list to display details
      </string>
@@ -46,6 +47,7 @@
     <string name="maximum_price_in_dollar">Maximum price in dollar</string>
     <string name="minimum_surface_in_square_meters">Minimum surface in sq m</string>
     <string name="maximum_surface_in_square_meters">Maximum surface in sq m</string>
+    <string name="minimum_number_of_photos">Minimum number of photos</string>
 
     <string-array name="real_estate_types">
         <item>Loft</item>

@@ -21,6 +21,8 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentOnClickRealEstateBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 
 public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCallback {
@@ -109,6 +111,18 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
                 .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment);
         supportMapFragment.getMapAsync(this);
 
+        if (mRealEstate.getVideoId() != null) {
+
+        getLifecycle().addObserver(binding.fragmentOnClickRealEstateVideo);
+
+        binding.fragmentOnClickRealEstateVideo.initialize(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(YouTubePlayer youTubePlayer) {
+
+                youTubePlayer.cueVideo(mRealEstate.getVideoId(),0);
+            }
+        });
+        }
     }
 
     @Override

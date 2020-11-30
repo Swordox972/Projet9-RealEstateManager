@@ -477,6 +477,7 @@
 
         <!-- Maps Lite Mode -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/fragment_on_click_real_estate_maps_card_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -496,6 +497,26 @@
         </androidx.cardview.widget.CardView>
         <!-- Maps Lite Mode -->
 
+        <!-- Youtube video -->
+        <TextView
+            android:id="@+id/fragment_on_click_real_estate_video_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fragment_on_click_real_estate_titles_margin"
+            android:textSize="@dimen/fragment_on_click_real_estate_titles_size"
+            android:text="@string/video"
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_maps_card_view"
+            map:layout_constraintStart_toStartOf="parent"/>
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/fragment_on_click_real_estate_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            map:autoPlay="false"
+            map:enableAutomaticInitialization="false"
+            map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_video_text_view"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -23,7 +23,6 @@ public class RealEstate implements Parcelable {
         }
     };
 
-
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String type;
@@ -46,6 +45,7 @@ public class RealEstate implements Parcelable {
     private String dateOfSale;
     private String agent;
     private String agentPhotoUrl;
+    private String videoId;
 
     @Ignore
     public RealEstate() {
@@ -56,7 +56,7 @@ public class RealEstate implements Parcelable {
                       String mainPhotoString, ArrayList photos, String firstLocation,
                       String secondLocation, String pointsOfInterest, double latitude, double longitude,
                       String status, String entryDate, String dateOfSale, String agent,
-                      String agentPhotoUrl) {
+                      String agentPhotoUrl, String videoId) {
         this.id = id;
         this.type = type;
         this.price = price;
@@ -78,6 +78,7 @@ public class RealEstate implements Parcelable {
         this.dateOfSale = dateOfSale;
         this.agent = agent;
         this.agentPhotoUrl = agentPhotoUrl;
+        this.videoId = videoId;
     }
 
 
@@ -249,6 +250,13 @@ public class RealEstate implements Parcelable {
         this.agentPhotoUrl = agentPhotoUrl;
     }
 
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
+    }
 
     //Parceling part
     public RealEstate(Parcel in) {
@@ -275,6 +283,7 @@ public class RealEstate implements Parcelable {
         this.dateOfSale = in.readString();
         this.agent = in.readString();
         this.agentPhotoUrl = in.readString();
+        this.videoId = in.readString();
     }
 
     @Override
@@ -305,6 +314,7 @@ public class RealEstate implements Parcelable {
         parcel.writeString(this.dateOfSale);
         parcel.writeString(this.agent);
         parcel.writeString(this.agentPhotoUrl);
+        parcel.writeString(this.videoId);
     }
 
     //Content Provider
@@ -338,6 +348,8 @@ public class RealEstate implements Parcelable {
         if (values.containsKey("agent")) realEstate.setAgent(values.getAsString("agent"));
         if (values.containsKey("agentPhotoUrl"))
             realEstate.setAgentPhotoUrl(values.getAsString("agentPhotoUrl"));
+        if (values.containsKey("videoId"))
+            realEstate.setVideoId(values.getAsString("videoId"));
 
         return realEstate;
     }

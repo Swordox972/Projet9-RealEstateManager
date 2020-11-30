@@ -68,11 +68,12 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                             "41 Great Jones Street Penthouse\n" +
                                     "Lafayette\n" +
                                     "NoHo\n" +
-                                    "New York", "Ecole",
+                                    "New York", "Shop",
                             40.726649, -73.992833,
                             "For sale", "07/11/2020", null,
                             "Jessica C. Campbell",
-                            "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg");
+                            "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg",
+                            "KBN60UbSoSM");
 
                     RealEstate realEstate2 = new RealEstate(2, "Penthouse", 5400000,
                             582, 7, 4, 3,
@@ -87,7 +88,8 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                             "Brooklyn", "Parc", 40.710313, -73.966295,
                             "For sale", "08/11/2020", null,
                             "Christian Haag",
-                            "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");
+                            "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg",
+                            "SMIm5ErsEJM");
 
                     realEstateDao.insertRealEstate(realEstate1);
                     realEstateDao.insertRealEstate(realEstate2);

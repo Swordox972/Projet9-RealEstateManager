@@ -50,6 +50,8 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
             String maximumPrice = binding.activitySearchRealEstatePriceMaximumEditText.getText().toString();
             String minimumSurface = binding.activitySearchRealEstateSurfaceMinimumEditText.getText().toString();
             String maximumSurface = binding.activitySearchRealEstateSurfaceMaximumEditText.getText().toString();
+            String firstLocation = binding.activitySearchRealEstateFirstLocationEditText.getText().toString();
+            String numberOfPhotos = binding.activitySearchRealEstateNumberPhotosEditText.getText().toString();
             String pointOfInterest = binding.activitySearchRealEstatePointOfInterestEditText.getText().toString();
             String entryDateInDays = binding.activitySearchRealEstateEntryDateSinceEditText.getText().toString();
             String saleDateInDays = binding.activitySearchRealEstateSaleDateSinceEditText.getText().toString();
@@ -93,6 +95,39 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
                 realEstateFilterList.addAll(realEstates);
             }
 
+            //Ensure first Location has value and filter with it
+            if (!firstLocation.isEmpty()) {
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
+
+                for (int i = 0; i < realEstateFilterList.size(); i++) {
+
+                    if (realEstateFilterList.get(i).getFirstLocation().equals(firstLocation))
+                        realEstates.add(realEstateFilterList.get(i));
+
+                }
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
+            }
+
+            //Ensure numberOfPhotos has value and filter with it
+            if (!numberOfPhotos.isEmpty()) {
+                //ArrayList to handle the result of our filters
+                ArrayList<RealEstate> realEstates = new ArrayList<>();
+                //Convert String edit text to integer
+                int numberOfPhotosInt = Integer.parseInt(numberOfPhotos);
+
+                for (int i =0 ; i<realEstateFilterList.size() ; i++) {
+                    int photosNumber = realEstateFilterList.get(i).getPhotos().size() + 1;
+
+
+                    if (numberOfPhotosInt <= photosNumber)
+                        realEstates.add(realEstateFilterList.get(i));
+                }
+                realEstateFilterList.clear();
+                realEstateFilterList.addAll(realEstates);
+            }
+
             //Ensure point of interest has value and filter with it
             if (!pointOfInterest.isEmpty()) {
 
@@ -101,7 +136,7 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
 
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
 
-                    if (!realEstateFilterList.get(i).getPointsOfInterest().equals(pointOfInterest))
+                    if (realEstateFilterList.get(i).getPointsOfInterest().equals(pointOfInterest))
                         realEstates.add(realEstateFilterList.get(i));
                 }
 
