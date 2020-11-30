@@ -11,7 +11,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.openclassrooms.realestatemanager.database.dao.RealEstateDao;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
 import com.openclassrooms.realestatemanager.service.RealEstateDescription;
 import com.openclassrooms.realestatemanager.service.RealEstatePhotoService;
 import com.openclassrooms.realestatemanager.service.RealEstateTypeConverter;
@@ -24,7 +23,7 @@ import java.util.concurrent.Executors;
 public abstract class MyRealEstateDatabase extends RoomDatabase {
 
     // --- SINGLETON ---
-      public static volatile MyRealEstateDatabase  INSTANCE;
+    public static volatile MyRealEstateDatabase INSTANCE;
 
     // --- DAO ---
     public abstract RealEstateDao realEstateDao();
@@ -60,38 +59,38 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
 
                     realEstateDao.deleteAll();
 
-                     RealEstate realEstate1 = new RealEstate(1,"Loft", 13950000,
-                             423, 8, 4, 4,
-                             RealEstateDescription.returnFirstDescription(),
-                             "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
-                             null, RealEstatePhotoService.getRealEstatePhotos1(),
-                             "Manhattan",
-                             "41 Great Jones Street Penthouse\n" +
-                                     "Lafayette\n" +
-                                     "NoHo\n" +
-                                     "New York", "Ecole",
-                             40.726649, -73.992833,
-                             "For sale", "07/11/2020", null,
-                             "Jessica C. Campbell",
-                             "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg");
+                    RealEstate realEstate1 = new RealEstate(1, "Loft", 13950000,
+                            423, 8, 4, 4,
+                            RealEstateDescription.returnFirstDescription(),
+                            "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
+                            null, RealEstatePhotoService.getRealEstatePhotos1(),
+                            "Manhattan",
+                            "41 Great Jones Street Penthouse\n" +
+                                    "Lafayette\n" +
+                                    "NoHo\n" +
+                                    "New York", "Ecole",
+                            40.726649, -73.992833,
+                            "For sale", "07/11/2020", null,
+                            "Jessica C. Campbell",
+                            "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg");
 
-                     RealEstate realEstate2 = new RealEstate(2,"Penthouse", 5400000,
-                             582, 7, 4, 3,
-                             RealEstateDescription.returnSecondDescription(),
-                             "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
-                             null, RealEstatePhotoService.getRealEstatePhotos2(),
-                             "Brooklyn"
-                             , "The Gretsch Building PH1A\n" +
-                             "60 Broadway\n" +
-                             "Wythe & Berry\n" +
-                             "Williamsburg\n" +
-                             "Brooklyn", "Parc",40.710313, -73.966295,
-                             "For sale", "08/11/2020", null,
-                             "Christian Haag",
-                             "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");
+                    RealEstate realEstate2 = new RealEstate(2, "Penthouse", 5400000,
+                            582, 7, 4, 3,
+                            RealEstateDescription.returnSecondDescription(),
+                            "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
+                            null, RealEstatePhotoService.getRealEstatePhotos2(),
+                            "Brooklyn"
+                            , "The Gretsch Building PH1A\n" +
+                            "60 Broadway\n" +
+                            "Wythe & Berry\n" +
+                            "Williamsburg\n" +
+                            "Brooklyn", "Parc", 40.710313, -73.966295,
+                            "For sale", "08/11/2020", null,
+                            "Christian Haag",
+                            "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg");
 
-                     realEstateDao.insertRealEstate(realEstate1);
-                     realEstateDao.insertRealEstate(realEstate2);
+                    realEstateDao.insertRealEstate(realEstate1);
+                    realEstateDao.insertRealEstate(realEstate2);
                 });
 
             }

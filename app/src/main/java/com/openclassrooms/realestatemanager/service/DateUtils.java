@@ -15,8 +15,8 @@ public class DateUtils {
             Date startDate = simpleDateFormat.parse(start);
             Date endDate = simpleDateFormat.parse(end);
 
-         long diff = endDate.getTime() - startDate.getTime();
-         days =   TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+            long diff = endDate.getTime() - startDate.getTime();
+            days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -26,7 +26,7 @@ public class DateUtils {
     }
 
     public static String returnTodayDate() {
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date todayDate = new Date();
         String currentDate = simpleDateFormat.format(todayDate);
         return currentDate;

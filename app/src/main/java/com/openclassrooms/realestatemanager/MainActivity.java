@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
@@ -69,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         initializeBottomNavigationView();
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
-
+        //Initialize handler thread
         myRealEstateHandlerThread = new MyRealEstateHandlerThread(
                 "InsertRealEstateInDatabase");
-
+        // Empty List to pass to SearchActivity and get back to main activity in onActivityResult
         realEstateFilteredList = new ArrayList<>();
 
     }
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.menu_add):
                 Intent intent = new Intent(this, AddOrEditRealEstateActivity.class);
                 RealEstate realEstate = new RealEstate();
-                intent.putExtra(ADD_REAL_ESTATE,  realEstate);
+                intent.putExtra(ADD_REAL_ESTATE, realEstate);
                 startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE);
                 break;
             case (R.id.menu_search):
@@ -116,9 +117,17 @@ public class MainActivity extends AppCompatActivity {
                                     new RealEstateFragment()).commit();
                     break;
                 case R.id.page2:
-                    getSupportFragmentManager().beginTransaction().replace(
-                            R.id.activity_main_fragment_container_view_list, new MapsFragment())
-                            .commit();
+                    Fragment fragmentContainerViewDetail = getSupportFragmentManager()
+                            .findFragmentById(R.id.activity_main_fragment_container_view_detail);
+                    if (fragmentContainerViewDetail == null) {
+                        getSupportFragmentManager().beginTransaction().replace(
+                                R.id.activity_main_fragment_container_view_list, new MapsFragment())
+                                .commit();
+                    } else if (fragmentContainerViewDetail.isVisible()) {
+                        getSupportFragmentManager().beginTransaction().replace(
+                                R.id.activity_main_fragment_container_view_detail, new MapsFragment()
+                        ).commit();
+                    }
                     break;
 
             }
@@ -172,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (requestCode == SEARCH_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                  realEstateFilteredList = data.getParcelableArrayListExtra(SEARCH_REAL_ESTATE);
-                  RealEstateFragment.adapter.setRealEstateList(realEstateFilteredList);
+                realEstateFilteredList = data.getParcelableArrayListExtra(SEARCH_REAL_ESTATE);
+                RealEstateFragment.adapter.setRealEstateList(realEstateFilteredList);
             }
         }
 

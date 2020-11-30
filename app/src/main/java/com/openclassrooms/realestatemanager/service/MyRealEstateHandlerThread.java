@@ -3,15 +3,8 @@ package com.openclassrooms.realestatemanager.service;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyRealEstateHandlerThread extends HandlerThread {
 
@@ -53,7 +46,7 @@ public class MyRealEstateHandlerThread extends HandlerThread {
     }
 
     public void startUpdateRealEstateHandler(RealEstate realEstate,
-                                             RealEstateViewModel realEstateViewModel){
+                                             RealEstateViewModel realEstateViewModel) {
         if (!this.isAlive()) this.start();
 
         Handler handler = new Handler(this.getLooper());

@@ -21,13 +21,15 @@ public class RealEstateDataRepository {
         mRealEstates = mRealEstateDao.getRealEstates();
     }
 
-   // Create
+    // Create
     public void createRealEstate(RealEstate realEstate) {
-        mRealEstateDao.insertRealEstate(realEstate);}
+        mRealEstateDao.insertRealEstate(realEstate);
+    }
 
     //Read
-    public LiveData<RealEstate> getRealEstate(long realEstateId) {return
-            mRealEstateDao.getRealEstate(realEstateId);
+    public LiveData<RealEstate> getRealEstate(long realEstateId) {
+        return
+                mRealEstateDao.getRealEstate(realEstateId);
     }
 
     //Real all
@@ -41,7 +43,9 @@ public class RealEstateDataRepository {
     }
 
     //Delete
-    public void deleteRealEstate(long realEstateId) {mRealEstateDao.deleteRealEstate(realEstateId);}
+    public void deleteRealEstate(long realEstateId) {
+        mRealEstateDao.deleteRealEstate(realEstateId);
+    }
 
 
 }

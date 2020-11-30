@@ -8,7 +8,6 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 @Entity
@@ -22,7 +21,7 @@ public class RealEstate implements Parcelable {
         public RealEstate[] newArray(int size) {
             return new RealEstate[size];
         }
-        };
+    };
 
 
     @PrimaryKey(autoGenerate = true)
@@ -322,7 +321,8 @@ public class RealEstate implements Parcelable {
                 values.getAsInteger("numberOfBedrooms"));
         if (values.containsKey("description")) realEstate.setDescription(
                 values.getAsString("description"));
-        if (values.containsKey("photoUrl")) realEstate.setMainPhotoUrl(values.getAsString("photoUrl"));
+        if (values.containsKey("photoUrl"))
+            realEstate.setMainPhotoUrl(values.getAsString("photoUrl"));
         if (values.containsKey("firstLocation")) realEstate.setFirstLocation(
                 values.getAsString("firstLocation"));
         if (values.containsKey("secondLocation")) realEstate.setSecondLocation(

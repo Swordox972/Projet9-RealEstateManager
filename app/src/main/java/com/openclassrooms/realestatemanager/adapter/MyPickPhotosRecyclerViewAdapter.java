@@ -42,8 +42,8 @@ public class MyPickPhotosRecyclerViewAdapter extends
         final RealEstatePhotos realEstatePhotos = realEstatePhotosList.get(position);
 
         if (realEstatePhotos.getPhotoUri() != null) {
-        holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.setImageURI(
-                RealEstatePhotos.stringToUri(realEstatePhotos.getPhotoUri()));
+            holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.setImageURI(
+                    RealEstatePhotos.stringToUri(realEstatePhotos.getPhotoUri()));
         } else if (realEstatePhotos.getPhotoUrl() != null) {
             Glide.with(holder.fragmentPickPhotosBinding.fragmentPickPhotosImageView.getContext())
                     .load(realEstatePhotos.getPhotoUrl())

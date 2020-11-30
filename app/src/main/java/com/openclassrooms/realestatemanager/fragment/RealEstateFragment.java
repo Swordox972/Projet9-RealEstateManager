@@ -26,8 +26,6 @@ import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.io.Serializable;
-
 import static android.app.Activity.RESULT_OK;
 
 
@@ -70,7 +68,7 @@ public class RealEstateFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
 
         if (getActivity().getIntent().getParcelableArrayListExtra(MainActivity.SEARCH_REAL_ESTATE)
-        == null) {
+                == null) {
             viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
                 adapter.setRealEstateList(realEstates);
             });
@@ -138,8 +136,8 @@ public class RealEstateFragment extends Fragment {
         if (requestCode == EDIT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                RealEstate realEstate =(RealEstate) data.getParcelableExtra(EDIT_REAL_ESTATE);
-                 myRealEstateHandlerThread =
+                RealEstate realEstate = (RealEstate) data.getParcelableExtra(EDIT_REAL_ESTATE);
+                myRealEstateHandlerThread =
                         new MyRealEstateHandlerThread("UpdateRealEstateInDatabase");
 
                 myRealEstateHandlerThread.startUpdateRealEstateHandler(realEstate, viewModel);

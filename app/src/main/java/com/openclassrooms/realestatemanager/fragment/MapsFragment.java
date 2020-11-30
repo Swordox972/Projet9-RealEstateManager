@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +31,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public static final String MAPS_MARKER_CLICK_REAL_ESTATE = "MAPS_MARKER_CLICK_REAL_ESTATE";
     private List<RealEstate> realEstateList;
 
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mMap = googleMap;
-            LatLng newYork = new LatLng(40.75691, -73.97619);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newYork, 11));
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LatLng newYork = new LatLng(40.75691, -73.97619);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newYork, 11));
 
-        }
+    }
 
 
     @Nullable
@@ -67,7 +66,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         myRealEstateHandlerThread = new MyRealEstateHandlerThread("GetRealEstates");
 
         viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
-            for (RealEstate realEstate: realEstates) {
+            for (RealEstate realEstate : realEstates) {
                 String realEstateId = Long.toString(realEstate.getId());
                 LatLng latLng = new LatLng(realEstate.getLatitude(), realEstate.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title(realEstateId));
@@ -76,7 +75,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             }
 
             mMap.setOnMarkerClickListener(marker -> {
-                for (int i =0; i< realEstateList.size(); i++) {
+                for (int i = 0; i < realEstateList.size(); i++) {
                     String realEstateId = Long.toString(realEstateList.get(i).getId());
                     if (marker.getTitle().equals(realEstateId)) {
                         OnClickRealEstateFragment onClickRealEstateFragment = new
@@ -85,16 +84,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         args.putParcelable(MAPS_MARKER_CLICK_REAL_ESTATE, realEstateList.get(i));
                         onClickRealEstateFragment.setArguments(args);
 
-                        getParentFragmentManager().beginTransaction()
-                                .addToBackStack("MapsFragment")
-                                .replace(R.id.activity_main_fragment_container_view_list,
-                                        onClickRealEstateFragment)
-                                .commit();
+                        Fragment fragmentContainerViewDetail = getParentFragmentManager()
+                                .findFragmentById(R.id.activity_main_fragment_container_view_detail);
+                        if (fragmentContainerViewDetail == null) {
+                            getParentFragmentManager().beginTransaction()
+                                    .addToBackStack("MapsFragment")
+                                    .replace(R.id.activity_main_fragment_container_view_list,
+                                            onClickRealEstateFragment)
+                                    .commit();
+                        } else if (fragmentContainerViewDetail.isVisible()) {
+                            getParentFragmentManager().beginTransaction()
+                                    .addToBackStack("MapsFragment")
+                                    .replace(R.id.activity_main_fragment_container_view_detail,
+                                            onClickRealEstateFragment)
+                                    .commit();
+                        }
                     }
                 }
                 return true;
             });
-                });
+        });
 
 
     }

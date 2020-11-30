@@ -14,9 +14,7 @@
         android:layout_height="@dimen/fragment_real_estate_imageview_size"
         android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
@@ -65,8 +63,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/fragment_real_estate_main_linear_layout"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_real_estate_main_linear_layout"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/fragment_real_estate_main_linear_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

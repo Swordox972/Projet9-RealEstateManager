@@ -18,7 +18,7 @@ public class RealEstateViewModel extends AndroidViewModel {
     private final RealEstateDataRepository mRepository;
     private final LiveData<List<RealEstate>> mRealEstates;
 
-    public RealEstateViewModel( Application application) {
+    public RealEstateViewModel(Application application) {
         super(application);
         mRepository = new RealEstateDataRepository(application);
         mRealEstates = mRepository.getRealEstates();
@@ -35,7 +35,7 @@ public class RealEstateViewModel extends AndroidViewModel {
     }
 
     public void updateRealEstate(RealEstate realEstate) {
-       mRepository.updateRealEstate(realEstate);
+        mRepository.updateRealEstate(realEstate);
     }
 
     public void deleteRealEstate(long realEstateId) {

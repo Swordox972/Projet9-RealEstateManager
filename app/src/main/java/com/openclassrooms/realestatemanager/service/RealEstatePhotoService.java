@@ -9,9 +9,9 @@ public class RealEstatePhotoService {
     public static ArrayList<RealEstatePhotos> getRealEstatePhotos1() {
         ArrayList<RealEstatePhotos> realEstatePhotos1 = new ArrayList<>();
 
-        realEstatePhotos1.add(new RealEstatePhotos(null,"" +
+        realEstatePhotos1.add(new RealEstatePhotos(null, "" +
                 "https://i.ibb.co/d21p5mr/Lounge1.jpg", "Lounge 1"));
-        realEstatePhotos1.add(new RealEstatePhotos(null,"https://i.ibb.co/dDJgnLj/Lounge2.jpg",
+        realEstatePhotos1.add(new RealEstatePhotos(null, "https://i.ibb.co/dDJgnLj/Lounge2.jpg",
                 "Lounge 2"));
         realEstatePhotos1.add(new RealEstatePhotos(null,
                 "https://i.ibb.co/ssvkpLq/Kitchen.jpg", "Kitchen"));

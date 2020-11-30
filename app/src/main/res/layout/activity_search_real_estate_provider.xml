@@ -1,93 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SearchRealEstateProviderActivity">
+    android:layout_height="match_parent">
 
-
-    <!-- Price -->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical"
+        tools:context=".SearchRealEstateProviderActivity">
 
-    <EditText
-        android:id="@+id/activity_search_real_estate_price_minimum_edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/minimum_price_in_dollar"
-        android:inputType="numberDecimal"
-        android:layout_margin="@dimen/activity_search_real_estate_provider_margin"/>
-
-        <EditText
-            android:id="@+id/activity_search_real_estate_price_maximum_edit_text"
+        <!-- Price -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/maximum_price_in_dollar"
-            android:inputType="numberDecimal"
-            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"/>
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/activity_search_real_estate_price_minimum_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+                android:hint="@string/minimum_price_in_dollar"
+                android:inputType="numberDecimal" />
 
-    <!-- Surface -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/activity_search_real_estate_price_maximum_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+                android:hint="@string/maximum_price_in_dollar"
+                android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/activity_search_real_estate_surface_minimum_edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/minimum_surface_in_square_meters"/>
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/activity_search_real_estate_surface_maximum_edit_text"
+        <!-- Surface -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/maximum_surface_in_square_meters"/>
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/activity_search_real_estate_surface_minimum_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/minimum_surface_in_square_meters"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/activity_search_real_estate_surface_maximum_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/maximum_surface_in_square_meters"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <!-- Point of interest-->
+        <EditText
+            android:id="@+id/activity_search_real_estate_point_of_interest_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:hint="@string/points_of_interest" />
+
+        <!-- Entry date filter in days-->
+        <EditText
+            android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:hint="@string/put_on_the_market_since_in_days" />
+
+        <!-- Sale date filter in days-->
+        <EditText
+            android:id="@+id/activity_search_real_estate_sale_date_since_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
+            android:hint="@string/sale_since_in_days" />
+
+        <!-- Button finish -->
+        <Button
+            android:id="@+id/activity_search_real_estate_button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corners"
+            android:text="@string/search"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#69F0AE" />
     </LinearLayout>
-
-    <!-- Point of interest-->
-    <EditText
-        android:id="@+id/activity_search_real_estate_point_of_interest_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/points_of_interest"
-        android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
-        />
-
-    <!-- Entry date filter in days-->
-    <EditText
-        android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/put_on_the_market_since_in_days"
-        android:layout_margin="@dimen/activity_search_real_estate_provider_margin"/>
-
-    <!-- Sale date filter in days-->
-    <EditText
-        android:id="@+id/activity_search_real_estate_sale_date_since_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/sale_since_in_days"
-        android:layout_margin="@dimen/activity_search_real_estate_provider_margin"/>
-
-    <!-- Button finish -->
-    <Button
-        android:id="@+id/activity_search_real_estate_button_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/search"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_corners"
-        app:backgroundTint="#69F0AE"/>
-</LinearLayout>
+</ScrollView>

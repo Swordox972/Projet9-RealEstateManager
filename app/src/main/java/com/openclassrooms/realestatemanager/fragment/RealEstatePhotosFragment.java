@@ -14,10 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.adapter.MyRealEstatePhotosRecyclerViewAdapter;
 import com.openclassrooms.realestatemanager.model.RealEstate;
-import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RealEstatePhotosFragment extends Fragment {
 
@@ -26,6 +22,7 @@ public class RealEstatePhotosFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MyRealEstatePhotosRecyclerViewAdapter adapter;
     RealEstate mRealEstate;
+
     public RealEstatePhotosFragment() {
         // Required empty public constructor
     }
@@ -44,8 +41,8 @@ public class RealEstatePhotosFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
 
         if (getParentFragment().getArguments().getParcelable(RealEstateFragment.KEY) != null) {
-        mRealEstate = (RealEstate) getParentFragment().getArguments().getParcelable(
-                RealEstateFragment.KEY);
+            mRealEstate = (RealEstate) getParentFragment().getArguments().getParcelable(
+                    RealEstateFragment.KEY);
         } else if (getParentFragment().getArguments().getParcelable(
                 MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) != null) {
             mRealEstate = (RealEstate) getParentFragment().getArguments().getParcelable(

@@ -5,8 +5,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.CancellationSignal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,8 +55,8 @@ public class RealEstateContentProvider extends ContentProvider {
                     .insertRealEstate(RealEstate.fromContentValues(contentValues));
 
             if (id != 0) {
-              getContext().getContentResolver().notifyChange(uri, null);
-              return ContentUris.withAppendedId(uri, id);
+                getContext().getContentResolver().notifyChange(uri, null);
+                return ContentUris.withAppendedId(uri, id);
             }
         }
 
