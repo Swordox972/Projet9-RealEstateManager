@@ -191,6 +191,14 @@
             android:hint="@string/points_of_interest"
             android:layout_margin="15dp" />
 
+        <!-- Video Id-->
+        <EditText
+            android:id="@+id/activity_add_or_edit_real_estate_video_id_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/video_id"
+            android:layout_margin="15dp"/>
+
         <!-- Entry Date -->
         <LinearLayout
             android:layout_width="wrap_content"
@@ -242,6 +250,7 @@
                 android:background="@drawable/rounded_corners"
                 app:backgroundTint="@color/activity_add_real_estate_chose_date_button_color" />
         </LinearLayout>
+
 
         <Button
             android:id="@+id/activity_add_or_edit_real_estate_ok_button"

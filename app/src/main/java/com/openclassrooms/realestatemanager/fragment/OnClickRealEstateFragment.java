@@ -111,7 +111,7 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
                 .findFragmentById(R.id.fragment_on_click_real_estate_map_fragment);
         supportMapFragment.getMapAsync(this);
 
-        if (mRealEstate.getVideoId() != null) {
+        if (!mRealEstate.getVideoId().isEmpty()) {
 
         getLifecycle().addObserver(binding.fragmentOnClickRealEstateVideo);
 

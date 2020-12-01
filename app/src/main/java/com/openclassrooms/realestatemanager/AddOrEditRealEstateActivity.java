@@ -100,7 +100,6 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         spinnerStatus.setOnItemSelectedListener(this);
         spinnerAgent.setOnItemSelectedListener(this);
 
-
     }
 
 
@@ -273,7 +272,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                 mNewRealEstate.getPointsOfInterest());
         binding.activityAddOrEditRealEstateEntryDateEditText.setText(mNewRealEstate.getEntryDate());
         binding.activityAddOrEditRealEstateSaleDateEditText.setText(mNewRealEstate.getDateOfSale());
-
+        binding.activityAddOrEditRealEstateVideoIdEditText.setText(mNewRealEstate.getVideoId());
 
     }
 
@@ -304,6 +303,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                 .toString();
         String entryDate = binding.activityAddOrEditRealEstateEntryDateEditText.getText().toString();
         String saleDate = binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString();
+        String videoId = binding.activityAddOrEditRealEstateVideoIdEditText.getText().toString();
 
         mNewRealEstate.setFirstLocation(firstLocation);
         mNewRealEstate.setPrice(price);
@@ -320,13 +320,12 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         mNewRealEstate.setPointsOfInterest(pointsOfInterest);
         mNewRealEstate.setEntryDate(entryDate);
         mNewRealEstate.setDateOfSale(saleDate);
-
-
+        mNewRealEstate.setVideoId(videoId);
     }
 
     private void initializeFinishButton() {
         //Set mNewRealEstate all value selected previously
-        // If intent comes from Main Activity pass data back
+        // If intent comes from Main Activity to add a real estate so pass data back
         if (getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
                 setNewRealEstateValue();
@@ -336,7 +335,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                 setResult(RESULT_OK, intent);
                 finish();
             });
-        }// Else if intent comes from Real Estate Fragment pass data back
+        }// Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
 
         else if (getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {

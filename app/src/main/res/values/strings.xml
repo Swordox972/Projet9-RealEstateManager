@@ -36,6 +36,7 @@
     <string name="ok">OK</string>
     <string name="choose_date">Choose Date</string>
     <string name="surface_in_square_meter">Surface in square meter</string>
+    <string name="video_id">Video Id (11 characters)</string>
 
     <string name="list_view">List View</string>
     <string name="map_view">Map View</string>
