@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager;
 
+import com.openclassrooms.realestatemanager.service.DateUtils;
 import com.openclassrooms.realestatemanager.service.Utils;
 
 import org.junit.Before;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -45,4 +47,23 @@ public class UtilsUnitTest {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         assertEquals(Utils.getTodayDate(), dateFormat.format(today));
     }
+
+    @Test
+    public void assertGetDaysBetweenTwoDatesWorks() {
+        long days = DateUtils.getDaysBetweenDates("01/11/20", "30/11/20");
+        long daysExpected = 29;
+
+        long daysUnexpected= 30;
+
+        assertEquals(daysExpected, days);
+        assertNotEquals(daysUnexpected, days);
+    }
+
+    @Test
+    public void assertReturnTodayDateWorks() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String currentDate =  dateFormat.format(new Date());
+        assertEquals(DateUtils.returnTodayDate(), currentDate);
+    }
+
 }

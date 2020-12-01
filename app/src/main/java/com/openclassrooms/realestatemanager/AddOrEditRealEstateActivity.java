@@ -27,6 +27,7 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddOrEditRealEst
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
+import com.openclassrooms.realestatemanager.service.LocationUtil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -316,7 +317,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         mNewRealEstate.setNumberOfBedrooms(numberOfBedrooms);
         mNewRealEstate.setSecondLocation(secondLocation);
         //Set latitude and longitude
-        getLocationFromAddress(secondLocation);
+        LocationUtil.getLocationFromAddress (this, mNewRealEstate, secondLocation);
         mNewRealEstate.setPointsOfInterest(pointsOfInterest);
         mNewRealEstate.setEntryDate(entryDate);
         mNewRealEstate.setDateOfSale(saleDate);
@@ -360,32 +361,6 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                 }
             });
 
-        }
-    }
-
-    private void getLocationFromAddress(String strAddress) {
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> address;
-
-        try {
-            //Get latLng from String
-            address = geocoder.getFromLocationName(strAddress, 5);
-
-            if (address != null) {
-
-                // Take first possibility from the all possibilities.
-                try {
-                    Address location = address.get(0);
-                    mNewRealEstate.setLatitude(location.getLatitude());
-                    mNewRealEstate.setLongitude(location.getLongitude());
-                } catch (IndexOutOfBoundsException e) {
-
-                }
-
-            }
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
     }
 

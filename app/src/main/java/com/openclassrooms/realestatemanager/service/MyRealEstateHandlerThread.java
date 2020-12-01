@@ -30,21 +30,6 @@ public class MyRealEstateHandlerThread extends HandlerThread {
 
     }
 
-    public void startDeleteRealEstateHandler(long realEstateId,
-                                             RealEstateViewModel realEstateViewModel) {
-
-        if (!this.isAlive()) this.start();
-
-        Handler handler = new Handler(this.getLooper());
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                realEstateViewModel.deleteRealEstate(realEstateId);
-            }
-        });
-    }
-
     public void startUpdateRealEstateHandler(RealEstate realEstate,
                                              RealEstateViewModel realEstateViewModel) {
         if (!this.isAlive()) this.start();
