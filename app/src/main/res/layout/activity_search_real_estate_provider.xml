@@ -12,11 +12,6 @@
         tools:context=".SearchRealEstateProviderActivity">
 
         <!-- Price -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <EditText
                 android:id="@+id/activity_search_real_estate_price_minimum_edit_text"
                 android:layout_width="wrap_content"
@@ -33,18 +28,14 @@
                 android:hint="@string/maximum_price_in_dollar"
                 android:inputType="numberDecimal" />
 
-        </LinearLayout>
+
 
         <!-- Surface -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
             <EditText
                 android:id="@+id/activity_search_real_estate_surface_minimum_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
                 android:hint="@string/minimum_surface_in_square_meters"
                 android:inputType="number" />
 
@@ -52,10 +43,11 @@
                 android:id="@+id/activity_search_real_estate_surface_maximum_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
                 android:hint="@string/maximum_surface_in_square_meters"
                 android:inputType="number" />
 
-        </LinearLayout>
+
 
         <!-- First location (Borough or neighborhood) -->
         <EditText

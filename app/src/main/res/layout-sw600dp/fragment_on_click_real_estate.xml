@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -16,10 +12,9 @@
 
             <ImageView
                 android:id="@+id/fragment_on_click_real_estate_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="450dp"
+                android:layout_height="450dp"
                 map:layout_constraintStart_toStartOf="parent"
-                map:layout_constraintEnd_toEndOf="parent"
                 map:layout_constraintTop_toTopOf="parent" />
 
 
@@ -59,9 +54,9 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 map:cardElevation="8dp"
                 map:cardBackgroundColor="@color/fragment_on_click_real_estate_status_cardview_color"
-                map:layout_constraintEnd_toEndOf="parent"
                 map:layout_constraintStart_toEndOf="@id/fragment_on_click_real_estate_title_description_cardview"
                 map:layout_constraintTop_toTopOf="@id/fragment_on_click_real_estate_title_description_cardview"
                 map:layout_constraintBottom_toBottomOf="@+id/fragment_on_click_real_estate_title_description_cardview">
@@ -69,7 +64,7 @@
                 <TextView
                     android:id="@+id/fragment_on_click_real_estate_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textSize="@dimen/fragment_on_click_real_estate_text_views_size"
                     android:textStyle="bold" />
 
@@ -87,7 +82,7 @@
 
                 <TextView
                     android:id="@+id/fragment_on_click_real_estate_description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fragment_on_click_real_estate_description_margin"
                     android:textSize="@dimen/fragment_on_click_real_estate_text_views_size" />
@@ -101,9 +96,9 @@
                 android:id="@+id/fragment_on_click_real_estate_linear_layout_agent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:orientation="vertical"
                 map:layout_constraintStart_toStartOf="parent"
-                map:layout_constraintEnd_toEndOf="parent"
                 map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_description_cardview">
 
                 <TextView
@@ -506,7 +501,6 @@
                 android:layout_margin="10dp"
                 map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_map_text_view"
                 map:layout_constraintStart_toStartOf="parent"
-                map:layout_constraintEnd_toEndOf="parent"
                 map:cardElevation="8dp">
 
                 <androidx.fragment.app.FragmentContainerView
@@ -533,15 +527,14 @@
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/fragment_on_click_real_estate_video"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 map:autoPlay="false"
                 map:enableAutomaticInitialization="false"
                 map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_video_text_view"
-                map:layout_constraintStart_toStartOf="parent"
-                map:layout_constraintEnd_toEndOf="parent"/>
+                map:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </HorizontalScrollView>
 </ScrollView>

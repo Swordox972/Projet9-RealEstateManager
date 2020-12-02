@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/fragment_on_click_real_estate_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
         <!-- Description Text-->
         <androidx.cardview.widget.CardView
             android:id="@+id/fragment_on_click_real_estate_description_cardview"
-            android:layout_width="wrap_content"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
             map:cardBackgroundColor="@color/fragment_on_click_real_estate_description_card_color"
             map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_title_description_cardview"
@@ -452,7 +452,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/fragment_on_click_real_estate_icons_margin_top"
             android:layout_marginStart="@dimen/fragment_on_click_real_estate_icon_margin_start"
-            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintEnd_toEndOf="@id/fragment_on_click_real_estate_linear_layout_agent"
             map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_linear_layout_points_of_interest">
 
             <ImageView
@@ -503,7 +503,6 @@
             android:layout_margin="10dp"
             map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_map_text_view"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
             map:cardElevation="8dp">
 
             <androidx.fragment.app.FragmentContainerView
@@ -530,13 +529,13 @@
 
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/fragment_on_click_real_estate_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="750dp"
+            android:layout_height="600dp"
+            android:layout_margin="15dp"
             map:autoPlay="false"
             map:enableAutomaticInitialization="false"
             map:layout_constraintTop_toBottomOf="@id/fragment_on_click_real_estate_video_text_view"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"/>
+            map:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
