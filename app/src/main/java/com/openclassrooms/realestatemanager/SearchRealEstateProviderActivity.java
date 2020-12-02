@@ -174,11 +174,14 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
                 ArrayList<RealEstate> realEstates = new ArrayList<>();
 
                 for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getDateOfSale(),
-                            todayDate);
+                    //Ensure date of sale has value
+                    if (realEstateFilterList.get(i).getDateOfSale() != null) {
+                        long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getDateOfSale(),
+                                todayDate);
 
-                    if (saleDateInDaysInt > days) {
-                        realEstates.add(realEstateFilterList.get(i));
+                        if (saleDateInDaysInt > days) {
+                            realEstates.add(realEstateFilterList.get(i));
+                        }
                     }
                 }
                 realEstateFilterList.clear();

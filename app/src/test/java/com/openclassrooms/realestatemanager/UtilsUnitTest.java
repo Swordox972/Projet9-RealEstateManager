@@ -32,20 +32,20 @@ public class UtilsUnitTest {
     @Test
     public void assertConvertDollarToEuroWorks() {
         int dollars = 8;
-        assertEquals(Utils.convertDollarToEuro(dollars), Math.round(dollars * 0.812));
+        assertEquals(Math.round(dollars * 0.812), Utils.convertDollarToEuro(dollars));
     }
 
     @Test
     public void assertConvertEuroToDollarWorks() {
         int euros = 5;
-        assertEquals(Utils.convertEuroToDollar(euros), Math.round(euros * 1.17));
+        assertEquals(Math.round(euros * 1.17), Utils.convertEuroToDollar(euros));
     }
 
     @Test
     public void assertGetTodayDateWorks() {
         Date today = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        assertEquals(Utils.getTodayDate(), dateFormat.format(today));
+        assertEquals(dateFormat.format(today), Utils.getTodayDate());
     }
 
     @Test
