@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -26,13 +27,9 @@ public class UtilsIntegrationTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        ConnectivityManager cm = (ConnectivityManager)
-                appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        boolean isInternetAvailable =  Utils.isInternetAvailable(appContext);
 
-        Utils.isInternetAvailable(appContext);
-        assertEquals(networkInfo.isConnectedOrConnecting(), Utils.isInternetAvailable(appContext));
-
+        assertTrue(isInternetAvailable);
 
     }
 }
