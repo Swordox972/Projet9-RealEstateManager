@@ -66,4 +66,12 @@ public class UtilsUnitTest {
         assertEquals(DateUtils.returnTodayDate(), currentDate);
     }
 
+    @Test
+    public void assertDateToStringWorks() {
+       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+       Date date = new Date();
+       String strDate = simpleDateFormat.format(date);
+      assertEquals(strDate ,DateUtils.convertDateToString(date));
+    }
+    
 }

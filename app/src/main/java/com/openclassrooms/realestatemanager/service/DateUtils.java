@@ -50,7 +50,7 @@ public class DateUtils {
         if ( date == null)
             return "";
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd//MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         String stringDate = simpleDateFormat.format(date);
         return stringDate;
