@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -8,17 +7,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.databinding.ActivitySearchRealEstateProviderBinding;
+import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
-import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.repository.RealEstateDataRepository;
 import com.openclassrooms.realestatemanager.service.DateUtils;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 public class SearchRealEstateProviderActivity extends AppCompatActivity {
 
     ActivitySearchRealEstateProviderBinding binding;
     private RealEstateViewModel viewModel;
-    private ArrayList<RealEstate> realEstateFilterList;
+    private RealEstateDataRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
         binding = ActivitySearchRealEstateProviderBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        repository = DI.getRepository(getApplication());
 
         getRealEstatesInDatabase();
 
@@ -34,18 +35,11 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
 
     private void getRealEstatesInDatabase() {
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
-
-        realEstateFilterList = getIntent().getParcelableArrayListExtra(MainActivity.SEARCH_REAL_ESTATE);
-
-        viewModel.getRealEstates().observe(this, realEstates -> {
-            realEstateFilterList.addAll(realEstates);
-        });
-
     }
 
     private void initializeSearchTerms() {
         binding.activitySearchRealEstateButtonSearch.setOnClickListener(view -> {
-
+            SearchCritaries critaries = new SearchCritaries();
             String minimumPrice = binding.activitySearchRealEstatePriceMinimumEditText.getText().toString();
             String maximumPrice = binding.activitySearchRealEstatePriceMaximumEditText.getText().toString();
             String minimumSurface = binding.activitySearchRealEstateSurfaceMinimumEditText.getText().toString();
@@ -53,146 +47,166 @@ public class SearchRealEstateProviderActivity extends AppCompatActivity {
             String firstLocation = binding.activitySearchRealEstateFirstLocationEditText.getText().toString();
             String numberOfPhotos = binding.activitySearchRealEstateNumberPhotosEditText.getText().toString();
             String pointOfInterest = binding.activitySearchRealEstatePointOfInterestEditText.getText().toString();
-            String entryDateInDays = binding.activitySearchRealEstateEntryDateSinceEditText.getText().toString();
-            String saleDateInDays = binding.activitySearchRealEstateSaleDateSinceEditText.getText().toString();
+            String entryDate = binding.activitySearchRealEstateEntryDateSinceEditText.getText().toString();
+            String saleDate = binding.activitySearchRealEstateSaleDateSinceEditText.getText().toString();
 
 
-            //Ensure min and max price has value and filter with price
-            if (!minimumPrice.isEmpty() && !maximumPrice.isEmpty()) {
-
-                int minimumPriceInt = Integer.parseInt(minimumPrice);
-                int maximumPriceInt = Integer.parseInt(maximumPrice);
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    int price = realEstateFilterList.get(i).getPrice();
-
-                    if (price > minimumPriceInt && price < maximumPriceInt)
-                        //RealEstates filtered to save
-                        realEstates.add(realEstateFilterList.get(i));
-                }
-
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setMinimumPrice(Integer.parseInt(minimumPrice));
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure min and max surface has value and filter with surface
-            if (!minimumSurface.isEmpty() && !maximumSurface.isEmpty()) {
-                int minimumSurfaceInt = Integer.parseInt(minimumSurface);
-                int maximumSurfaceInt = Integer.parseInt(maximumSurface);
-
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    int surface = realEstateFilterList.get(i).getSurface();
-
-                    if (surface > minimumSurfaceInt && surface < maximumSurfaceInt)
-                        realEstates.add(realEstateFilterList.get(i));
-                }
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setMaximumPrice(Integer.parseInt(maximumPrice));
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure first Location has value and filter with it
-            if (!firstLocation.isEmpty()) {
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-
-                    if (realEstateFilterList.get(i).getFirstLocation().equals(firstLocation))
-                        realEstates.add(realEstateFilterList.get(i));
-
-                }
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setMinimumSurface(Integer.parseInt(minimumSurface));
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
+            }
+            try {
+                critaries.setMaximumSurface(Integer.parseInt(maximumSurface));
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure numberOfPhotos has value and filter with it
-            if (!numberOfPhotos.isEmpty()) {
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-                //Convert String edit text to integer
-                int numberOfPhotosInt = Integer.parseInt(numberOfPhotos);
-
-                for (int i =0 ; i<realEstateFilterList.size() ; i++) {
-                    int photosNumber = realEstateFilterList.get(i).getPhotos().size() + 1;
-
-
-                    if (numberOfPhotosInt <= photosNumber)
-                        realEstates.add(realEstateFilterList.get(i));
-                }
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setFirstLocation(firstLocation);
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure point of interest has value and filter with it
-            if (!pointOfInterest.isEmpty()) {
-
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-
-                    if (realEstateFilterList.get(i).getPointsOfInterest().equals(pointOfInterest))
-                        realEstates.add(realEstateFilterList.get(i));
-                }
-
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setNumberOfPhotos(Integer.parseInt(numberOfPhotos));
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure entry date has value and filter with it
-            if (!entryDateInDays.isEmpty()) {
-                String todayDate = DateUtils.returnTodayDate();
-                int entryDateInDaysInt = Integer.parseInt(entryDateInDays);
+            try {
+                critaries.setPointOfInterest(pointOfInterest);
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
+            }
+            try {
+                critaries.setPointOfInterest(pointOfInterest);
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
+            }
+            Date entryDateInDate = DateUtils.convertStringToDate(entryDate);
 
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getEntryDate(),
-                            todayDate);
-
-                    if (entryDateInDaysInt > days) {
-                        realEstates.add(realEstateFilterList.get(i));
-                    }
-
-                }
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            try {
+                critaries.setEntryDateInDate(entryDateInDate);
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            //Ensure sale date has value and filter with it
-            if (!saleDateInDays.isEmpty()) {
-                String todayDate = DateUtils.returnTodayDate();
-                int saleDateInDaysInt = Integer.parseInt(saleDateInDays);
-
-                //ArrayList to handle the result of our filters
-                ArrayList<RealEstate> realEstates = new ArrayList<>();
-
-                for (int i = 0; i < realEstateFilterList.size(); i++) {
-                    //Ensure date of sale has value
-                    if (realEstateFilterList.get(i).getDateOfSale() != null) {
-                        long days = DateUtils.getDaysBetweenDates(realEstateFilterList.get(i).getDateOfSale(),
-                                todayDate);
-
-                        if (saleDateInDaysInt > days) {
-                            realEstates.add(realEstateFilterList.get(i));
-                        }
-                    }
-                }
-                realEstateFilterList.clear();
-                realEstateFilterList.addAll(realEstates);
+            Date saleDateInDate = DateUtils.convertStringToDate(saleDate);
+            try {
+                critaries.setSaleDateInDate(saleDateInDate);
+            } catch (Throwable t) {
+                t.printStackTrace(); //if it's not an integer
             }
 
-            Intent intent = new Intent();
-            intent.putParcelableArrayListExtra(MainActivity.SEARCH_REAL_ESTATE, realEstateFilterList);
-            setResult(RESULT_OK, intent);
+            critaries.setPointOfInterest(pointOfInterest);
+            critaries.setEntryDateInDate(entryDateInDate);
+            critaries.setSaleDateInDate(saleDateInDate);
+
+            repository.setFilter(critaries);
+
             finish();
         });
     }
 
+    public class SearchCritaries {
+        private Integer minimumPrice;
+        private Integer maximumPrice;
+        private Integer minimumSurface;
+        private Integer maximumSurface;
+        private String firstLocation;
+        private Integer numberOfPhotos;
+        private String pointOfInterest;
+        private Date entryDateInDate;
+        private Date saleDateInDate;
+
+        public SearchCritaries() {
+            //empty constructor
+        }
+
+        public Integer getMinimumPrice() {
+            return minimumPrice;
+        }
+
+        public void setMinimumPrice(Integer minimumPrice) {
+            this.minimumPrice = minimumPrice;
+        }
+
+        public Integer getMaximumPrice() {
+            return maximumPrice;
+        }
+
+        public void setMaximumPrice(Integer maximumPrice) {
+            this.maximumPrice = maximumPrice;
+        }
+
+        public Integer getMinimumSurface() {
+            return minimumSurface;
+        }
+
+        public void setMinimumSurface(Integer minimumSurface) {
+            this.minimumSurface = minimumSurface;
+        }
+
+        public Integer getMaximumSurface() {
+            return maximumSurface;
+        }
+
+        public void setMaximumSurface(Integer maximumSurface) {
+            this.maximumSurface = maximumSurface;
+        }
+
+        public String getFirstLocation() {
+            return firstLocation;
+        }
+
+        public void setFirstLocation(String firstLocation) {
+            this.firstLocation = firstLocation;
+        }
+
+        public Integer getNumberOfPhotos() {
+            return numberOfPhotos;
+        }
+
+        public void setNumberOfPhotos(Integer numberOfPhotos) {
+            this.numberOfPhotos = numberOfPhotos;
+        }
+
+        public String getPointOfInterest() {
+            return pointOfInterest;
+        }
+
+        public void setPointOfInterest(String pointOfInterest) {
+            this.pointOfInterest = pointOfInterest;
+        }
+
+        public Date getEntryDateInDate() {
+            return entryDateInDate;
+        }
+
+        public void setEntryDateInDate(Date entryDateInDate) {
+            this.entryDateInDate = entryDateInDate;
+        }
+
+        public Date getSaleDateInDate() {
+            return saleDateInDate;
+        }
+
+        public void setSaleDateInDate(Date saleDateInDate) {
+            this.saleDateInDate = saleDateInDate;
+        }
+    }
 }
+

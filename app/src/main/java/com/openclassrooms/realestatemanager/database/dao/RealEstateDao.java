@@ -7,10 +7,13 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.model.RealEstate;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -35,4 +38,10 @@ public interface RealEstateDao {
     //Content Provider
     @Query("SELECT * FROM RealEstate")
     Cursor getRealEstatesWithCursor();
+
+    //Filter
+    @RawQuery(observedEntities = RealEstate.class)
+    LiveData<List<RealEstate>> getRealEstatesFiltered(SupportSQLiteQuery query);
+
+
 }

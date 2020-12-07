@@ -11,15 +11,18 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.openclassrooms.realestatemanager.database.dao.RealEstateDao;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.service.DateConverter;
+import com.openclassrooms.realestatemanager.service.DateUtils;
 import com.openclassrooms.realestatemanager.service.RealEstateDescription;
 import com.openclassrooms.realestatemanager.service.RealEstatePhotoService;
 import com.openclassrooms.realestatemanager.service.RealEstateTypeConverter;
 
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {RealEstate.class}, version = 1, exportSchema = false)
-@TypeConverters(RealEstateTypeConverter.class)
+@TypeConverters({RealEstateTypeConverter.class, DateConverter.class})
 public abstract class MyRealEstateDatabase extends RoomDatabase {
 
     // --- SINGLETON ---
@@ -63,14 +66,15 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                             423, 8, 4, 4,
                             RealEstateDescription.returnFirstDescription(),
                             "https://i.ibb.co/WKx9zZj/Loft-Manhattan.jpg",
-                            null, RealEstatePhotoService.getRealEstatePhotos1(),
+                            null, RealEstatePhotoService.getRealEstatePhotos1(), 8,
                             "Manhattan",
                             "41 Great Jones Street Penthouse\n" +
                                     "Lafayette\n" +
                                     "NoHo\n" +
                                     "New York", "Shop",
                             40.726649, -73.992833,
-                            "For sale", "07/11/2020", null,
+                            "For sale", DateUtils.convertStringToDate("07/10/2020"),
+                            null,
                             "Jessica C. Campbell",
                             "https://i.ibb.co/0MZZf43/Jessica-CCampbell.jpg",
                             "KBN60UbSoSM");
@@ -79,14 +83,15 @@ public abstract class MyRealEstateDatabase extends RoomDatabase {
                             582, 7, 4, 3,
                             RealEstateDescription.returnSecondDescription(),
                             "https://i.ibb.co/9NXstNR/Brooklyn-Penthouse.jpg",
-                            null, RealEstatePhotoService.getRealEstatePhotos2(),
+                            null, RealEstatePhotoService.getRealEstatePhotos2(), 7,
                             "Brooklyn"
                             , "The Gretsch Building PH1A\n" +
                             "60 Broadway\n" +
                             "Wythe & Berry\n" +
                             "Williamsburg\n" +
                             "Brooklyn", "Parc", 40.710313, -73.966295,
-                            "For sale", "08/11/2020", null,
+                            "For sale", DateUtils.convertStringToDate("08/11/2020"),
+                            null,
                             "Christian Haag",
                             "https://i.ibb.co/Y71g9LB/Christian-Haag.jpg",
                             "SMIm5ErsEJM");

@@ -26,7 +26,6 @@ import java.util.List;
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
     private RealEstateViewModel viewModel;
-    private MyRealEstateHandlerThread myRealEstateHandlerThread;
     private GoogleMap mMap;
     public static final String MAPS_MARKER_CLICK_REAL_ESTATE = "MAPS_MARKER_CLICK_REAL_ESTATE";
     private List<RealEstate> realEstateList;
@@ -37,33 +36,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         LatLng newYork = new LatLng(40.75691, -73.97619);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newYork, 11));
 
-    }
-
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
-
-        return inflater.inflate(R.layout.fragment_maps, container, false);
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         realEstateList = new ArrayList<>();
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        }
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
-
-        myRealEstateHandlerThread = new MyRealEstateHandlerThread("GetRealEstates");
 
         viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
             for (RealEstate realEstate : realEstates) {
@@ -81,7 +56,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         OnClickRealEstateFragment onClickRealEstateFragment = new
                                 OnClickRealEstateFragment();
                         Bundle args = new Bundle();
-                        args.putParcelable(MAPS_MARKER_CLICK_REAL_ESTATE, realEstateList.get(i));
+                        args.putSerializable(MAPS_MARKER_CLICK_REAL_ESTATE, realEstateList.get(i));
                         onClickRealEstateFragment.setArguments(args);
 
                         Fragment fragmentContainerViewDetail = getParentFragmentManager()
@@ -103,14 +78,36 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 }
                 return true;
             });
-        });
+    });
+    }
 
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+
+        return inflater.inflate(R.layout.fragment_maps, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
 
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        myRealEstateHandlerThread.quit();
+
     }
 }

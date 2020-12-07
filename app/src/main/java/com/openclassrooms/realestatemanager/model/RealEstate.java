@@ -1,27 +1,18 @@
 package com.openclassrooms.realestatemanager.model;
 
 import android.content.ContentValues;
-import android.os.Parcel;
-import android.os.Parcelable;
+
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
-public class RealEstate implements Parcelable {
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public RealEstate createFromParcel(Parcel in) {
-            return new RealEstate(in);
-        }
-
-        public RealEstate[] newArray(int size) {
-            return new RealEstate[size];
-        }
-    };
+public class RealEstate implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -35,14 +26,15 @@ public class RealEstate implements Parcelable {
     private String mainPhotoUrl;
     private String mainPhotoString;
     private ArrayList photos;
+    private int numberOfPhotos;
     private String firstLocation;
     private String secondLocation;
     private String pointsOfInterest;
     private double latitude;
     private double longitude;
     private String status;
-    private String entryDate;
-    private String dateOfSale;
+    private Date entryDate;
+    private Date dateOfSale;
     private String agent;
     private String agentPhotoUrl;
     private String videoId;
@@ -53,9 +45,9 @@ public class RealEstate implements Parcelable {
 
     public RealEstate(long id, String type, int price, int surface, int numberOfRooms,
                       int numberOfBathrooms, int numberOfBedrooms, String description, String mainPhotoUrl,
-                      String mainPhotoString, ArrayList photos, String firstLocation,
+                      String mainPhotoString, ArrayList photos, int numberOfPhotos, String firstLocation,
                       String secondLocation, String pointsOfInterest, double latitude, double longitude,
-                      String status, String entryDate, String dateOfSale, String agent,
+                      String status, Date entryDate, Date dateOfSale, String agent,
                       String agentPhotoUrl, String videoId) {
         this.id = id;
         this.type = type;
@@ -68,6 +60,7 @@ public class RealEstate implements Parcelable {
         this.mainPhotoUrl = mainPhotoUrl;
         this.mainPhotoString = mainPhotoString;
         this.photos = photos;
+        this.numberOfPhotos = numberOfPhotos;
         this.firstLocation = firstLocation;
         this.secondLocation = secondLocation;
         this.pointsOfInterest = pointsOfInterest;
@@ -170,6 +163,14 @@ public class RealEstate implements Parcelable {
         this.photos = photos;
     }
 
+    public int getNumberOfPhotos() {
+        return numberOfPhotos;
+    }
+
+    public void setNumberOfPhotos(int numberOfPhotos) {
+        this.numberOfPhotos = numberOfPhotos;
+    }
+
     public String getFirstLocation() {
         return firstLocation;
     }
@@ -218,19 +219,19 @@ public class RealEstate implements Parcelable {
         this.status = status;
     }
 
-    public String getEntryDate() {
+    public Date getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(String entryDate) {
+    public void setEntryDate(Date entryDate) {
         this.entryDate = entryDate;
     }
 
-    public String getDateOfSale() {
+    public Date getDateOfSale() {
         return dateOfSale;
     }
 
-    public void setDateOfSale(String dateOfSale) {
+    public void setDateOfSale(Date dateOfSale) {
         this.dateOfSale = dateOfSale;
     }
 
@@ -258,65 +259,6 @@ public class RealEstate implements Parcelable {
         this.videoId = videoId;
     }
 
-    //Parceling part
-    public RealEstate(Parcel in) {
-        photos = new ArrayList<RealEstatePhotos>();
-
-        this.id = in.readLong();
-        this.type = in.readString();
-        this.price = in.readInt();
-        this.surface = in.readInt();
-        this.numberOfRooms = in.readInt();
-        this.numberOfBathrooms = in.readInt();
-        this.numberOfBedrooms = in.readInt();
-        this.description = in.readString();
-        this.mainPhotoUrl = in.readString();
-        this.mainPhotoString = in.readString();
-        this.photos = in.readArrayList(RealEstatePhotos.class.getClassLoader());
-        this.firstLocation = in.readString();
-        this.secondLocation = in.readString();
-        this.pointsOfInterest = in.readString();
-        this.latitude = in.readDouble();
-        this.longitude = in.readDouble();
-        this.status = in.readString();
-        this.entryDate = in.readString();
-        this.dateOfSale = in.readString();
-        this.agent = in.readString();
-        this.agentPhotoUrl = in.readString();
-        this.videoId = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(this.id);
-        parcel.writeString(this.type);
-        parcel.writeInt(this.price);
-        parcel.writeInt(this.surface);
-        parcel.writeInt(this.numberOfRooms);
-        parcel.writeInt(this.numberOfBathrooms);
-        parcel.writeInt(this.numberOfBedrooms);
-        parcel.writeString(this.description);
-        parcel.writeString(this.mainPhotoUrl);
-        parcel.writeString(this.mainPhotoString);
-        parcel.writeList(this.photos);
-        parcel.writeString(this.firstLocation);
-        parcel.writeString(this.secondLocation);
-        parcel.writeString(this.pointsOfInterest);
-        parcel.writeDouble(this.latitude);
-        parcel.writeDouble(this.longitude);
-        parcel.writeString(this.status);
-        parcel.writeString(this.entryDate);
-        parcel.writeString(this.dateOfSale);
-        parcel.writeString(this.agent);
-        parcel.writeString(this.agentPhotoUrl);
-        parcel.writeString(this.videoId);
-    }
-
     //Content Provider
     public static RealEstate fromContentValues(ContentValues values) {
         final RealEstate realEstate = new RealEstate();
@@ -331,8 +273,12 @@ public class RealEstate implements Parcelable {
                 values.getAsInteger("numberOfBedrooms"));
         if (values.containsKey("description")) realEstate.setDescription(
                 values.getAsString("description"));
-        if (values.containsKey("photoUrl"))
-            realEstate.setMainPhotoUrl(values.getAsString("photoUrl"));
+        if (values.containsKey("mainPhotoUrl"))
+            realEstate.setMainPhotoUrl(values.getAsString("mainPhotoUrl"));
+        if (values.containsKey("mainPhotoString"))
+            realEstate.setMainPhotoString(values.getAsString("mainPhotoString"));
+        if (values.containsKey("numberOfPhotos"))
+            realEstate.setNumberOfPhotos(values.getAsInteger("numberOfPhotos"));
         if (values.containsKey("firstLocation")) realEstate.setFirstLocation(
                 values.getAsString("firstLocation"));
         if (values.containsKey("secondLocation")) realEstate.setSecondLocation(
@@ -342,9 +288,9 @@ public class RealEstate implements Parcelable {
             realEstate.setLongitude(values.getAsDouble("longitude"));
         if (values.containsKey("status")) realEstate.setStatus(values.getAsString("status"));
         if (values.containsKey("entryDate"))
-            realEstate.setEntryDate(values.getAsString("entryDate"));
+            realEstate.setEntryDate((Date) values.get("entryDate"));
         if (values.containsKey("dateOfSale"))
-            realEstate.setDateOfSale(values.getAsString("dateOfSale"));
+            realEstate.setDateOfSale( (Date) values.get("dateOfSale"));
         if (values.containsKey("agent")) realEstate.setAgent(values.getAsString("agent"));
         if (values.containsKey("agentPhotoUrl"))
             realEstate.setAgentPhotoUrl(values.getAsString("agentPhotoUrl"));

@@ -5,7 +5,9 @@ import android.app.Application;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
+import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.repository.RealEstateDataRepository;
 
@@ -20,8 +22,9 @@ public class RealEstateViewModel extends AndroidViewModel {
 
     public RealEstateViewModel(Application application) {
         super(application);
-        mRepository = new RealEstateDataRepository(application);
+        mRepository = DI.getRepository(application);
         mRealEstates = mRepository.getRealEstates();
+
     }
 
     //Data
@@ -36,6 +39,10 @@ public class RealEstateViewModel extends AndroidViewModel {
 
     public void updateRealEstate(RealEstate realEstate) {
         mRepository.updateRealEstate(realEstate);
+    }
+
+    public LiveData<List<RealEstate>> getRealEstatesFiltered(SupportSQLiteQuery query) {
+        return mRepository.getRealEstatesFiltered(query);
     }
 
 }

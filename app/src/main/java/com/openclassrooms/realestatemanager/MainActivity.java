@@ -23,12 +23,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.openclassrooms.realestatemanager.databinding.ActivityMainBinding;
+import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.fragment.MapsFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.fragment.RealEstateViewModel;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.repository.RealEstateDataRepository;
 import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    private RealEstateDataRepository repository;
 
     private RealEstateViewModel viewModel;
 
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         checkPermissionsGranted();
+
+        repository = DI.getRepository(getApplication());
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_main_fragment_container_view_list,
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.menu_add):
                 Intent intent = new Intent(this, AddOrEditRealEstateActivity.class);
                 RealEstate realEstate = new RealEstate();
-                intent.putExtra(ADD_REAL_ESTATE, realEstate);
+                intent.putExtra(ADD_REAL_ESTATE,(Serializable) realEstate);
                 startActivityForResult(intent, ADD_REAL_ESTATE_REQUEST_CODE);
                 break;
             case (R.id.menu_search):
@@ -98,9 +104,13 @@ public class MainActivity extends AppCompatActivity {
                     realEstateFilteredList.clear();
 
                 Intent intent1 = new Intent(this, SearchRealEstateProviderActivity.class);
-                intent1.putParcelableArrayListExtra(SEARCH_REAL_ESTATE, realEstateFilteredList);
-                startActivityForResult(intent1, SEARCH_REAL_ESTATE_REQUEST_CODE);
+                startActivity(intent1);
                 break;
+
+            case (R.id.menu_clear_filter):
+                repository.resetFilter();
+                break;
+
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -173,19 +183,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ADD_REAL_ESTATE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 RealEstate newRealEstate = (RealEstate)
-                        data.getParcelableExtra(MainActivity.ADD_REAL_ESTATE);
+                        data.getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
 
                 myRealEstateHandlerThread.startCreateRealEstateHandler(newRealEstate, viewModel);
 
                 showNotificationOnAddRealEstate();
             }
-        } else if (requestCode == SEARCH_REAL_ESTATE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                realEstateFilteredList = data.getParcelableArrayListExtra(SEARCH_REAL_ESTATE);
-                RealEstateFragment.adapter.setRealEstateList(realEstateFilteredList);
-            }
         }
-
     }
 
     private void showNotificationOnAddRealEstate() {

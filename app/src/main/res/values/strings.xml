@@ -41,14 +41,15 @@
     <string name="list_view">List View</string>
     <string name="map_view">Map View</string>
 
-    <string name="put_on_the_market_since_in_days">Put on the market since (in days)</string>
-    <string name="sale_since_in_days">Sale since (in days)</string>
+    <string name="put_on_the_market_since_in_days">Put on the market since (dd/MM/yyyy)</string>
+    <string name="sale_since_in_days">Sale since (dd/MM/yyyy)</string>
     <string name="search">Search</string>
     <string name="minimum_price_in_dollar">Minimum price in dollar</string>
     <string name="maximum_price_in_dollar">Maximum price in dollar</string>
     <string name="minimum_surface_in_square_meters">Minimum surface in sq m</string>
     <string name="maximum_surface_in_square_meters">Maximum surface in sq m</string>
     <string name="minimum_number_of_photos">Minimum number of photos</string>
+    <string name="menu_clear_filter">clear_filter</string>
 
     <string-array name="real_estate_types">
         <item>Loft</item>

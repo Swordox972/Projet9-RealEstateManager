@@ -21,8 +21,11 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.databinding.FragmentOnClickRealEstateBinding;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
+import com.openclassrooms.realestatemanager.service.DateUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+
+import java.util.Date;
 
 
 public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCallback {
@@ -42,12 +45,12 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding = FragmentOnClickRealEstateBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        if (getArguments().getParcelable(RealEstateFragment.KEY) != null) {
-            mRealEstate = (RealEstate) getArguments().getParcelable(RealEstateFragment.KEY);
-        } else if (getArguments().getParcelable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) !=
+        if (getArguments().getSerializable(RealEstateFragment.KEY) != null) {
+            mRealEstate = (RealEstate) getArguments().getSerializable(RealEstateFragment.KEY);
+        } else if (getArguments().getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE) !=
                 null) {
             mRealEstate = (RealEstate) getArguments()
-                    .getParcelable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
+                    .getSerializable(MapsFragment.MAPS_MARKER_CLICK_REAL_ESTATE);
         }
         return view;
     }
@@ -83,12 +86,9 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         }
 
 
-        String dateOfSale;
-        if (mRealEstate.getDateOfSale() == null) {
-            dateOfSale = "None";
-        } else {
-            dateOfSale = mRealEstate.getDateOfSale();
-        }
+        Date dateOfSale = mRealEstate.getDateOfSale();
+
+
 
         String surface = mRealEstate.getSurface() + " sq" + " m";
         String numberOfRooms = Integer.toString(mRealEstate.getNumberOfRooms());
@@ -103,8 +103,10 @@ public class OnClickRealEstateFragment extends Fragment implements OnMapReadyCal
         binding.fragmentOnClickRealEstateLocationValue.setText(mRealEstate.getSecondLocation());
         binding.fragmentOnClickRealEstatePointsOfInterestValue.setText(mRealEstate.getPointsOfInterest());
         binding.fragmentOnClickRealEstatePriceValue.setText("$" + mRealEstate.getPrice());
-        binding.fragmentOnClickRealEstateEntryDateValue.setText(mRealEstate.getEntryDate());
-        binding.fragmentOnClickRealEstateSaleDateValue.setText(dateOfSale);
+        binding.fragmentOnClickRealEstateEntryDateValue.setText(DateUtils.convertDateToString(
+                mRealEstate.getEntryDate()));
+        if (dateOfSale != null)
+        binding.fragmentOnClickRealEstateSaleDateValue.setText(DateUtils.convertDateToString(dateOfSale));
 
 
         SupportMapFragment supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()

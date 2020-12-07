@@ -31,4 +31,28 @@ public class DateUtils {
         String currentDate = simpleDateFormat.format(todayDate);
         return currentDate;
     }
+
+    public static Date convertStringToDate(String stringDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date;
+        try {
+             date = simpleDateFormat.parse(stringDate);
+             return date;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public static String convertDateToString(Date date) {
+        if ( date == null)
+            return "";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd//MM/yyyy");
+
+        String stringDate = simpleDateFormat.format(date);
+        return stringDate;
+    }
 }

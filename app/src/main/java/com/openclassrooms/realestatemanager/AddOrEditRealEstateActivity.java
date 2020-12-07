@@ -4,8 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,12 +25,13 @@ import com.openclassrooms.realestatemanager.databinding.ActivityAddOrEditRealEst
 import com.openclassrooms.realestatemanager.fragment.RealEstateFragment;
 import com.openclassrooms.realestatemanager.model.RealEstate;
 import com.openclassrooms.realestatemanager.model.RealEstatePhotos;
+import com.openclassrooms.realestatemanager.service.DateUtils;
 import com.openclassrooms.realestatemanager.service.LocationUtil;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
 public class AddOrEditRealEstateActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
@@ -63,11 +62,11 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         setContentView(view);
 
         //If intent coming from AddRealEstate
-        if (getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
-            mNewRealEstate = (RealEstate) getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE);
+        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE);
         } //Else if intent coming from EditRealEstate
-        else if (getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
-            mNewRealEstate = (RealEstate) getIntent().getParcelableExtra(
+        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+            mNewRealEstate = (RealEstate) getIntent().getSerializableExtra(
                     RealEstateFragment.EDIT_REAL_ESTATE);
         }
 
@@ -81,7 +80,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         initializeButtonSelectSaleDate();
 
         //if editing, set all value in spinners, editTexts and ImageViews
-        if (mNewRealEstate.equals(getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE))) {
+        if (mNewRealEstate.equals(getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE))) {
             initializeRealEstateToEdit();
         }
         initializeFinishButton();
@@ -271,8 +270,10 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         binding.activityAddOrEditRealEstateAddressEditText.setText(mNewRealEstate.getSecondLocation());
         binding.activityAddOrEditRealEstatePointsOfInterestEditText.setText(
                 mNewRealEstate.getPointsOfInterest());
-        binding.activityAddOrEditRealEstateEntryDateEditText.setText(mNewRealEstate.getEntryDate());
-        binding.activityAddOrEditRealEstateSaleDateEditText.setText(mNewRealEstate.getDateOfSale());
+        binding.activityAddOrEditRealEstateEntryDateEditText.setText(
+                DateUtils.convertDateToString(mNewRealEstate.getEntryDate()));
+        binding.activityAddOrEditRealEstateSaleDateEditText.setText(
+                DateUtils.convertDateToString(mNewRealEstate.getDateOfSale()));
         binding.activityAddOrEditRealEstateVideoIdEditText.setText(mNewRealEstate.getVideoId());
 
     }
@@ -302,8 +303,10 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
         String secondLocation = binding.activityAddOrEditRealEstateAddressEditText.getText().toString();
         String pointsOfInterest = binding.activityAddOrEditRealEstatePointsOfInterestEditText.getText()
                 .toString();
-        String entryDate = binding.activityAddOrEditRealEstateEntryDateEditText.getText().toString();
-        String saleDate = binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString();
+        Date entryDate = DateUtils.convertStringToDate(
+                binding.activityAddOrEditRealEstateEntryDateEditText.getText().toString());
+        Date saleDate = DateUtils.convertStringToDate(
+                binding.activityAddOrEditRealEstateSaleDateEditText.getText().toString());
         String videoId = binding.activityAddOrEditRealEstateVideoIdEditText.getText().toString();
 
         mNewRealEstate.setFirstLocation(firstLocation);
@@ -327,18 +330,18 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
     private void initializeFinishButton() {
         //Set mNewRealEstate all value selected previously
         // If intent comes from Main Activity to add a real estate so pass data back
-        if (getIntent().getParcelableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
+        if (getIntent().getSerializableExtra(MainActivity.ADD_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
                 setNewRealEstateValue();
 
                 Intent intent = new Intent();
-                intent.putExtra(MainActivity.ADD_REAL_ESTATE, mNewRealEstate);
+                intent.putExtra(MainActivity.ADD_REAL_ESTATE, (Serializable) mNewRealEstate);
                 setResult(RESULT_OK, intent);
                 finish();
             });
         }// Else if intent comes from Real Estate Fragment to edit a real estate so pass data back
 
-        else if (getIntent().getParcelableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
+        else if (getIntent().getSerializableExtra(RealEstateFragment.EDIT_REAL_ESTATE) != null) {
             binding.activityAddOrEditRealEstateOkButton.setOnClickListener(view -> {
 
                 //Verify if when "Sold" status is selected that Sale date has a value
@@ -350,7 +353,7 @@ public class AddOrEditRealEstateActivity extends AppCompatActivity
                     setNewRealEstateValue();
 
                     Intent intent = new Intent();
-                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE, mNewRealEstate);
+                    intent.putExtra(RealEstateFragment.EDIT_REAL_ESTATE,(Serializable) mNewRealEstate);
                     setResult(RESULT_OK, intent);
                     finish();
                 }// Toast to inform user that he put "Sold" status without sale date value

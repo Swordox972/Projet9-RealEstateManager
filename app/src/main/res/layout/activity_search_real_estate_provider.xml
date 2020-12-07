@@ -74,7 +74,7 @@
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/points_of_interest" />
 
-        <!-- Entry date filter in days-->
+        <!-- Entry date -->
         <EditText
             android:id="@+id/activity_search_real_estate_entry_date_since_edit_text"
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:layout_margin="@dimen/activity_search_real_estate_provider_margin"
             android:hint="@string/put_on_the_market_since_in_days" />
 
-        <!-- Sale date filter in days-->
+        <!-- Sale date -->
         <EditText
             android:id="@+id/activity_search_real_estate_sale_date_since_edit_text"
             android:layout_width="match_parent"

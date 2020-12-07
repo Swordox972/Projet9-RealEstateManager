@@ -18,13 +18,18 @@ import com.openclassrooms.realestatemanager.AddOrEditRealEstateActivity;
 import com.openclassrooms.realestatemanager.MainActivity;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.adapter.MyRealEstateRecyclerViewAdapter;
+import com.openclassrooms.realestatemanager.di.DI;
 import com.openclassrooms.realestatemanager.event.EditRealEstateEvent;
 import com.openclassrooms.realestatemanager.event.OpenRealEstateEvent;
 import com.openclassrooms.realestatemanager.model.RealEstate;
+import com.openclassrooms.realestatemanager.model.RealEstateList;
+import com.openclassrooms.realestatemanager.repository.RealEstateDataRepository;
 import com.openclassrooms.realestatemanager.service.MyRealEstateHandlerThread;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.io.Serializable;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -44,6 +49,7 @@ public class RealEstateFragment extends Fragment {
     public static final String EDIT_REAL_ESTATE = "RealEstateToEdit";
     public static final int EDIT_REQUEST_CODE = 25;
 
+    private RealEstateDataRepository repository;
 
     public RealEstateFragment() {
         // Required empty public constructor
@@ -51,7 +57,7 @@ public class RealEstateFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+ repository = DI.getRepository(getActivity().getApplication());
         return inflater.inflate(R.layout.fragment_real_estate_list, container, false);
     }
 
@@ -67,15 +73,9 @@ public class RealEstateFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(RealEstateViewModel.class);
 
-        if (getActivity().getIntent().getParcelableArrayListExtra(MainActivity.SEARCH_REAL_ESTATE)
-                == null) {
             viewModel.getRealEstates().observe(getViewLifecycleOwner(), realEstates -> {
                 adapter.setRealEstateList(realEstates);
             });
-        } else {
-            adapter.setRealEstateList(getActivity().getIntent().getParcelableArrayListExtra(
-                    MainActivity.SEARCH_REAL_ESTATE));
-        }
     }
 
     @Override
@@ -96,7 +96,7 @@ public class RealEstateFragment extends Fragment {
 
         OnClickRealEstateFragment onClickRealEstateFragment = new OnClickRealEstateFragment();
         Bundle args = new Bundle();
-        args.putParcelable(KEY, mRealEstate);
+        args.putSerializable(KEY, mRealEstate);
         onClickRealEstateFragment.setArguments(args);
 
         Fragment fragmentContainerViewDetail = getParentFragmentManager().findFragmentById(
@@ -126,7 +126,7 @@ public class RealEstateFragment extends Fragment {
         RealEstate mRealEstate = event.mRealEstate;
 
         Intent intent = new Intent(getContext(), AddOrEditRealEstateActivity.class);
-        intent.putExtra(EDIT_REAL_ESTATE, mRealEstate);
+        intent.putExtra( EDIT_REAL_ESTATE, (Serializable) mRealEstate);
         startActivityForResult(intent, EDIT_REQUEST_CODE);
     }
 
@@ -136,7 +136,7 @@ public class RealEstateFragment extends Fragment {
         if (requestCode == EDIT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                RealEstate realEstate = (RealEstate) data.getParcelableExtra(EDIT_REAL_ESTATE);
+                RealEstate realEstate = (RealEstate) data.getSerializableExtra(EDIT_REAL_ESTATE);
                 myRealEstateHandlerThread =
                         new MyRealEstateHandlerThread("UpdateRealEstateInDatabase");
 
